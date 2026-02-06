@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; default-src 'self' https:; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://unpkg.com https://storage.googleapis.com; worker-src 'self' https://storage.googleapis.com; manifest-src 'self'; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https:;">
     
     <title>Furkan Senyuz | Divine Edition</title>
     <link rel="canonical" href="https://fsenyuz.com">
+    
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.ico" sizes="any"> <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 font-size=%2280%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 fill=%22%23fbbf24%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>FS</text></svg>">
+    <link rel="icon" href="favicon.ico" sizes="any"> 
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 font-size=%2280%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 fill=%22%23fbbf24%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>FS</text></svg>">
     <meta name="theme-color" content="#0f172a">
 
-    <style>
-        :root { --bg-body: #0f172a; --text-main: #f1f5f9; --accent-gold: #fbbf24; }
-        body { margin: 0; font-family: sans-serif; background: var(--bg-body); color: var(--text-main); }
-        :focus-visible { outline: 3px solid var(--accent-gold); outline-offset: 2px; }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-        /* Divine Toast */
-        #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 6000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-        .toast { pointer-events: auto; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(5px); color: #fff; padding: 12px 24px; border-radius: 50px; border: 1px solid var(--accent-gold); box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); font-size: 0.9rem; animation: slideUp 0.3s ease; }
-        .toast.divine { border-color: #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    </style>
-
-    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 
@@ -42,36 +34,86 @@
         <div class="nav-container">
             <a href="#" class="logo">f<span>senyuz</span></a>
             <div style="display:flex; align-items:center;">
+                <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()" style="background:none; border:none; color:var(--text-main); cursor:pointer; font-weight:bold; margin-right:10px;">EN</button>
+                
                 <button class="anim-toggle" id="anim-toggle" aria-pressed="true" onclick="toggleAnimations()" title="Ctrl+Shift+A">Anim: On</button>
                 <button id="pwa-install-btn" style="display:none;" aria-label="Install App" aria-describedby="install-desc"><i class="fa-solid fa-download"></i></button>
                 <span id="install-desc" class="sr-only">Add to home screen</span>
-                <button class="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+                <button class="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false" onclick="toggleMobileMenu()" style="background:none; border:none; color:var(--text-main); font-size:1.5rem; display:none;"><i class="fa-solid fa-bars"></i></button>
             </div>
-            <div class="header-actions" id="mobile-menu" role="dialog" aria-modal="true">
-                </div>
         </div>
     </header>
 
-    <section class="hero">...</section>
-    <div class="map-container">...</div>
-    <div class="content-grid">...</div>
+    <section class="hero">
+        <img src="profile.jpg" class="hero-avatar" alt="Furkan Senyuz">
+        <h1 class="hero-name">Furkan Senyuz</h1>
+        <p class="hero-title" data-i18n="heroTitle">Civil Engineer & AI Solutions Developer</p>
+        <div class="hero-slogan" data-i18n="heroSlogan">Building the Future with <br> Concrete & Code</div>
+        
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/fsenyuz" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/fsenyuz" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
+            <a href="https://kaggle.com/fsenyuz" target="_blank" class="social-icon"><i class="fa-brands fa-kaggle"></i></a>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skill-row">
+                <div class="skill-tag bg-tech" data-i18n-tooltip="skillTip1">Python & SQL</div>
+                <div class="skill-tag bg-tech" data-i18n-tooltip="skillTip2">ML & AI APIs</div>
+                <div class="skill-tag bg-tech" data-i18n-tooltip="skillTip3">Power BI & ERP</div>
+            </div>
+            <div class="skill-row">
+                <div class="skill-tag bg-eng" data-i18n-tooltip="skillTip4">Primavera P6 & TILOS</div>
+                <div class="skill-tag bg-eng" data-i18n-tooltip="skillTip5">Tender & Cost</div>
+                <div class="skill-tag bg-eng" data-i18n-tooltip="skillTip6">FIDIC & Claims</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="map-container">
+        <h3 class="section-title"><i class="fa-solid fa-earth-americas"></i> <span data-i18n="mapTitle">Global Experience Map</span></h3>
+        <div id="map"></div>
+    </div>
+
+    <div class="content-grid">
+        <div>
+            <h3 class="section-title"><i class="fa-solid fa-briefcase"></i> <span data-i18n="expTitle">Professional Experience</span></h3>
+            <div class="list-group" id="exp-list"></div>
+        </div>
+        <div>
+            <h3 class="section-title"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="eduTitle">Education & Certifications</span></h3>
+            <div class="list-group" id="edu-list"></div>
+        </div>
+    </div>
     
     <div class="projects-section">
-        <h3 class="section-title">Projects</h3>
+        <h3 class="section-title"><i class="fa-solid fa-laptop-code"></i> <span data-i18n="projTitle">AI & Engineering Projects</span></h3>
         <div class="projects-grid">
-             <div class="project-card" data-category="ai">
-                <h4><i class="fa-solid fa-chart-line"></i> Divine Project</h4>
-                <div class="project-tags"><span>Python</span></div>
-                <p>Mythical project launching...</p>
-                <a href="#" class="project-link" onclick="handleRepoLink('construction-claim-predictor')"><i class="fa-brands fa-github"></i> Code</a>
+             <div class="project-card">
+                <h4><i class="fa-solid fa-chart-line"></i> Construction Claim Predictor</h4>
+                <div class="project-tags"><span class="project-tag-item">Python</span><span class="project-tag-item">ML</span></div>
+                <p data-i18n="proj1Desc">ML model predicting potential delay claims.</p>
+                <a href="#" class="project-link" onclick="handleRepoLink('construction-claim-predictor')"><i class="fa-brands fa-github"></i> <span data-i18n="viewCode">View Code</span></a>
+            </div>
+            <div class="project-card">
+                <h4><i class="fa-solid fa-file-invoice-dollar"></i> Tender Cost Optimizer</h4>
+                <div class="project-tags"><span class="project-tag-item">Python</span><span class="project-tag-item">Automation</span></div>
+                <p data-i18n="proj2Desc">Script automating BOQ pricing analysis.</p>
+                <a href="#" class="project-link" onclick="handleRepoLink('tender-cost-optimizer')"><i class="fa-brands fa-github"></i> <span data-i18n="viewCode">View Code</span></a>
+            </div>
+             <div class="project-card">
+                <h4><i class="fa-solid fa-hard-hat"></i> Site Safety Vision</h4>
+                <div class="project-tags"><span class="project-tag-item">YOLO</span><span class="project-tag-item">OpenCV</span></div>
+                <p data-i18n="proj3Desc">AI model detecting PPE compliance.</p>
+                <a href="#" class="project-link" onclick="handleRepoLink('site-safety-vision')"><i class="fa-brands fa-github"></i> <span data-i18n="viewCode">View Code</span></a>
             </div>
         </div>
     </div>
 
     <footer>
         <p>&copy; <span id="year"></span> Furkan Senyuz. 
-           <button class="easter-egg-btn" onclick="triggerEasterEgg()" aria-label="Show secret credit">Built by Divine AIs</button>
-           <button onclick="reopenCookieBanner()" style="background:none; border:none; color:#666; font-size:0.7rem; cursor:pointer; margin-left:10px;">Privacy Settings</button>
+           <span data-i18n="footerText">Built by Divine AIs</span>
+           <button onclick="reopenCookieBanner()" style="background:none; border:none; color:#666; font-size:0.7rem; cursor:pointer; margin-left:10px;">Privacy</button>
         </p>
     </footer>
 
@@ -83,10 +125,10 @@
         <div class="chat-messages" id="chat-messages" aria-live="polite" role="log"></div>
         <div id="chat-img-preview" style="display:none; padding:5px;"><img id="preview-img" alt="Uploaded preview"></div>
         <div class="chat-input-area">
-            <label for="chat-file" class="chat-file-label"><i class="fa-solid fa-paperclip"></i></label>
+            <label for="chat-file" class="chat-file-label" style="cursor:pointer; color:var(--text-muted);"><i class="fa-solid fa-paperclip"></i></label>
             <input type="file" id="chat-file" style="display:none" accept="image/*" onchange="previewImage(this)">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Ask the oracle...">
-            <button class="chat-send" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+            <input type="text" id="chat-input" class="chat-input" placeholder="Ask the oracle..." onkeypress="handleChatKey(event)">
+            <button class="chat-send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -99,17 +141,51 @@
     <canvas id="confetti-canvas" style="position:fixed; top:0; left:0; pointer-events:none; z-index:9999;"></canvas>
 
     <div id="cookie-banner" role="alert">
-        <p>Divine Cookies.</p>
-        <div><label><input type="checkbox" id="analytics-consent"> Analytics</label></div>
+        <p data-i18n="cookieText">Divine Cookies.</p>
+        <div style="margin:10px 0;"><label><input type="checkbox" id="analytics-consent"> Analytics</label></div>
         <div class="cookie-actions">
-            <button id="cookie-reject" class="btn-cookie-reject">Decline</button>
-            <button id="cookie-accept" class="btn-cookie-accept">Accept</button>
+            <button id="cookie-reject" class="btn-cookie-reject" data-i18n="decline">Decline</button>
+            <button id="cookie-accept" class="btn-cookie-accept" data-i18n="accept">Accept</button>
         </div>
     </div>
 
-    <button class="chat-bubble" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></button>
-    <div id="custom-modal" class="modal-overlay">...</div>
+    <div class="chat-widget">
+        <button class="chat-btn" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></button>
+    </div>
 
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="modal-title" class="modal-title">Title</h3>
+            
+            <div id="modal-text-content" class="modal-text"></div>
+            
+            <div id="modal-form-content" style="display:none;">
+                <form id="contact-form" action="https://formspree.io/f/mnjbavgw" method="POST" class="contact-form">
+                    <input type="text" name="_gotcha" style="display:none">
+                    <div class="form-group">
+                        <label for="name" data-i18n="formName">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="formEmail">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="formMsg">Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" id="form-submit-btn" class="form-submit">
+                        <span class="spinner" id="form-spinner"></span>
+                        <span id="form-btn-text" data-i18n="formSend">Send Message</span>
+                    </button>
+                    <div id="form-status" class="form-status"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="script.js" defer></script>
 </body>
 </html>
