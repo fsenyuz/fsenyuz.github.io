@@ -235,10 +235,16 @@ async function sendMessage() {
         if (!navigator.onLine) {
             showToast("Offline: Message queued! 📨", "info");
             appendMessage("Message queued (Offline)...", "system");
+            
+            // Grok Tweak: Offline Sync Placeholder
+            // NOT: Bunun çalışması için sw.js dosyasında 'sync' event listener gerekir.
+            if ('serviceWorker' in navigator && 'SyncManager' in window) {
+                navigator.serviceWorker.ready.then(reg => reg.sync.register('sync-chat').catch(() => {}));
+            }
         } else {
-            // Grok'un stil ve fonksiyon önerisi entegre edildi
+            // Grok Tweak: A11y & Stil İyileştirmesi
             const btnStyle = "background:var(--accent-gold); color:#000; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold; margin-left:5px; font-size:0.8rem;";
-            appendMessage(`Connection failed or Server Busy. <button onclick='retryLastMessage()' style='${btnStyle}'>Retry</button>`, 'bot');
+            appendMessage(`Connection failed or Server Busy. <button onclick='retryLastMessage()' style='${btnStyle}' aria-label='Retry last message'>Retry</button>`, 'bot');
         }
     }
 }
