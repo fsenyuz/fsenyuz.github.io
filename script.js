@@ -125,9 +125,8 @@ window.reopenCookieBanner = () => {
 
 // Mobil Menü
 window.toggleMobileMenu = () => {
-    // Basit bir toggle mantığı, CSS'de .active class'ı ile kontrol edilebilir
     const menu = document.querySelector('.header-actions');
-    // menu.classList.toggle('active'); 
+    // menu.classList.toggle('active'); // CSS entegrasyonuna göre açılabilir
     console.log("Mobile menu toggled");
 };
 
@@ -165,6 +164,20 @@ function appendMessage(text, type) {
     container.scrollTop = container.scrollHeight;
     return div;
 }
+
+// YENİ: Retry Fonksiyonu (Grok'un önerisiyle)
+window.retryLastMessage = function() {
+    // Son kullanıcı mesajını bul
+    const lastUserMsg = document.querySelector('.chat-messages .message.user:last-of-type');
+    
+    if (lastUserMsg) {
+        const input = document.getElementById('chat-input');
+        // Mesajı tekrar input'a yaz
+        input.value = lastUserMsg.innerText;
+        // Ve gönder
+        sendMessage();
+    }
+};
 
 // Chat Gönderme
 async function sendMessage() {
@@ -217,15 +230,15 @@ async function sendMessage() {
         clearInterval(interval);
         loading.remove();
         
-        console.error("Chat Error:", e); // Hata detayını konsola bas
+        console.error("Chat Error:", e);
         
         if (!navigator.onLine) {
             showToast("Offline: Message queued! 📨", "info");
             appendMessage("Message queued (Offline)...", "system");
         } else {
-            // Kullanıcıya daha şık bir retry butonu göster
-            const retryBtn = `<button onclick='sendMessage()' style='background:none; border:1px solid currentColor; border-radius:4px; cursor:pointer; padding: 2px 5px; margin-left:5px;'>Retry</button>`;
-            appendMessage(`Connection weak or Server Error. ${retryBtn}`, 'bot');
+            // Grok'un stil ve fonksiyon önerisi entegre edildi
+            const btnStyle = "background:var(--accent-gold); color:#000; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold; margin-left:5px; font-size:0.8rem;";
+            appendMessage(`Connection failed or Server Busy. <button onclick='retryLastMessage()' style='${btnStyle}'>Retry</button>`, 'bot');
         }
     }
 }
@@ -266,7 +279,7 @@ function setLanguage(lang) {
         renderLists('exp-list', window.globalExpData);
         renderLists('edu-list', window.globalEduData);
     } else {
-       // İlk yüklemede veriler fetch'ten gelir, sonrakilerde buradan
+       // İlk yüklemede veriler fetch'ten gelir
     }
     
     document.getElementById('lang-toggle').innerText = lang.toUpperCase();
