@@ -126,10 +126,8 @@ window.reopenCookieBanner = () => {
 // Mobil Menü
 window.toggleMobileMenu = () => {
     // Basit bir toggle mantığı, CSS'de .active class'ı ile kontrol edilebilir
-    // Şimdilik sadece toast mesajı ile placeholder yapıyoruz, 
-    // CSS'inizde mobil menü tasarımı varsa buraya 'classList.toggle' eklenir.
     const menu = document.querySelector('.header-actions');
-    // menu.classList.toggle('active'); // CSS'de mobil menü varsa açar
+    // menu.classList.toggle('active'); 
     console.log("Mobile menu toggled");
 };
 
@@ -205,7 +203,7 @@ async function sendMessage() {
         clearInterval(interval);
         loading.remove();
         
-        if (!res.ok && !navigator.onLine) throw new Error("Offline"); 
+        if (!res.ok) throw new Error(`Server Error: ${res.status}`); 
         
         const data = await res.json();
         appendMessage(data.reply, 'bot');
@@ -219,12 +217,15 @@ async function sendMessage() {
         clearInterval(interval);
         loading.remove();
         
+        console.error("Chat Error:", e); // Hata detayını konsola bas
+        
         if (!navigator.onLine) {
             showToast("Offline: Message queued! 📨", "info");
-            appendMessage("Message queued...", "system");
+            appendMessage("Message queued (Offline)...", "system");
         } else {
-            console.error(e);
-            appendMessage("Connection weak. <button onclick='sendMessage()'>Retry</button>", 'bot');
+            // Kullanıcıya daha şık bir retry butonu göster
+            const retryBtn = `<button onclick='sendMessage()' style='background:none; border:1px solid currentColor; border-radius:4px; cursor:pointer; padding: 2px 5px; margin-left:5px;'>Retry</button>`;
+            appendMessage(`Connection weak or Server Error. ${retryBtn}`, 'bot');
         }
     }
 }
@@ -339,7 +340,7 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 4000);
 }
 
-// Harita ve Modallar (Önceki kodun aynısı)
+// Harita ve Modallar
 let map, tileLayer;
 function initMapObserver() {
     const mapEl = document.getElementById('map');
