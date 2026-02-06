@@ -1,4 +1,4 @@
-const CACHE_NAME = 'divine-v20-final'; // Versiyon kontrolü
+const CACHE_NAME = 'divine-v21-sync'; // Versiyonu V21 yaptık (Cache temizlensin diye)
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -9,7 +9,7 @@ const ASSETS_TO_CACHE = [
   '/profile.jpg',
   '/icon-192.png',
   '/icon-512.png',
-  // Veri dosyalarını zorla cache'liyoruz (Offline garantisi)
+  // Veri dosyalarını zorla cache'liyoruz
   '/data/translations.json?v=20',
   '/data/experience.json?v=20',
   '/data/education.json?v=20',
@@ -23,7 +23,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[SW] Divine cache yükleniyor... 💾');
+        console.log('[SW] Divine cache v21 yükleniyor... 💾');
         return cache.addAll(ASSETS_TO_CACHE);
       })
   );
@@ -46,35 +46,37 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// 3. İSTEKLERİ YAKALA (Stale-While-Revalidate Benzeri Strateji)
-// Önce cache'ten ver, sonra arka planda yenisini kontrol et.
+// 3. İSTEKLERİ YAKALA (Stale-While-Revalidate)
 self.addEventListener('fetch', (event) => {
-  // Sadece GET isteklerini ve kendi domainimizi cache'le
   if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
     return;
   }
   
-  // Chatbot (POST) isteklerini cache'leme, sunucuya gitmeli
   if (event.request.url.includes('/chat')) return;
 
   event.respondWith(
     caches.open(CACHE_NAME).then(async (cache) => {
       const cachedResponse = await cache.match(event.request);
       
-      // Cache'te varsa hemen onu döndür (Hız!)
       if (cachedResponse) {
-          // Ama arka planda yenisi var mı diye bak ve cache'i güncelle (Sessiz güncelleme)
           fetch(event.request).then(networkResponse => {
               if(networkResponse && networkResponse.status === 200) {
                   cache.put(event.request, networkResponse.clone());
               }
-          }).catch(() => {}); // Offline ise hata verme, zaten cache'ten döndük
-          
+          }).catch(() => {}); 
           return cachedResponse;
       }
-
-      // Cache'te yoksa internetten çek
       return fetch(event.request);
     })
   );
+});
+
+// 4. BACKGROUND SYNC (Script.js'den gelen talebi karşıla)
+self.addEventListener('sync', (event) => {
+    if (event.tag === 'sync-chat') {
+        console.log('[SW] Background Sync tetiklendi: sync-chat');
+        // Buraya normalde IndexedDB'den mesajları alıp sunucuya gönderme kodu gelir.
+        // Şimdilik sadece log basıyoruz, böylece tarayıcı hata vermez.
+        event.waitUntil(Promise.resolve());
+    }
 });
