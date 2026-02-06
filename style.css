@@ -1,4 +1,4 @@
-/* V20 DIVINE STYLE */
+/* V20 DIVINE STYLE - FINAL EDITION */
 :root {
     --bg-body: #0f172a; --bg-secondary: #1e293b; --text-main: #f1f5f9; --text-muted: #94a3b8;
     --accent-gold: #fbbf24; --accent-blue: #38bdf8; --accent-green: #2ecc71;
@@ -18,6 +18,13 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; transition: background-color 0.3s, color 0.3s; }
 :focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
 
+/* --- DIVINE TOUCHES (Scrollbar & Selection) --- */
+::selection { background: var(--accent-gold); color: #000; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-body); }
+::-webkit-scrollbar-thumb { background: var(--bg-secondary); border-radius: 4px; border: 1px solid var(--border-color); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-gold); }
+
 /* Header & Nav */
 header { background: var(--bg-body); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: background-color 0.3s; }
 .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
@@ -32,6 +39,7 @@ header { background: var(--bg-body); padding: 15px 0; position: fixed; width: 10
 .btn-contact:hover { background-color: var(--accent-gold); color: white; transform: translateY(-2px); }
 .btn-cv { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 7px 18px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; }
 .btn-cv:hover { background-color: var(--accent-gold); color: white; }
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; }
 
 /* Hero */
 .hero { padding: 160px 20px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
@@ -115,6 +123,8 @@ footer { text-align: center; padding: 40px 0; color: var(--text-muted); border-t
 .message.user { background: var(--accent-gold); color: #000; align-self: flex-end; border-top-right-radius: 2px; font-weight: 500; }
 .message.system { font-size: 0.8rem; text-align: center; color: var(--text-muted); width: 100%; max-width: 100%; background: transparent; }
 .message.typing { display: flex; align-items: center; gap: 4px; font-style: italic; color: var(--text-muted); border-color: transparent; }
+.retry-btn { background: none; border: 1px solid var(--accent-gold); color: var(--text-main); cursor: pointer; margin-left: 5px; border-radius: 4px; padding: 2px 6px; font-size: 0.8rem; }
+.retry-btn:hover { background: var(--accent-gold); color: #000; }
 .dot { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: blink 1.4s infinite both; }
 .dot:nth-child(2) { animation-delay: 0.2s; }
 .dot:nth-child(3) { animation-delay: 0.4s; }
@@ -183,6 +193,7 @@ textarea.form-control { resize: vertical; min-height: 100px; }
     .hero-title { font-size: 1.2rem; }
     .hero-slogan { font-size: 1.5rem; }
     .header-actions .btn-cv { display: none; }
+    .mobile-toggle { display: block; } /* Mobil menü butonu görünür */
     .content-grid { grid-template-columns: 1fr; }
     #map { height: 400px; }
     .chat-window { width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; border-radius: 0; z-index: 2500; position: fixed; margin-bottom: 0; }
