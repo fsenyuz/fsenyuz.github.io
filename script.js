@@ -364,4 +364,45 @@ function initMap() {
     const iconUrl = (c) => `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${c}.png`;
     const shadow = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png';
     const createIcon = (color) => new L.Icon({ iconUrl: iconUrl(color), shadowUrl: shadow, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] });
-    const icons = { blue: createIcon('blue'), green: createIcon('green'), gold: createIcon('
+    const icons = { blue: createIcon('blue'), green: createIcon('green'), gold: createIcon('orange') };
+
+    const bounds = [];
+    locationsData.forEach(l => {
+        let i, lay;
+        if (l.ty === 'edu') { i = icons.green; lay = eduLayer; } else if (l.ty === 'tender') { i = icons.gold; lay = tenderLayer; } else { i = icons.blue; lay = workLayer; }
+        L.marker([l.lat, l.lng], {icon: i, zIndexOffset: l.zIndex || 0}).bindPopup(`<b>${l.t}</b><br><small>${l.desc || ''}</small>`).addTo(lay);
+        bounds.push([l.lat, l.lng]);
+    });
+    setTimeout(() => { map.invalidateSize(); if(bounds.length) map.fitBounds(bounds, {padding:[30,30]}); }, 200);
+    window.addMapControl = (lang) => {
+        const t = translations[lang] || translations['en'];
+        const overlays = {};
+        overlays[`<span style='color:#2A81CB'>${t.legendWork}</span>`] = workLayer;
+        overlays[`<span style='color:#2ecc71'>${t.legendEdu}</span>`] = eduLayer;
+        overlays[`<span style='color:#fbbf24'>${t.legendTender}</span>`] = tenderLayer;
+        L.control.layers(null, overlays, {collapsed:true}).addTo(map);
+    };
+    window.addMapControl(currentLang);
+}
+
+// Modallar ve Form
+const modal = document.getElementById('custom-modal');
+function openModal(title, contentHTML) {
+    document.getElementById('modal-text-content').style.display = 'block';
+    document.getElementById('modal-form-content').style.display = 'none';
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-text-content').innerHTML = contentHTML;
+    document.getElementById('modal-close-btn').style.display = 'inline-block';
+    modal.classList.add('active');
+}
+function closeModal() { modal.classList.remove('active'); }
+if(modal) {
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+}
+window.handleRepoLink = function(repoName) {
+    const repo = repoStatus[repoName];
+    if (!repo) return; 
+    if (repo.ready) window.open(repo.url, '_blank');
+    else if (repo.comingSoon) showToast("Launching Soon! 🚀 Gods are working on it.", "divine");
+};
