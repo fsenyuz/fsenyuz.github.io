@@ -3,14 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
-    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6.">
+    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
     <meta name="author" content="Furkan Senyuz">
+    <meta name="keywords" content="Furkan Senyuz, Civil Engineer, AI Developer, Primavera P6, Python, Machine Learning, Construction Management">
     <link rel="canonical" href="https://fsenyuz.com">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"}]}'>
-    <meta name="theme-color" content="#fbbf24">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Furkan Senyuz",
+      "jobTitle": "Civil Engineer & AI Solutions Developer",
+      "url": "https://fsenyuz.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/fsenyuz",
+        "https://github.com/fsenyuz",
+        "https://kaggle.com/fsenyuz"
+      ]
+    }
+    </script>
 
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fsenyuz.com/">
+    <meta property="og:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
+    <meta property="og:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
+    <meta property="og:image" content="https://fsenyuz.com/profile.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fsenyuz.com/">
+    <meta property="twitter:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
+    <meta property="twitter:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
+    <meta property="twitter:image" content="https://fsenyuz.com/profile.jpg">
+    
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <meta name="theme-color" content="#fbbf24">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
     
     <script>
@@ -28,7 +61,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v44 POLISHED UI CSS */
+        /* v47 LEGENDARY LAUNCH CSS */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         
@@ -36,17 +69,23 @@
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
         
-        /* HIDE UGLY RECAPTCHA BADGE */
-        .grecaptcha-badge { visibility: hidden; }
+        /* Focus Management */
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--gold); color: #000; padding: 8px; z-index: 2000; transition: top 0.3s; text-decoration: none; font-weight: bold; }
+        .skip-link:focus { top: 0; outline: 3px solid var(--txt); }
+        *:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
+        /* Animations & Utils */
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .anim { opacity:0; animation:fadeIn 0.8s ease-out forwards; } .d1{animation-delay:0.1s} .d2{animation-delay:0.2s} .d3{animation-delay:0.3s} .d4{animation-delay:0.4s} .d5{animation-delay:0.5s}
         .hidden-item { display:none !important; } 
+        .grecaptcha-badge { visibility: hidden; }
         
+        /* Loader */
         #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column; transition:opacity 0.5s; }
         .loader-spin { width:50px; height:50px; border:5px solid var(--sec); border-top:5px solid var(--gold); border-radius:50%; animation:spin 1s linear infinite; }
 
+        /* Header & Nav */
         header { background:var(--bg); padding:15px 0; position:fixed; width:100%; top:0; z-index:1000; border-bottom:1px solid var(--brd); backdrop-filter:blur(10px); }
         .nav-con { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
         .logo { font-size:1.5rem; font-weight:700; color:var(--txt); text-decoration:none; } .logo span { color:var(--gold); }
@@ -55,6 +94,7 @@
         .b-con { background:var(--txt); color:var(--bg); padding:8px 24px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.3s; } .b-con:hover { background:var(--gold); color:#fff; transform:translateY(-2px); }
         .b-cv { border:1px solid var(--gold); color:var(--gold); padding:7px 20px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.3s; } .b-cv:hover { background:var(--gold); color:#fff; }
 
+        /* Content */
         .hero { padding:160px 20px 80px; text-align:center; max-width:900px; margin:0 auto; }
         .avt { width:160px; height:160px; border-radius:50%; border:4px solid var(--gold); box-shadow:0 0 20px rgba(251,191,36,0.3); margin-bottom:25px; object-fit:cover; background:var(--sec); }
         .hero h1 { font-size:3.5rem; font-weight:800; color:var(--txt); margin-bottom:15px; line-height:1.1; }
@@ -67,18 +107,15 @@
         .s-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
         .tag { padding:12px 24px; border-radius:12px; font-weight:600; font-size:0.95rem; color:#fff; box-shadow:var(--shd); transition:0.2s; cursor:default; } 
         .tag:hover { transform:translateY(-2px); }
-        .bg-t { background:var(--green); } .bg-e { background:var(--sec); border:1px solid var(--blue); color:var(--blue); } 
-        .light-mode .bg-e { background:#e0f2fe; border-color:#0284c7; color:#0284c7; }
+        .bg-t { background:var(--green); } .bg-e { background:var(--sec); border:1px solid var(--blue); color:var(--blue); } .light-mode .bg-e { background:#e0f2fe; border-color:#0284c7; color:#0284c7; }
 
         .box { max-width:1200px; margin:60px auto; padding:0 20px; }
         #map { height:500px; border-radius:20px; border:1px solid var(--brd); margin-bottom:20px; z-index:1; background:var(--sec); }
-        .leg { display:flex; gap:20px; justify-content:center; color:var(--mut); } 
-        .dot { width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:5px; }
+        .leg { display:flex; gap:20px; justify-content:center; color:var(--mut); } .dot { width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:5px; }
 
         .grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; max-width:1200px; margin:80px auto; padding:0 20px; }
         .sec-head { text-align:center; margin-bottom:30px; }
         .title { font-size:1.8rem; margin-bottom:15px; color:var(--txt); display:flex; align-items:center; gap:12px; border-bottom: 2px solid var(--gold); padding-bottom: 10px; display: inline-block; }
-        
         .filters { grid-column: 1 / -1; display:flex; justify-content:center; gap:15px; margin-bottom:40px; }
         .f-btn { background:var(--sec); color:var(--mut); border:1px solid var(--brd); padding:10px 24px; border-radius:30px; cursor:pointer; transition:0.3s; font-weight:600; } 
         .f-btn:hover, .f-btn.active { background:var(--gold); color:#000; border-color:var(--gold); }
@@ -88,12 +125,10 @@
         .t-item:hover { transform: translateX(5px); border-color: var(--gold); }
         .t-item::before { content: ''; position: absolute; left: -27px; top: 25px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
         .t-item.edu::before { background: var(--green); }
-        
         .t-item h4 { font-size:1.2rem; margin-bottom:5px; font-weight:700; color:var(--txt); }
         .t-item .co { font-size:1rem; color:var(--gold); font-weight:600; display:block; margin-bottom:10px; } .t-item.edu .co { color:var(--green); }
         .t-item .meta { font-size:0.85rem; color:var(--mut); display:flex; justify-content:space-between; margin-bottom:12px; border-bottom: 1px solid var(--brd); padding-bottom: 8px; }
-        .t-item ul { padding-left:20px; color:var(--mut); font-size: 0.95rem; }
-        .t-item ul li { margin-bottom: 5px; }
+        .t-item ul { padding-left:20px; color:var(--mut); font-size: 0.95rem; } .t-item ul li { margin-bottom: 5px; }
 
         .proj { max-width:1200px; margin:80px auto; padding:0 20px; }
         .p-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:30px; margin-top: 30px; }
@@ -105,6 +140,7 @@
         .card p { flex-grow: 1; color: var(--mut); margin-bottom: 20px; }
         .plnk { color:var(--txt); text-decoration:none; font-size:1rem; display:inline-flex; align-items:center; gap:8px; font-weight: 600; } .plnk:hover { color:var(--gold); }
 
+        /* Chat & Modal */
         .bub { position:fixed; bottom:30px; right:30px; background:var(--gold); color:#000; width:65px; height:65px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.8rem; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.4); z-index:2500; transition: transform 0.3s; } .bub:hover { transform:scale(1.1); }
         .win { position:fixed; bottom:100px; right:30px; width:380px; height:600px; max-height:80dvh; background:var(--sec); border:1px solid var(--brd); border-radius:20px; display:flex; flex-direction:column; box-shadow:0 10px 40px rgba(0,0,0,0.5); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } .win.act { opacity:1; visibility:visible; transform:translateY(0); }
         .chat-h { background:var(--gold); padding:20px; display:flex; justify-content:space-between; align-items:center; color:#000; font-weight:bold; font-size: 1.1rem; }
@@ -137,107 +173,110 @@
 </head>
 <body>
     <div id="loader"><div class="loader-spin"></div><p style="margin-top:20px;color:var(--gold);font-weight:bold;">Loading Profile...</p></div>
+    <a href="#main-content" class="skip-link">Skip to content</a>
 
     <header class="anim d1">
         <div class="nav-con">
             <a href="#" class="logo">f<span>senyuz</span></a>
-            <div class="act">
-                <button class="i-btn" id="lang-btn" onclick="App.lang()">TR</button>
-                <button class="i-btn" onclick="App.theme()"><i class="fa-solid fa-sun"></i></button>
-                <a href="CV_FS_2026.pdf" class="b-cv" target="_blank"><i class="fa-solid fa-download"></i> CV</a>
-                <a href="#" class="b-con" onclick="App.cont(event)"><i class="fa-regular fa-envelope"></i> <span data-t="contactBtn"></span></a>
-            </div>
+            <nav class="act" aria-label="Main Navigation">
+                <button class="i-btn" id="lang-btn" aria-label="Switch Language" onclick="App.lang()">TR</button>
+                <button class="i-btn" aria-label="Toggle Theme" onclick="App.theme()"><i class="fa-solid fa-sun"></i></button>
+                <a href="CV_FS_2026.pdf" class="b-cv" target="_blank" aria-label="Download CV"><i class="fa-solid fa-download"></i> CV</a>
+                <a href="#" class="b-con" onclick="App.cont(event)" aria-label="Contact Me"><i class="fa-regular fa-envelope"></i> <span data-t="contactBtn"></span></a>
+            </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <img src="profile.jpg" class="avt anim d2" alt="Furkan Senyuz">
-        <h1 class="anim d3">Furkan Senyuz</h1>
-        <p class="sub anim d4" data-t="heroTitle"></p>
-        <div class="slogan anim d5" data-t="heroSlogan"></div>
-        <div class="socials anim d5">
-            <a href="https://www.linkedin.com/in/fsenyuz" class="soc"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://github.com/fsenyuz" class="soc"><i class="fa-brands fa-github"></i></a>
-            <a href="https://kaggle.com/fsenyuz" class="soc"><i class="fa-brands fa-kaggle"></i></a>
-        </div>
-        <div class="skills anim d5">
-            <div class="s-row">
-                <div class="tag bg-t" data-tip="skillTip1" onclick="App.tip(this)">Python & SQL</div>
-                <div class="tag bg-t" data-tip="skillTip2" onclick="App.tip(this)">ML & AI APIs</div>
-                <div class="tag bg-t" data-tip="skillTip3" onclick="App.tip(this)">Power BI & ERP</div>
+    <main id="main-content">
+        <section class="hero">
+            <img src="profile.jpg" class="avt anim d2" alt="Furkan Senyuz" loading="lazy">
+            <h1 class="anim d3">Furkan Senyuz</h1>
+            <p class="sub anim d4" data-t="heroTitle"></p>
+            <div class="slogan anim d5" data-t="heroSlogan"></div>
+            <div class="socials anim d5">
+                <a href="https://www.linkedin.com/in/fsenyuz" class="soc" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/fsenyuz" class="soc" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://kaggle.com/fsenyuz" class="soc" aria-label="Kaggle"><i class="fa-brands fa-kaggle"></i></a>
             </div>
-            <div class="s-row">
-                <div class="tag bg-e" data-tip="skillTip4" onclick="App.tip(this)">Primavera P6 & TILOS</div>
-                <div class="tag bg-e" data-tip="skillTip5" onclick="App.tip(this)">Tender & Cost</div>
-                <div class="tag bg-e" data-tip="skillTip6" onclick="App.tip(this)">FIDIC & Claims</div>
+            <div class="skills anim d5">
+                <div class="s-row">
+                    <div class="tag bg-t" data-tip="skillTip1" onclick="App.tip(this)">Python & SQL</div>
+                    <div class="tag bg-t" data-tip="skillTip2" onclick="App.tip(this)">ML & AI APIs</div>
+                    <div class="tag bg-t" data-tip="skillTip3" onclick="App.tip(this)">Power BI & ERP</div>
+                </div>
+                <div class="s-row">
+                    <div class="tag bg-e" data-tip="skillTip4" onclick="App.tip(this)">Primavera P6 & TILOS</div>
+                    <div class="tag bg-e" data-tip="skillTip5" onclick="App.tip(this)">Tender & Cost</div>
+                    <div class="tag bg-e" data-tip="skillTip6" onclick="App.tip(this)">FIDIC & Claims</div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="box">
-        <h3 class="title" style="justify-content: center;"><i class="fa-solid fa-earth-americas"></i> <span data-t="mapTitle"></span></h3>
-        <div id="map"></div>
-        <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legendWork"></span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legendEdu"></span></div></div>
-    </div>
+        <div class="box">
+            <h3 class="title" style="justify-content: center;"><i class="fa-solid fa-earth-americas"></i> <span data-t="mapTitle"></span></h3>
+            <div id="map"></div>
+            <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legendWork"></span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legendEdu"></span></div></div>
+        </div>
 
-    <div class="grid">
-        <div class="filters">
-            <button class="f-btn active" onclick="App.filt('all')" data-t="filterAll"></button>
-            <button class="f-btn" onclick="App.filt('civil')" data-t="filterCivil"></button>
-            <button class="f-btn" onclick="App.filt('ai')" data-t="filterAI"></button>
+        <div class="grid">
+            <div class="filters">
+                <button class="f-btn active" onclick="App.filt('all')" data-t="filterAll"></button>
+                <button class="f-btn" onclick="App.filt('civil')" data-t="filterCivil"></button>
+                <button class="f-btn" onclick="App.filt('ai')" data-t="filterAI"></button>
+            </div>
+            
+            <div>
+                <div class="sec-head"><h3 class="title"><i class="fa-solid fa-briefcase"></i> <span data-t="expTitle"></span></h3></div>
+                <div class="timeline-container" id="exp"></div>
+            </div>
+            
+            <div>
+                <div class="sec-head"><h3 class="title"><i class="fa-solid fa-graduation-cap"></i> <span data-t="eduTitle"></span></h3></div>
+                <div class="timeline-container" id="edu"></div>
+            </div>
         </div>
-        
-        <div>
-            <div class="sec-head"><h3 class="title"><i class="fa-solid fa-briefcase"></i> <span data-t="expTitle"></span></h3></div>
-            <div class="timeline-container" id="exp"></div>
-        </div>
-        
-        <div>
-            <div class="sec-head"><h3 class="title"><i class="fa-solid fa-graduation-cap"></i> <span data-t="eduTitle"></span></h3></div>
-            <div class="timeline-container" id="edu"></div>
-        </div>
-    </div>
 
-    <div class="proj">
-        <h3 class="title" style="justify-content: center;"><i class="fa-solid fa-laptop-code"></i> <span data-t="projTitle"></span></h3>
-        <div class="p-grid" id="projs">
-            <div class="card item-box visible-item" data-cat="ai">
-                <h4><i class="fa-solid fa-chart-line"></i> Construction Claim Predictor</h4>
-                <div class="ptags"><span class="pt">Python</span><span class="pt">Random Forest</span></div>
-                <p data-t="proj1Desc"></p>
-                <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" class="plnk" onclick="App.repo(event,'Construction Claim Predictor')"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
-            </div>
-            <div class="card item-box visible-item" data-cat="civil">
-                <h4><i class="fa-solid fa-file-invoice-dollar"></i> Tender Cost Optimizer</h4>
-                <div class="ptags"><span class="pt">Python</span><span class="pt">Automation</span></div>
-                <p data-t="proj2Desc"></p>
-                <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" class="plnk" onclick="App.repo(event,'Tender Cost Optimizer')"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
-            </div>
-            <div class="card item-box visible-item" data-cat="ai">
-                <h4><i class="fa-solid fa-hard-hat"></i> Site Safety Vision</h4>
-                <div class="ptags"><span class="pt">YOLO</span><span class="pt">OpenCV</span></div>
-                <p data-t="proj3Desc"></p>
-                <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" class="plnk" onclick="App.repo(event,'Site Safety Vision')"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+        <div class="proj">
+            <h3 class="title" style="justify-content: center;"><i class="fa-solid fa-laptop-code"></i> <span data-t="projTitle"></span></h3>
+            <div class="p-grid" id="projs">
+                <div class="card item-box visible-item" data-cat="ai">
+                    <h4><i class="fa-solid fa-chart-line"></i> Construction Claim Predictor</h4>
+                    <div class="ptags"><span class="pt">Python</span><span class="pt">Random Forest</span></div>
+                    <p data-t="proj1Desc"></p>
+                    <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" class="plnk" onclick="App.repo(event,'Construction Claim Predictor')" aria-label="View Code for Claim Predictor"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+                </div>
+                <div class="card item-box visible-item" data-cat="civil">
+                    <h4><i class="fa-solid fa-file-invoice-dollar"></i> Tender Cost Optimizer</h4>
+                    <div class="ptags"><span class="pt">Python</span><span class="pt">Automation</span></div>
+                    <p data-t="proj2Desc"></p>
+                    <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" class="plnk" onclick="App.repo(event,'Tender Cost Optimizer')" aria-label="View Code for Cost Optimizer"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+                </div>
+                <div class="card item-box visible-item" data-cat="ai">
+                    <h4><i class="fa-solid fa-hard-hat"></i> Site Safety Vision</h4>
+                    <div class="ptags"><span class="pt">YOLO</span><span class="pt">OpenCV</span></div>
+                    <p data-t="proj3Desc"></p>
+                    <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" class="plnk" onclick="App.repo(event,'Site Safety Vision')" aria-label="View Code for Site Safety"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer><p>&copy; <span id="yr"></span> Furkan Senyuz. <span data-t="footerText"></span></p></footer>
 
-    <div class="bub" id="bub" onclick="App.chat()"><i class="fa-solid fa-robot"></i></div>
-    <div class="win" id="win">
-        <div class="chat-h"><h4><i class="fa-solid fa-brain"></i> FS AI</h4><button class="cls" onclick="App.chat()" style="position:static;font-size:1.2rem"><i class="fa-solid fa-xmark"></i></button></div>
-        <div class="msgs" id="msgs"><div class="msg bot">Hello! I'm Furkan's AI. Ask me anything about my projects or experience!</div></div>
+    <button class="bub" id="bub" onclick="App.chat()" aria-label="Open Chatbot"><i class="fa-solid fa-robot"></i></button>
+    <div class="win" id="win" role="dialog" aria-label="Chatbot Window">
+        <div class="chat-h"><h4><i class="fa-solid fa-brain"></i> FS AI</h4><button class="cls" onclick="App.chat()" aria-label="Close Chat" style="position:static;font-size:1.2rem"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="msgs" id="msgs" role="log" aria-live="polite"><div class="msg bot">Hello! I'm Furkan's AI. Ask me anything about my projects or experience!</div></div>
         <div class="c-inp">
-            <label for="f-up" style="cursor:pointer"><i class="fa-solid fa-paperclip"></i></label><input type="file" id="f-up" style="display:none">
+            <label for="f-up" style="cursor:pointer" aria-label="Upload File"><i class="fa-solid fa-paperclip"></i></label><input type="file" id="f-up" style="display:none">
             <input type="text" id="inp" class="inp" placeholder="Ask something..." onkeypress="App.key(event)">
-            <button class="snd" onclick="App.send()"><i class="fa-solid fa-paper-plane"></i></button>
+            <button class="snd" onclick="App.send()" aria-label="Send Message"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <div id="mod" class="mod" role="dialog" aria-modal="true">
+    <div id="mod" class="mod" role="dialog" aria-modal="true" aria-labelledby="m-tit">
         <div class="m-con">
-            <button class="cls" onclick="App.cls()"><i class="fa-solid fa-xmark"></i></button>
+            <button class="cls" onclick="App.cls()" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
             <h3 id="m-tit">Title</h3><div id="m-txt"></div>
             <form id="frm" action="https://formspree.io/f/mnjbavgw" method="POST" style="display:none">
                 <input type="text" name="_gotcha" style="display:none">
@@ -246,22 +285,28 @@
                 <textarea id="msg" name="message" class="frm-c" required placeholder="Message" rows="4"></textarea>
                 
                 <button class="g-recaptcha frm-b" data-sitekey="6LeR6GMsAAAAADhs_VIncXqN9ZOlJzCWMLocd1jv" data-callback="onSubmit" data-error-callback="onErr" data-action="submit">Send Message</button>
-                
                 <p class="recaptcha-text">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.</p>
-                
                 <div id="fst" style="margin-top:10px;display:none"></div>
             </form>
             <button id="m-btn" class="frm-b" onclick="App.cls()" style="margin-top:15px">Close</button>
         </div>
     </div>
 
-    <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText"></p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline"></button><button class="yes" onclick="App.cons(true)" data-t="accept"></button></div></div>
+    <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()" aria-label="Close Cookie Banner"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText"></p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline"></button><button class="yes" onclick="App.cons(true)" data-t="accept"></button></div></div>
+
+    <noscript>
+        <div style="text-align:center; padding:50px; color:var(--gold);">
+            <h2>JavaScript Required</h2>
+            <p>Please enable JavaScript to view this interactive portfolio.</p>
+        </div>
+    </noscript>
 
     <script>
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v44').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v47').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
-        function onErr(){ console.warn("ReCAPTCHA Error"); } 
+        function onErr(){ console.warn("ReCAPTCHA Error"); }
+        function sanitize(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
         
         window.App=(function(){
             const C=window.CFG;
@@ -289,8 +334,7 @@
                     const pObs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('visible-item');pObs.unobserve(i.target)}})});
                     document.querySelectorAll('.card').forEach(c=>pObs.observe(c));
                 } catch(e) {
-                    console.error(e);
-                    document.getElementById('loader').innerHTML = `<p style="color:red">Loading failed. Please refresh.</p>`;
+                    document.getElementById('loader').innerHTML = `<p style="color:var(--gold);margin-bottom:15px">⚠️ Connection Failed</p><button class="f-btn" onclick="location.reload()">Retry</button>`;
                 }
             }
             
@@ -340,7 +384,7 @@
             async function send(){
                 const inp=document.getElementById('inp'), msgs=document.getElementById('msgs'), txt=inp.value.trim();
                 if(!txt)return;
-                msgs.innerHTML+=`<div class="msg usr">${txt}</div>`;inp.value='';
+                msgs.innerHTML+=`<div class="msg usr">${sanitize(txt)}</div>`;inp.value='';
                 msgs.scrollTop=msgs.scrollHeight;
                 
                 const ld=document.createElement('div'); ld.className='msg bot typing'; ld.innerHTML='...'; msgs.appendChild(ld);
@@ -350,9 +394,9 @@
                     const fd=new FormData(); fd.append('message',txt);
                     const res=await fetch(C.API,{method:'POST',body:fd});
                     if(!res.ok)throw 0;
-                    const d=await res.json(); msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">${d.reply}</div>`;
+                    const d=await res.json(); msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">${sanitize(d.reply)}</div>`;
                 }catch(e){
-                    msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">⚠️ I'm sleeping now (Server Offline). Try again later!</div>`;
+                    msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">⚠️ Connection failed. <a href="#" style="color:var(--txt);text-decoration:underline;font-weight:bold" onclick="App.cont(event)">Email me</a></div>`;
                 }
                 msgs.scrollTop=msgs.scrollHeight;
             }
@@ -369,10 +413,8 @@
                     .addTo(lyrs[l.ty]);
                 });
                 
-                // TRUE AUTO-FIT
                 const group = L.featureGroup([lyrs.work, lyrs.edu, lyrs.tender]);
                 map.fitBounds(group.getBounds(), {padding: [50, 50]});
-                
                 addLC(l);
             }
             function addLC(lg){
