@@ -61,9 +61,43 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v57 STABILIZED MAP CSS */
-        :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
-        body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
+        /* v58 CSS (v29 Colors + Modern UI + Map Fixes) */
+        
+        /* v29 DARK MODE (Default) */
+        :root { 
+            --bg: #0f172a; 
+            --sec: #1e293b; 
+            --txt: #f1f5f9; 
+            --mut: #94a3b8; 
+            --gold: #fbbf24; 
+            --blue: #38bdf8; 
+            --green: #2ecc71; 
+            --brd: rgba(255, 255, 255, 0.1); 
+            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --tag: rgba(255,255,255,0.1); 
+            --ovr: rgba(0, 0, 0, 0.85); 
+            --inp: #0f172a; 
+            --bot: #fbbf24; 
+            --usr: #334155; 
+        }
+
+        /* v29 LIGHT MODE */
+        body.light-mode { 
+            --bg: #f8fafc; 
+            --sec: #ffffff; 
+            --txt: #0f172a; 
+            --mut: #475569; 
+            --gold: #d97706; 
+            --blue: #0284c7; 
+            --green: #15803d; 
+            --brd: #e2e8f0; 
+            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --tag: #e2e8f0; 
+            --ovr: rgba(255, 255, 255, 0.85); 
+            --inp: #f1f5f9; 
+            --bot: #d97706; 
+            --usr: #e2e8f0; 
+        }
         
         * { margin:0; padding:0; box-sizing:border-box; } 
         html { scroll-behavior:smooth; }
@@ -340,7 +374,7 @@
 
     <script>
         // PWA Service Worker
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v57').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v58').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
@@ -363,7 +397,6 @@
                     
                     document.getElementById('yr').innerText=new Date().getFullYear();
                     
-                    // AUTO THEME DETECTION
                     const saved = localStorage.getItem(C.THEME);
                     const sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
                     if(saved === 'light' || (!saved && sysLight)) {
@@ -448,7 +481,7 @@
             }
 
             function initMap(){
-                // Haritayı başlat
+                // UNLOCKED MAP (Zoom limitation removed)
                 map = L.map('map'); 
 
                 const isLight = document.body.classList.contains('light-mode');
@@ -470,10 +503,10 @@
                 // Katmanları haritaya ekle
                 ['work','edu','tender'].forEach(k=>lyrs[k].addTo(map));
                 
-                // --- KRİTİK DÜZELTME: LAG EKLEME ---
+                // --- KRİTİK DÜZELTME: LAG EKLEME (v58 Logic) ---
                 const group = L.featureGroup(markers);
                 
-                // 300ms gecikme ile haritayı oturt (Veri ve DOM tam yüklensin)
+                // 500ms gecikme ile haritayı oturt (Veri ve DOM tam yüklensin)
                 setTimeout(() => {
                     map.invalidateSize(); // Harita boyutunu garantiye al
                     if(markers.length > 0) {
@@ -481,7 +514,7 @@
                     } else {
                         map.setView([41.0, 29.0], 3); // Veri yoksa varsayılan
                     }
-                }, 300);
+                }, 500);
                 
                 addLC(l);
             }
