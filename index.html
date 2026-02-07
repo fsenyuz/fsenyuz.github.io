@@ -35,7 +35,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* ETERNITY EDITION CSS v37 */
+        /* FIXED CSS v38 */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 4px 6px -1px rgba(0,0,0,0.3); --tag:rgba(255,255,255,0.1); --ovr:rgba(0,0,0,0.85); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 4px 6px -1px rgba(0,0,0,0.1); --tag:#e2e8f0; --ovr:rgba(255,255,255,0.85); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         * { margin:0; padding:0; box-sizing:border-box; } html { scroll-behavior:smooth; }
@@ -224,8 +224,8 @@
 
     <script>
         if('serviceWorker'in navigator){
-            // PWA Cache: Core Assets + Fonts + CV + Leaflet
-            const sw=`const C='fs-v4';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/','index.html','profile.jpg','CV_FS_2026.pdf','https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`;
+            // PWA Cache: Core + Fonts + CV + Leaflet
+            const sw=`const C='fs-v5';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/','index.html','profile.jpg','CV_FS_2026.pdf','https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`;
             navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(sw)}`).catch(console.error);
         }
         function onSubmit(t){App.sub(t)}
@@ -233,10 +233,23 @@
         
         window.App=(function(){
             const C=window.CFG, D=new Date().toISOString().split('T')[0];
-            let l='en', map, lyrs={}, mRetries=0, foc, obs, DATA;
+            let l='en', map, lyrs={}, mRetries=0, foc, obs;
             
-            // BASE64 ENCODED DATA (GZIP-LIKE)
-            const B64="==";
+            // DIRECT DATA OBJECT - NO DECODING RISK
+            const DATA = {
+                en:{
+                    contactBtn:"Let's Connect",heroTitle:"Civil Engineer & AI Solutions Developer",heroSlogan:"Building the Future with <br> Concrete & Code",mapTitle:"Global Experience Map",legWork:"Work",legEdu:"Edu",fAll:"All",fCiv:"Construction",fAI:"AI & Tech",expTitle:"Experience",eduTitle:"Education",projTitle:"Projects",p1:"ML model predicting delay claims.",p2:"Script automating BOQ analysis.",p3:"AI detecting PPE compliance.",view:"View Code",foot:"Built with Concrete, Code & AI.",cookieText:"Cookies help us improve.",accept:"Accept",decline:"Decline",formName:"Name",formEmail:"Email",formMsg:"Message",
+                    skillTip1:"Automating BOQ",skillTip2:"Predictive Models",skillTip3:"Data-Driven",skillTip4:"Mega Projects",skillTip5:"Risk Analysis",skillTip6:"Contract Mgmt",
+                    exp:[{c:"civil",t:"Technical Office Chief",co:"Tasyapi",l:"Serbia",d:"2024+",x:"<li>Kuzmin-Sremska Raca Highway.</li>"},{c:"civil",t:"Tender Specialist",co:"Tasyapi",l:"Serbia",d:"21-24",x:"<li>International Tenders.</li>"},{c:"civil",t:"Planning Chief",co:"Fernas",l:"Turkey",d:"2021",x:"<li>Aydin-Denizli Motorway.</li>"}],
+                    edu:[{c:"ai",t:"ML Specialization",co:"Stanford",l:"Online",d:"2026",x:"<li>Andrew Ng Course.</li>"},{c:"civil",t:"MSc Geotechnical",co:"MSKU",l:"Turkey",d:"2016+",x:"<li>AI in Geotechnics.</li>"}]
+                },
+                tr:{
+                    contactBtn:"İletişime Geç",heroTitle:"İnşaat Mühendisi & Yapay Zeka Geliştiricisi",heroSlogan:"Geleceği Beton ve Kod ile <br> İnşa Ediyorum",mapTitle:"Global Deneyim Haritası",legWork:"İş",legEdu:"Eğitim",fAll:"Tümü",fCiv:"İnşaat",fAI:"Yapay Zeka",expTitle:"Deneyim",eduTitle:"Eğitim",projTitle:"Projeler",p1:"Gecikme tahmini yapan ML modeli.","p2":"Otomatik metraj analizi.","p3":"KKD tespit eden yapay zeka.","view":"Kodu Gör","foot":"Beton, Kod ve Yapay Zeka ile yapıldı.","cookieText":"Çerez kullanıyoruz.","accept":"Kabul","decline":"Red","formName":"İsim","formEmail":"E-posta","formMsg":"Mesaj",
+                    skillTip1:"Metraj Otomasyonu",skillTip2:"Tahmin Modelleri",skillTip3:"Veri Odaklı",skillTip4:"Mega Projeler",skillTip5:"Risk Analizi",skillTip6:"Sözleşme Yönetimi",
+                    exp:[{c:"civil",t:"Teknik Ofis Şefi",co:"Tasyapi",l:"Sırbistan",d:"2024+",x:"<li>Kuzmin-Sremska Raca Otoyolu.</li>"},{c:"civil",t:"İhale Uzmanı",co:"Tasyapi",l:"Sırbistan",d:"21-24",x:"<li>Uluslararası İhaleler.</li>"},{c:"civil",t:"Planlama Şefi",co:"Fernas",l:"Türkiye",d:"2021",x:"<li>Aydın-Denizli Otoyolu.</li>"}],
+                    edu:[{c:"ai",t:"ML Uzmanlığı",co:"Stanford",l:"Online",d:"2026",x:"<li>Andrew Ng Kursu.</li>"},{c:"civil",t:"Yüksek Lisans",co:"MSKÜ",l:"Türkiye",d:"2016+",x:"<li>Geoteknikte Yapay Zeka.</li>"}]
+                }
+            };
 
             function tr(n,p){if(typeof gtag==='function')gtag('event',n,p)}
             function ann(t){document.getElementById('ann').innerText=t}
@@ -354,7 +367,6 @@
             function addLC(lg){window.mc=L.control.layers(null,{[`<span style='color:#38bdf8'>${DATA[lg].legWork}</span>`]:lyrs.work,[`<span style='color:#2ecc71'>${DATA[lg].legEdu}</span>`]:lyrs.edu},{collapsed:true}).addTo(map)}
 
             function init(){
-                DATA = JSON.parse(atob(B64)); // Decode Base64 Data
                 document.getElementById('yr').innerText=new Date().getFullYear();
                 if(localStorage.getItem(C.THEME)==='light')document.body.classList.add('light-mode');
                 if(!localStorage.getItem(C.CONSENT))setTimeout(()=>document.getElementById('cook').classList.add('shw'),2000);
