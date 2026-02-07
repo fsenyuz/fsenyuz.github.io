@@ -2,839 +2,380 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
     <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
-    <meta name="keywords" content="Furkan Senyuz, Civil Engineer, AI Developer, Primavera P6, Python, Machine Learning, Construction Management, Gemini AI">
     <meta name="author" content="Furkan Senyuz">
     <link rel="canonical" href="https://fsenyuz.com">
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 font-size=%2280%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 fill=%22%23fbbf24%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>FS</text></svg>">
     
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <meta name="theme-color" content="#fbbf24">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
     <meta property="og:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
-    <meta property="og:description" content="Bridging the gap between physical infrastructure and digital intelligence. Chat with my AI Assistant!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fsenyuz.com">
+    <meta property="og:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
+    <meta property="og:image" content="https://fsenyuz.com/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png">
 
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-          'ad_storage': 'denied',
-          'ad_user_data': 'denied',
-          'ad_personalization': 'denied',
-          'analytics_storage': 'denied'
-        });
+        window.CFG = { GA:'G-1E33W355PW', API:"https://portfolio-backend-hu1r.onrender.com/chat", THEME:'theme', CONSENT:'cookie_consent', RETRY:2000, MAX:2, LIM:50 };
+        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', { 'ad_storage':'denied', 'ad_user_data':'denied', 'ad_personalization':'denied', 'analytics_storage':'denied' });
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E33W355PW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-1E33W355PW', { 'anonymize_ip': true });
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', window.CFG.GA, { 'anonymize_ip': true });</script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* CSS VARIABLES */
-        :root {
-            --bg-body: #0f172a; --bg-secondary: #1e293b; --text-main: #f1f5f9; --text-muted: #94a3b8;
-            --accent-gold: #fbbf24; --accent-blue: #38bdf8; --accent-green: #2ecc71;
-            --border-color: rgba(255, 255, 255, 0.1); --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --logo-color: #ffffff; --tag-bg: rgba(255,255,255,0.1); --modal-overlay: rgba(0, 0, 0, 0.85);
-            --input-bg: #0f172a; --chat-bg: #1e293b; --chat-user: #334155; --chat-bot: #fbbf24;
-        }
-        body.light-mode {
-            --bg-body: #f8fafc; --bg-secondary: #ffffff; --text-main: #0f172a; --text-muted: #475569;
-            --accent-gold: #d97706; --accent-blue: #0284c7; --accent-green: #15803d;
-            --border-color: #e2e8f0; --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --logo-color: #0f172a; --tag-bg: #e2e8f0; --modal-overlay: rgba(255, 255, 255, 0.85);
-            --input-bg: #f1f5f9; --chat-bg: #ffffff; --chat-user: #e2e8f0; --chat-bot: #d97706;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; transition: background-color 0.3s, color 0.3s; overflow-x: hidden; }
+        /* ETERNITY EDITION CSS v37 */
+        :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 4px 6px -1px rgba(0,0,0,0.3); --tag:rgba(255,255,255,0.1); --ovr:rgba(0,0,0,0.85); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
+        body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 4px 6px -1px rgba(0,0,0,0.1); --tag:#e2e8f0; --ovr:rgba(255,255,255,0.85); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
+        * { margin:0; padding:0; box-sizing:border-box; } html { scroll-behavior:smooth; }
+        body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.6; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
+        :focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
         
-        :focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
-
-        /* --- ANIMATIONS START --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
-        }
-
-        .animate-load {
-            opacity: 0; /* Başlangıçta gizli */
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.3s; }
-        .delay-3 { animation-delay: 0.5s; }
-        .delay-4 { animation-delay: 0.7s; }
-        .delay-5 { animation-delay: 0.9s; }
-        /* --- ANIMATIONS END --- */
-
-        /* Header & Nav */
-        header { background: var(--bg-body); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: background-color 0.3s; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--logo-color); text-decoration: none; letter-spacing: -0.5px; }
-        .logo span { color: var(--accent-gold); }
-        .header-actions { display: flex; gap: 12px; align-items: center; }
-
-        .icon-btn { background: none; border: none; color: var(--text-main); font-size: 1.1rem; cursor: pointer; padding: 5px; transition: transform 0.3s, color 0.3s; }
-        .icon-btn:hover { color: var(--accent-gold); }
-        #theme-toggle:hover { transform: rotate(15deg); }
-        .lang-toggle { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; min-width: 30px; text-align: center; }
-
-        .btn-contact { background-color: var(--text-main); color: var(--bg-body); padding: 8px 20px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; }
-        .btn-contact:hover { background-color: var(--accent-gold); color: white; transform: translateY(-2px); }
-        .btn-cv { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 7px 18px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; }
-        .btn-cv:hover { background-color: var(--accent-gold); color: white; }
-
-        /* Hero */
-        .hero { padding: 160px 20px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
-        .hero-avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--accent-gold); box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); margin-bottom: 25px; object-fit: cover; transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: var(--bg-secondary); }
-        .hero-avatar:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(251, 191, 36, 0.5); }
-        .hero-name { font-size: 3.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; line-height: 1.1; }
-        .hero-title { font-size: 1.5rem; color: var(--text-muted); font-weight: 300; margin-bottom: 30px; }
-        .hero-slogan { font-size: 2rem; color: var(--accent-gold); font-weight: 600; margin-bottom: 40px; line-height: 1.3; }
+        @keyframes up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(251,191,36,0.7)} 70%{box-shadow:0 0 0 15px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+        .anim { opacity:0; animation:up 0.8s ease-out forwards; } .d1{animation-delay:.1s} .d2{animation-delay:.2s} .d3{animation-delay:.3s} .d4{animation-delay:.4s} .d5{animation-delay:.5s}
+        .item-box { transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), display 0.4s allow-discrete; }
+        .hidden-item { opacity:0; transform:scale(0.9); display:none !important; } .visible-item { opacity:1; transform:scale(1); display:flex !important; }
         
-        .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; }
-        .social-icon { font-size: 1.8rem; color: var(--text-muted); transition: all 0.3s ease; }
-        .social-icon:hover { color: var(--accent-gold); transform: translateY(-3px) scale(1.1); }
+        header { background:var(--bg); padding:15px 0; position:fixed; width:100%; top:0; z-index:1000; border-bottom:1px solid var(--brd); backdrop-filter:blur(10px); }
+        .nav-con { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
+        .logo { font-size:1.5rem; font-weight:700; color:var(--txt); text-decoration:none; } .logo span { color:var(--gold); }
+        .act { display:flex; gap:12px; align-items:center; }
+        .i-btn { background:none; border:none; color:var(--txt); cursor:pointer; font-size:1.1rem; padding:5px; transition:0.3s; } .i-btn:hover { color:var(--gold); }
+        .b-cv { background:transparent; color:var(--gold); border:1px solid var(--gold); padding:7px 18px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.3s; } .b-cv:hover { background:var(--gold); color:#fff; }
+        .b-con { background:var(--txt); color:var(--bg); padding:8px 20px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.3s; cursor:pointer; } .b-con:hover { background:var(--gold); color:#fff; transform:translateY(-2px); }
 
-        /* Skills */
-        .skills-container { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px; }
-        .skill-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .skill-tag { padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: transform 0.2s; position: relative; cursor: pointer; user-select: none; }
-        .skill-tag:hover, .skill-tag:focus { transform: translateY(-2px); outline: none; }
+        .hero { padding:140px 20px 60px; text-align:center; max-width:900px; margin:0 auto; }
+        .avt { width:150px; height:150px; border-radius:50%; border:4px solid var(--gold); box-shadow:0 0 20px rgba(251,191,36,0.3); margin-bottom:25px; object-fit:cover; background:var(--sec); }
+        .hero h1 { font-size:3.5rem; font-weight:700; color:var(--txt); line-height:1.1; margin-bottom:10px; }
+        .sub { font-size:1.5rem; color:var(--mut); font-weight:300; margin-bottom:30px; }
+        .slogan { font-size:2rem; color:var(--gold); font-weight:600; margin-bottom:40px; }
+        .soc { font-size:1.8rem; color:var(--mut); margin:0 10px; transition:0.3s; } .soc:hover { color:var(--gold); transform:translateY(-3px); }
         
-        .skill-tag::after {
-            content: attr(data-tooltip); position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%);
-            background-color: var(--bg-secondary); color: var(--accent-gold); padding: 8px 12px; border-radius: 6px;
-            font-size: 0.85rem; white-space: normal; line-height: 1.3; text-align: center; width: max-content; max-width: 250px;
-            opacity: 0; visibility: hidden; transition: opacity 0.2s ease;
-            box-shadow: var(--card-shadow); border: 1px solid var(--accent-gold); z-index: 100; pointer-events: none;
-        }
-        @media (hover: hover) { .skill-tag:hover::after { opacity: 1; visibility: visible; } }
-        .skill-tag.active::after { opacity: 1; visibility: visible; }
+        .skills { display:flex; flex-direction:column; gap:15px; align-items:center; margin-top:20px; }
+        .s-row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+        .tag { padding:10px 20px; border-radius:8px; font-weight:600; font-size:0.95rem; color:#fff; box-shadow:var(--shd); transition:0.2s; position:relative; cursor:pointer; } .tag:hover { transform:translateY(-2px); }
+        .tag::after { content:attr(data-tooltip); position:absolute; bottom:110%; left:50%; transform:translateX(-50%); background:var(--sec); color:var(--gold); padding:8px 12px; border-radius:6px; font-size:0.85rem; width:max-content; opacity:0; visibility:hidden; transition:0.2s; border:1px solid var(--gold); pointer-events:none; z-index:10; } .tag:hover::after, .tag.active::after { opacity:1; visibility:visible; }
+        .bg-t { background:var(--green); } .bg-e { background:var(--sec); border:1px solid var(--blue); color:var(--blue); } .light-mode .bg-e { background:#e0f2fe; border-color:#0284c7; color:#0284c7; }
+
+        .box { max-width:1200px; margin:0 auto; padding:0 20px; }
+        #map { height:500px; border-radius:16px; border:1px solid var(--brd); margin-bottom:10px; z-index:1; background:var(--sec); }
+        .leg { display:flex; gap:20px; justify-content:center; color:var(--mut); margin-bottom:40px; } .dot { width:12px; height:12px; border-radius:50%; display:inline-block; }
+
+        .grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; max-width:1200px; margin:40px auto; padding:0 20px; }
+        .filters { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+        .f-btn { background:var(--sec); color:var(--mut); border:1px solid var(--brd); padding:8px 16px; border-radius:20px; cursor:pointer; transition:0.3s; } .f-btn:hover, .f-btn.active { background:var(--gold); color:#000; border-color:var(--gold); }
         
-        .bg-tech { background-color: var(--accent-green); }
-        .bg-eng { background-color: var(--bg-secondary); border: 1px solid var(--accent-blue); color: var(--accent-blue); } 
-        body.light-mode .bg-eng { background-color: #e0f2fe; border-color: #0284c7; color: #0284c7; }
+        .title { font-size:1.6rem; margin-bottom:25px; padding-bottom:10px; border-bottom:2px solid var(--brd); color:var(--txt); display:flex; align-items:center; gap:12px; }
+        .lst { display:flex; flex-direction:column; gap:20px; }
+        .it { background:var(--sec); padding:24px; border-radius:12px; border-left:4px solid var(--gold); transition:0.3s; box-shadow:var(--shd); } .it:hover { transform:translateX(5px); } .it.edu { border-left-color:var(--green); }
+        .it h4 { font-size:1.1rem; margin-bottom:4px; font-weight:700; } .it .co { font-size:0.95rem; color:var(--gold); font-weight:600; display:block; margin-bottom:5px; } .it.edu .co { color:var(--green); }
+        .it .meta { font-size:0.85rem; color:var(--mut); display:flex; justify-content:space-between; border-bottom:1px solid var(--brd); padding-bottom:8px; margin-bottom:10px; }
+        .it ul { padding-left:0; list-style:none; } .it ul li { position:relative; padding-left:15px; margin-bottom:6px; font-size:0.9rem; color:var(--mut); } .it ul li::before { content:"•"; color:var(--gold); position:absolute; left:0; }
 
-        /* Map */
-        .map-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        #map { height: 550px; width: 100%; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 10px; z-index: 1; background-color: var(--bg-secondary); }
-        .leaflet-control-layers { background: var(--bg-secondary) !important; color: var(--text-main) !important; border: 1px solid var(--accent-gold) !important; border-radius: 8px !important; }
-        .leaflet-control-layers-toggle { filter: invert(1); }
-        body.light-mode .leaflet-control-layers-toggle { filter: invert(0); }
-        .map-legend { display: flex; gap: 20px; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 40px; justify-content: center; flex-wrap: wrap; }
-        .legend-item { display: flex; align-items: center; gap: 8px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .p-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; max-width:1200px; margin:60px auto; padding:0 20px; }
+        .card { background:var(--sec); padding:24px; border-radius:12px; border:1px solid var(--brd); transition:0.3s; box-shadow:var(--shd); display:flex; flex-direction:column; } .card:hover { transform:translateY(-5px); border-color:var(--gold); }
+        .card h4 { color:var(--gold); margin-bottom:10px; font-size:1.2rem; }
+        .ptags { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; } .pt { font-size:0.75rem; background:var(--tag); padding:4px 8px; border-radius:4px; }
+        .plnk { color:var(--txt); text-decoration:none; font-size:0.9rem; display:inline-flex; align-items:center; gap:5px; cursor:pointer; } .plnk:hover { color:var(--gold); }
 
-        /* Filters */
-        .filter-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .filter-btn { background: var(--bg-secondary); color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
-        .filter-btn:hover, .filter-btn.active { background: var(--accent-gold); color: #000; border-color: var(--accent-gold); }
+        .bub { position:fixed; bottom:20px; right:20px; background:var(--gold); color:#000; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); transition:0.3s; z-index:2500; animation:pulse 2s infinite 2s; } .bub:hover { transform:scale(1.1); animation:none; } .bub.act { transform:scale(0.9); animation:none; }
+        .win { position:fixed; bottom:90px; right:20px; width:350px; height:500px; max-height:80dvh; height:calc(80vh - 20px); background:var(--sec); border:1px solid var(--brd); border-radius:12px; display:flex; flex-direction:column; box-shadow:0 5px 20px rgba(0,0,0,0.4); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } .win.act { opacity:1; visibility:visible; transform:translateY(0); }
+        .chat-h { background:var(--gold); padding:15px; display:flex; justify-content:space-between; align-items:center; color:#000; font-weight:bold; }
+        .msgs { flex-grow:1; padding:15px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; font-size:0.9rem; scroll-behavior:smooth; }
+        .msg { padding:10px 14px; border-radius:10px; max-width:80%; line-height:1.4; word-wrap:break-word; } .msg.bot { background:var(--bot); color:#fff; align-self:flex-start; border-bottom-left-radius:2px; } .msg.usr { background:var(--usr); color:var(--txt); align-self:flex-end; border-bottom-right-radius:2px; } .light-mode .msg.bot { color:#fff; }
+        .c-inp { padding:10px; border-top:1px solid var(--brd); display:flex; gap:8px; background:var(--bg); align-items:center; }
+        .inp { flex-grow:1; padding:10px; border-radius:20px; border:1px solid var(--brd); background:var(--sec); color:var(--txt); outline:none; } .inp:disabled { opacity:0.6; cursor:not-allowed; }
+        .snd { background:var(--gold); border:none; width:35px; height:35px; border-radius:50%; color:#000; cursor:pointer; display:flex; justify-content:center; align-items:center; }
+        .rtry { background:var(--bg); color:var(--txt); border:1px solid var(--brd); padding:5px 10px; border-radius:15px; font-size:0.8rem; margin-top:5px; cursor:pointer; } .rtry:hover { background:var(--gold); color:#000; } .rtry[disabled] { opacity:0.5; cursor:not-allowed; }
 
-        /* Content & Lists */
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { font-size: 1.6rem; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--border-color); color: var(--text-main); display: flex; align-items: center; gap: 12px; }
-        
-        .list-group { display: flex; flex-direction: column; gap: 20px; }
-        .list-item { background: var(--bg-secondary); padding: 24px; border-radius: 12px; border-left: 4px solid var(--accent-gold); transition: transform 0.2s; box-shadow: var(--card-shadow); display: block; } 
-        .list-item:hover { transform: translateX(5px); }
-        .list-item.edu { border-left-color: var(--accent-green); }
-        .list-item h4 { font-size: 1.1rem; margin-bottom: 4px; color: var(--text-main); font-weight: 700; }
-        .list-item .company { font-size: 0.95rem; color: var(--accent-gold); font-weight: 600; display: block; margin-bottom: 5px;}
-        .list-item.edu .company { color: var(--accent-green); }
-        .list-item .meta { font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px; }
-        .list-item ul { list-style-type: none; margin-left: 0; padding-left: 0; }
-        .list-item ul li { position: relative; padding-left: 15px; margin-bottom: 6px; font-size: 0.9rem; color: var(--text-muted); }
-        .list-item ul li::before { content: "•"; color: var(--accent-gold); position: absolute; left: 0; }
-        .list-item.edu ul li::before { color: var(--accent-green); }
-        .badge-link { display: inline-block; margin-top: 10px; font-size: 0.8rem; color: var(--accent-blue); text-decoration: none; border: 1px solid var(--accent-blue); padding: 4px 10px; border-radius: 4px; transition: all 0.3s; }
-        .badge-link:hover { background: var(--accent-blue); color: #fff; }
+        .mod { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--ovr); z-index:3000; display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:0.3s; backdrop-filter:blur(5px); } .mod.act { opacity:1; visibility:visible; }
+        .m-con { background:var(--sec); border:1px solid var(--gold); padding:30px; border-radius:12px; max-width:500px; width:90%; text-align:center; position:relative; transform:translateY(20px); transition:0.3s; } .mod.act .m-con { transform:translateY(0); }
+        .cls { position:absolute; top:15px; right:15px; background:none; border:none; color:var(--mut); font-size:1.5rem; cursor:pointer; }
+        .frm-c { padding:12px; border-radius:8px; border:1px solid var(--brd); background:var(--inp); color:var(--txt); width:100%; margin-bottom:10px; font-family:'Inter',sans-serif; }
+        .frm-b { background:var(--gold); color:#000; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%; } .frm-b:disabled { opacity:0.6; }
 
-        /* Projects */
-        .projects-section { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .project-card { background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color); transition: transform 0.3s; box-shadow: var(--card-shadow); display: flex; flex-direction: column; }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
-        .project-card h4 { color: var(--accent-gold); margin-bottom: 10px; font-size: 1.2rem; }
-        .project-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; }
-        .project-tags { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
-        .project-tag-item { font-size: 0.75rem; background: var(--tag-bg); color: var(--text-main); padding: 4px 8px; border-radius: 4px; }
-        .project-link { color: var(--text-main); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
-        .project-link:hover { color: var(--accent-gold); }
-
-        footer { text-align: center; padding: 40px 0; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 60px; font-size: 0.9rem; }
-
-        /* Banner & Modal */
-        #cookie-banner { position: fixed; bottom: -200px; left: 0; width: 100%; background: var(--bg-secondary); border-top: 1px solid var(--accent-gold); padding: 20px; z-index: 2000; display: flex; flex-direction: column; align-items: center; gap: 15px; transition: bottom 0.5s ease; box-shadow: 0 -4px 10px rgba(0,0,0,0.3); }
-        #cookie-banner.show { bottom: 0; }
-        #cookie-banner p { margin: 0; font-size: 0.9rem; color: var(--text-main); text-align: center; }
-        #cookie-banner a { color: var(--accent-gold); text-decoration: underline; cursor: pointer; }
-        .cookie-actions { display: flex; gap: 10px; }
-        .btn-cookie-accept { background: var(--accent-gold); color: #000; border: none; padding: 8px 24px; border-radius: 50px; font-weight: bold; cursor: pointer; }
-        .btn-cookie-reject { background: transparent; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 8px 24px; border-radius: 50px; font-weight: bold; cursor: pointer; }
-        .btn-cookie-reject:hover { border-color: var(--text-main); color: var(--text-main); }
-        .cookie-close { position: absolute; top: 10px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-overlay); z-index: 3000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--bg-secondary); border: 1px solid var(--accent-gold); padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; position: relative; transform: translateY(20px); transition: transform 0.3s ease; }
-        .modal-overlay.active .modal-content { transform: translateY(0); }
-        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
-        .modal-close:hover { color: var(--accent-gold); }
-        .modal-title { color: var(--accent-gold); font-size: 1.5rem; margin-bottom: 15px; }
-        .modal-text { color: var(--text-main); font-size: 1rem; margin-bottom: 20px; line-height: 1.5; }
-        .modal-btn { background: var(--accent-gold); color: #000; border: none; padding: 10px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; }
-
-        /* CONTACT FORM */
-        .contact-form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
-        .form-group { display: flex; flex-direction: column; gap: 5px; }
-        .form-group label { font-size: 0.9rem; color: var(--accent-gold); font-weight: 600; }
-        .form-control { padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); font-family: 'Inter', sans-serif; transition: border-color 0.3s; }
-        .form-control:focus { outline: none; border-color: var(--accent-gold); }
-        textarea.form-control { resize: vertical; min-height: 100px; }
-        .form-submit { background: var(--accent-gold); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: opacity 0.3s; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .form-submit:hover { opacity: 0.9; }
-        .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-        .form-status { margin-top: 15px; padding: 10px; border-radius: 8px; display: none; font-size: 0.9rem; }
-        .form-status.success { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
-        .form-status.error { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
-        .spinner { border: 2px solid rgba(0, 0, 0, 0.1); border-left-color: #000; border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; display: none; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* CHATBOT STYLES with Pulse Animation */
-        .chat-bubble { position: fixed; bottom: 20px; right: 20px; background: var(--accent-gold); color: #000; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; z-index: 2500; animation: pulseGlow 2s infinite 2s; /* 2s gecikme ile başlar */ }
-        .chat-bubble:hover { transform: scale(1.1); animation: none; }
-        
-        .chat-window { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 5px 20px rgba(0,0,0,0.4); z-index: 2500; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; overflow: hidden; }
-        .chat-window.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .chat-header { background: var(--accent-gold); padding: 15px; display: flex; justify-content: space-between; align-items: center; color: #000; font-weight: bold; }
-        .chat-header h4 { font-size: 1rem; display: flex; align-items: center; gap: 8px; }
-        .chat-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #000; }
-        .chat-messages { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
-        .message { padding: 10px 14px; border-radius: 10px; max-width: 80%; line-height: 1.4; word-wrap: break-word; }
-        .message.bot { background: var(--chat-bot); color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .message.user { background: var(--chat-user); color: var(--text-main); align-self: flex-end; border-bottom-right-radius: 2px; }
-        body.light-mode .message.bot { color: #fff; }
-        .chat-input-area { padding: 10px; border-top: 1px solid var(--border-color); display: flex; gap: 8px; background: var(--bg-body); align-items: center; }
-        .chat-input { flex-grow: 1; padding: 10px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main); outline: none; }
-        .chat-send { background: var(--accent-gold); border: none; width: 35px; height: 35px; border-radius: 50%; color: #000; cursor: pointer; display: flex; justify-content: center; align-items: center; }
-        .chat-file-label { cursor: pointer; color: var(--text-muted); font-size: 1.1rem; }
-        .chat-file-label:hover { color: var(--accent-gold); }
-        .typing { display: flex; gap: 4px; padding: 10px; background: var(--bg-secondary); width: fit-content; border-radius: 10px; }
-        .typing span { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
-        .typing span:nth-child(1) { animation-delay: -0.32s; }
-        .typing span:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
-
-        @media (min-width: 600px) { #cookie-banner { flex-direction: row; justify-content: center; } }
-        @media (max-width: 768px) {
-            .hero { padding-top: 130px; }
-            .hero-name { font-size: 2.5rem; }
-            .content-grid { grid-template-columns: 1fr; }
-            #map { height: 400px; }
-            .chat-window { width: 90%; right: 5%; bottom: 85px; height: 60vh; }
-        }
-        @media (max-width: 600px) { .map-legend { justify-content: space-between; } .map-legend span { font-size: 0.75rem; } }
+        #cook { position:fixed; bottom:-200px; left:0; width:100%; background:var(--sec); border-top:1px solid var(--gold); padding:20px; z-index:2000; display:flex; flex-direction:column; align-items:center; gap:15px; transition:0.5s; box-shadow:0 -4px 10px rgba(0,0,0,0.3); } #cook.shw { bottom:0; }
+        .c-act button { padding:8px 24px; border-radius:50px; font-weight:bold; cursor:pointer; margin:0 5px; } .yes { background:var(--gold); border:none; color:#000; } .no { background:transparent; border:1px solid var(--mut); color:var(--mut); }
+        footer { text-align:center; padding:40px 0; color:var(--mut); border-top:1px solid var(--brd); margin-top:60px; font-size:0.9rem; }
     </style>
 </head>
 <body>
-
-    <header class="animate-load delay-1">
-        <div class="nav-container">
+    <header class="anim d1">
+        <div class="nav-con">
             <a href="#" class="logo">f<span>senyuz</span></a>
-            <div class="header-actions">
-                <button class="icon-btn lang-toggle" id="lang-toggle" title="Switch Language" aria-label="Switch Language" onclick="toggleLanguage()">TR</button>
-                <button class="icon-btn theme-toggle" id="theme-toggle" title="Toggle Light/Dark Mode" aria-label="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
-                <a href="CV_FS_2026.pdf" download="Furkan_Senyuz_CV.pdf" class="btn-cv" target="_blank" rel="noopener noreferrer" onclick="trackEvent('cv_download')"><i class="fa-solid fa-download"></i> CV</a>
-                <a href="#" class="btn-contact" onclick="openContactModal(event)"><i class="fa-regular fa-envelope"></i> <span data-i18n="contactBtn">Let's Connect</span></a>
+            <div class="act">
+                <button class="i-btn" id="lang-btn" aria-label="Switch Language" aria-expanded="false" onclick="App.lang()">TR</button>
+                <button class="i-btn" aria-label="Toggle Theme" onclick="App.theme()"><i class="fa-solid fa-sun"></i></button>
+                <a href="CV_FS_2026.pdf" class="b-cv" target="_blank" onclick="App.tr('cv_dl')"><i class="fa-solid fa-download"></i> CV</a>
+                <a href="#" class="b-con" onclick="App.cont(event)"><i class="fa-regular fa-envelope"></i> <span data-t="contactBtn">Connect</span></a>
             </div>
+            <div id="ann" class="sr-only" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
         </div>
     </header>
 
     <section class="hero">
-        <img src="profile.jpg" class="hero-avatar animate-load delay-2" alt="Furkan Senyuz Profile Photo" loading="lazy">
-        
-        <h1 class="hero-name animate-load delay-3">Furkan Senyuz</h1>
-        <p class="hero-title animate-load delay-4" data-i18n="heroTitle">Civil Engineer & AI Solutions Developer</p>
-        <div class="hero-slogan animate-load delay-5" data-i18n="heroSlogan">Building the Future with <br> Concrete & Code</div>
-        
-        <div class="social-links animate-load delay-5">
-            <a href="https://www.linkedin.com/in/fsenyuz" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://github.com/fsenyuz" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://kaggle.com/fsenyuz" target="_blank" rel="noopener noreferrer" class="social-icon" title="Kaggle"><i class="fa-brands fa-kaggle"></i></a>
+        <img src="profile.jpg" class="avt anim d2" alt="Furkan Senyuz">
+        <h1 class="anim d3">Furkan Senyuz</h1>
+        <p class="sub anim d4" data-t="heroTitle">Civil Engineer & AI Solutions Developer</p>
+        <div class="slogan anim d5" data-t="heroSlogan">Building the Future with <br> Concrete & Code</div>
+        <div class="socials anim d5">
+            <a href="https://www.linkedin.com/in/fsenyuz" class="soc"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/fsenyuz" class="soc"><i class="fa-brands fa-github"></i></a>
+            <a href="https://kaggle.com/fsenyuz" class="soc"><i class="fa-brands fa-kaggle"></i></a>
         </div>
-        
-        <div class="skills-container animate-load delay-5">
-            <div class="skill-row">
-                <div class="skill-tag bg-tech" role="button" tabindex="0" data-i18n-tooltip="skillTip1" onclick="toggleTooltip(this)">Python & SQL</div>
-                <div class="skill-tag bg-tech" role="button" tabindex="0" data-i18n-tooltip="skillTip2" onclick="toggleTooltip(this)">ML & AI APIs</div>
-                <div class="skill-tag bg-tech" role="button" tabindex="0" data-i18n-tooltip="skillTip3" onclick="toggleTooltip(this)">Power BI & ERP</div>
+        <div class="skills anim d5">
+            <div class="s-row">
+                <div class="tag bg-t" tabindex="0" data-tip="skillTip1" onclick="App.tip(this)">Python & SQL</div>
+                <div class="tag bg-t" tabindex="0" data-tip="skillTip2" onclick="App.tip(this)">ML & AI APIs</div>
+                <div class="tag bg-t" tabindex="0" data-tip="skillTip3" onclick="App.tip(this)">Power BI & ERP</div>
             </div>
-            <div class="skill-row">
-                <div class="skill-tag bg-eng" role="button" tabindex="0" data-i18n-tooltip="skillTip4" onclick="toggleTooltip(this)">Primavera P6 & TILOS</div>
-                <div class="skill-tag bg-eng" role="button" tabindex="0" data-i18n-tooltip="skillTip5" onclick="toggleTooltip(this)">Tender & Cost</div>
-                <div class="skill-tag bg-eng" role="button" tabindex="0" data-i18n-tooltip="skillTip6" onclick="toggleTooltip(this)">FIDIC & Claims</div>
+            <div class="s-row">
+                <div class="tag bg-e" tabindex="0" data-tip="skillTip4" onclick="App.tip(this)">Primavera P6 & TILOS</div>
+                <div class="tag bg-e" tabindex="0" data-tip="skillTip5" onclick="App.tip(this)">Tender & Cost</div>
+                <div class="tag bg-e" tabindex="0" data-tip="skillTip6" onclick="App.tip(this)">FIDIC & Claims</div>
             </div>
         </div>
     </section>
 
-    <div class="map-container" role="application" aria-label="Global Experience Map">
-        <h3 class="section-title"><i class="fa-solid fa-earth-americas"></i> <span data-i18n="mapTitle">Global Experience Map</span></h3>
+    <div class="box">
+        <h3 class="title"><i class="fa-solid fa-earth-americas"></i> <span data-t="mapTitle">Map</span></h3>
         <div id="map"></div>
-        <div class="map-legend">
-            <div class="legend-item"><span class="dot" style="background: #2A81CB;"></span> <span data-i18n="legendWork">Work & Projects</span></div>
-            <div class="legend-item"><span class="dot" style="background: #2ecc71;"></span> <span data-i18n="legendEdu">Education & Certs</span></div>
-            <div class="legend-item"><span class="dot" style="background: #fbbf24;"></span> <span data-i18n="legendTender">Tender Experience</span></div>
-            <span style="font-size:0.8rem; color:#fbbf24; white-space: nowrap;" data-i18n="legendFilter">*Use layer icon to filter</span>
-        </div>
+        <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legWork">Work</span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legEdu">Edu</span></div></div>
     </div>
 
-    <div class="content-grid">
-        <div style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
-            <div class="filter-container">
-                <button class="filter-btn active" onclick="filterSelection('all')" data-i18n="filterAll">All</button>
-                <button class="filter-btn" onclick="filterSelection('civil')" data-i18n="filterCivil">Construction</button>
-                <button class="filter-btn" onclick="filterSelection('ai')" data-i18n="filterAI">AI & Tech</button>
+    <div class="grid">
+        <div style="grid-column:1/-1; display:flex; justify-content:center;">
+            <div class="filters">
+                <button class="f-btn active" onclick="App.filt('all')" data-t="fAll">All</button>
+                <button class="f-btn" onclick="App.filt('civil')" data-t="fCiv">Construction</button>
+                <button class="f-btn" onclick="App.filt('ai')" data-t="fAI">AI & Tech</button>
             </div>
         </div>
-
-        <div>
-            <h3 class="section-title"><i class="fa-solid fa-briefcase"></i> <span data-i18n="expTitle">Professional Experience</span></h3>
-            <div class="list-group" id="exp-list">
-                </div>
-        </div>
-
-        <div>
-            <h3 class="section-title"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="eduTitle">Education & Certifications</span></h3>
-            <div class="list-group" id="edu-list">
-                </div>
-        </div>
+        <div><h3 class="title"><i class="fa-solid fa-briefcase"></i> <span data-t="expTitle">Experience</span></h3><div class="lst" id="exp"></div></div>
+        <div><h3 class="title"><i class="fa-solid fa-graduation-cap"></i> <span data-t="eduTitle">Education</span></h3><div class="lst" id="edu"></div></div>
     </div>
 
-    <div class="projects-section">
-        <h3 class="section-title"><i class="fa-solid fa-laptop-code"></i> <span data-i18n="projTitle">AI & Engineering Projects</span></h3>
-        <div class="projects-grid">
-            <div class="project-card" data-category="ai">
+    <div class="proj">
+        <h3 class="title"><i class="fa-solid fa-laptop-code"></i> <span data-t="projTitle">Projects</span></h3>
+        <div class="p-grid" id="projs">
+            <div class="card item-box visible-item" data-cat="ai">
                 <h4><i class="fa-solid fa-chart-line"></i> Construction Claim Predictor</h4>
-                <div class="project-tags"><span class="project-tag-item">Python</span><span class="project-tag-item">Random Forest</span></div>
-                <p data-i18n="proj1Desc">ML model predicting potential delay claims based on daily site reports and weather data.</p>
-                <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" rel="noopener noreferrer" class="project-link" onclick="openRepoModal(event, 'Construction Claim Predictor')"><i class="fa-brands fa-github"></i> <span data-i18n="viewCode">View Code</span></a>
+                <div class="ptags"><span class="pt">Python</span><span class="pt">Random Forest</span></div>
+                <p data-t="p1">ML model predicting delay claims.</p>
+                <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" class="plnk" onclick="App.repo(event,'Construction Claim Predictor')"><i class="fa-brands fa-github"></i> <span data-t="view">View Code</span></a>
             </div>
-            <div class="project-card" data-category="civil">
+            <div class="card item-box visible-item" data-cat="civil">
                 <h4><i class="fa-solid fa-file-invoice-dollar"></i> Tender Cost Optimizer</h4>
-                <div class="project-tags"><span class="project-tag-item">Python</span><span class="project-tag-item">Automation</span></div>
-                <p data-i18n="proj2Desc">Script automating BOQ pricing analysis, comparing vendor bids, and identifying anomalies.</p>
-                <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" rel="noopener noreferrer" class="project-link" onclick="openRepoModal(event, 'Tender Cost Optimizer')"><i class="fa-brands fa-github"></i> <span data-i18n="viewCode">View Code</span></a>
+                <div class="ptags"><span class="pt">Python</span><span class="pt">Automation</span></div>
+                <p data-t="p2">Script automating BOQ analysis.</p>
+                <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" class="plnk" onclick="App.repo(event,'Tender Cost Optimizer')"><i class="fa-brands fa-github"></i> <span data-t="view">View Code</span></a>
             </div>
-            <div class="project-card" data-category="ai">
+            <div class="card item-box visible-item" data-cat="ai">
                 <h4><i class="fa-solid fa-hard-hat"></i> Site Safety Vision</h4>
-                <div class="project-tags"><span class="project-tag-item">YOLO</span><span class="project-tag-item">OpenCV</span></div>
-                <p data-i18n="proj3Desc">Prototype AI model detecting PPE compliance (helmets/vests) on construction sites.</p>
-                <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" rel="noopener noreferrer" class="project-link" onclick="openRepoModal(event, 'Site Safety Vision')"><i class="fa-brands fa-github"></i> <span data-i18n="viewCode">View Code</span></a>
+                <div class="ptags"><span class="pt">YOLO</span><span class="pt">OpenCV</span></div>
+                <p data-t="p3">AI detecting PPE compliance.</p>
+                <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" class="plnk" onclick="App.repo(event,'Site Safety Vision')"><i class="fa-brands fa-github"></i> <span data-t="view">View Code</span></a>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; <span id="year"></span> Furkan Senyuz. <span data-i18n="footerText">Built with Concrete, Code & AI Collaboration.</span></p>
-    </footer>
+    <footer><p>&copy; <span id="yr"></span> Furkan Senyuz. <span data-t="foot">Built with Concrete, Code & AI.</span></p></footer>
 
-    <div class="chat-bubble" onclick="toggleChat()">
-        <i class="fa-solid fa-robot"></i>
-    </div>
-    <div class="chat-window" id="chat-window">
-        <div class="chat-header">
-            <h4><i class="fa-solid fa-brain"></i> FS AI Assistant</h4>
-            <button class="chat-close" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="message bot">Hello! I'm Furkan's AI Assistant powered by Gemini Pro. Ask me about his FIDIC experience, Python projects, or construction background.</div>
-        </div>
-        <div class="chat-input-area">
-            <label for="chat-file" class="chat-file-label"><i class="fa-solid fa-paperclip"></i></label>
-            <input type="file" id="chat-file" style="display:none" accept="image/*">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Ask something..." onkeypress="handleChatKey(event)">
-            <button class="chat-send" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    <div class="bub" id="bub" onclick="App.chat()"><i class="fa-solid fa-robot"></i></div>
+    <div class="win" id="win">
+        <div class="chat-h"><h4><i class="fa-solid fa-brain"></i> FS AI</h4><button class="cls" onclick="App.chat()" style="position:static;font-size:1.2rem"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="msgs" id="msgs" role="log" aria-live="polite"><div class="msg bot">Hello! I'm Furkan's AI. Ask me anything!</div></div>
+        <div class="c-inp">
+            <label for="f-up" style="cursor:pointer"><i class="fa-solid fa-paperclip"></i></label><input type="file" id="f-up" style="display:none">
+            <input type="text" id="inp" class="inp" placeholder="Ask..." onkeypress="App.key(event)">
+            <button class="snd" aria-label="Send Message" onclick="App.send()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <div id="cookie-banner">
-        <button class="cookie-close" id="cookie-close" title="Dismiss"><i class="fa-solid fa-xmark"></i></button>
-        <p data-i18n="cookieText">We use cookies to analyze traffic and improve user experience.</p> 
-        <a onclick="openPrivacyModal()" data-i18n="privacyLink">Privacy Policy</a>
-        <div class="cookie-actions">
-            <button id="cookie-reject" class="btn-cookie-reject" data-i18n="decline">Decline</button>
-            <button id="cookie-accept" class="btn-cookie-accept" data-i18n="accept">Accept</button>
+    <div id="mod" class="mod" role="dialog" aria-modal="true">
+        <div class="m-con">
+            <button class="cls" onclick="App.cls()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="m-tit">Title</h3><div id="m-txt"></div>
+            <form id="frm" action="https://formspree.io/f/mnjbavgw" method="POST" style="display:none">
+                <input type="text" name="_gotcha" style="display:none">
+                <input type="text" id="name" name="name" class="frm-c" required placeholder="Name">
+                <input type="email" id="email" name="email" class="frm-c" required placeholder="Email">
+                <textarea id="msg" name="message" class="frm-c" required placeholder="Message" rows="4"></textarea>
+                <button class="g-recaptcha frm-b" data-sitekey="YOUR_SITE_KEY" data-callback="onSubmit" data-error-callback="onErr" data-action="submit">Send</button>
+                <div id="fst" style="margin-top:10px;display:none"></div>
+            </form>
+            <button id="m-btn" class="frm-b" onclick="App.cls()" style="margin-top:15px">Close</button>
         </div>
     </div>
 
-    <div id="custom-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <h3 id="modal-title" class="modal-title">Title</h3>
-            <div id="modal-text-content" class="modal-text"></div>
-            <div id="modal-form-content" style="display:none;">
-                <form id="contact-form" action="https://formspree.io/f/mnjbavgw" method="POST" class="contact-form">
-                    <input type="text" name="_gotcha" style="display:none">
-                    <input type="hidden" name="_subject" value="New Contact from fsenyuz.com">
-                    <div class="form-group">
-                        <label for="name" data-i18n="formName">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" required placeholder="Name" autofocus>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" data-i18n="formEmail">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="message" data-i18n="formMsg">Message</label>
-                        <textarea id="message" name="message" class="form-control" required placeholder="Message"></textarea>
-                    </div>
-                    <button type="submit" id="form-submit-btn" class="form-submit">
-                        <span class="spinner" id="form-spinner"></span>
-                        <span id="form-btn-text" data-i18n="formSend">Send Message</span>
-                    </button>
-                    <div id="form-status" class="form-status"></div>
-                </form>
-            </div>
-            <button id="modal-close-btn" class="modal-btn" onclick="closeModal()" data-i18n="closeBtn">Close</button>
-        </div>
-    </div>
+    <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText">Cookies help us improve.</p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline">Decline</button><button class="yes" onclick="App.cons(true)" data-t="accept">Accept</button></div></div>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const GA_MEASUREMENT_ID = 'G-1E33W355PW'; 
+        if('serviceWorker'in navigator){
+            // PWA Cache: Core Assets + Fonts + CV + Leaflet
+            const sw=`const C='fs-v4';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/','index.html','profile.jpg','CV_FS_2026.pdf','https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`;
+            navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(sw)}`).catch(console.error);
+        }
+        function onSubmit(t){App.sub(t)}
+        function onErr(){App.errCap()}
         
-        // ** BACKEND URL (UPDATE THIS AFTER DEPLOYING BACKEND) **
-        const API_URL = "https://portfolio-backend-hu1r.onrender.com/chat"; 
+        window.App=(function(){
+            const C=window.CFG, D=new Date().toISOString().split('T')[0];
+            let l='en', map, lyrs={}, mRetries=0, foc, obs, DATA;
+            
+            // BASE64 ENCODED DATA (GZIP-LIKE)
+            const B64="==";
 
-        function trackEvent(eventName, params) {
-            if (typeof gtag === 'function') gtag('event', eventName, params);
-        }
-
-        // ** DATA with CATEGORIES & BADGES **
-        const dataExp = [
-            { key: "exp1", category: "civil", company: "Tasyapi Construction", loc: "Kuzmin, Serbia", date: "2024 – Present", subtext: "Kuzmin-Sremska Raca Highway (€ 345M)" },
-            { key: "exp2", category: "civil", company: "Tasyapi Construction", loc: "Belgrade, Serbia", date: "2021 – 2024", subtext: null },
-            { key: "exp3", category: "civil", company: "Fernas Group", loc: "Aydın, Turkey", date: "Jan 2021 – Aug 2021", subtext: "Aydin-Denizli Motorway (€ 1.13B)" },
-            { key: "exp4", category: "civil", company: "Limak Group", loc: "Çanakkale, Turkey", date: "Aug 2019 – Dec 2019", subtext: "1915 Çanakkale Bridge Project" },
-            { key: "exp5", category: "civil", company: "Limak Group", loc: "Kocaeli, Turkey", date: "Jan 2018 – Aug 2019", subtext: "Northern Marmara Motorway ($500M)" },
-            { key: "exp6", category: "civil", company: "Mat Yapi Group", loc: "Istanbul, Turkey", date: "Dec 2016 – Jan 2018", subtext: null }
-        ];
-
-        const dataEdu = [
-            { key: "edu1", category: "ai", company: "Stanford University (Andrew Ng)", loc: "Online", date: "2026 (Expected)", badge: "https://www.credly.com" },
-            { key: "edu2", category: "ai", company: "University of Michigan", loc: "Online", date: "Jan 2026", badge: "#" },
-            { key: "edu3", category: "civil", company: "Istanbul Technical University (ITU)", loc: "Istanbul", date: "Nov 2023" },
-            { key: "edu_itu_claim", category: "civil", company: "Istanbul Technical University (ITU)", loc: "Istanbul", date: "Apr 2023" },
-            { key: "edu4", category: "civil", company: "Grid Group / TILOS", loc: "Istanbul", date: "Feb 2019" },
-            { key: "edu5", category: "civil", company: "Akım Mühendislik (Oracle Partner)", loc: "Istanbul", date: "Jan 2018" },
-            { key: "edu6", category: "civil", company: "Leiden University", loc: "Online", date: "Certification" },
-            { key: "edu7", category: "civil", company: "Mugla Sitki Kocman University", loc: "Turkey", date: "2016 – Present" },
-            { key: "edu8", category: "civil", company: "Mugla Sitki Kocman University", loc: "Turkey", date: "2011 – 2016" }
-        ];
-
-        const translations = {
-            en: {
-                contactBtn: "Let's Connect", heroTitle: "Civil Engineer & AI Solutions Developer", heroSlogan: "Building the Future with <br> Concrete & Code",
-                skillTip1: "Automating BOQ & Cost Analysis", skillTip2: "Predictive Models for Claims", skillTip3: "Data-Driven Decision Making",
-                skillTip4: "Mega Project Scheduling", skillTip5: "Int. Market & Risk Analysis", skillTip6: "Contract Mgmt. & Dispute Resolution",
-                mapTitle: "Global Experience Map", legendWork: "Work & Projects", legendEdu: "Education & Certifications", legendTender: "Tender Experience", legendFilter: "*Use layer icon to filter",
-                expTitle: "Professional Experience", eduTitle: "Education & Certifications", projTitle: "AI & Engineering Projects",
-                proj1Desc: "ML model predicting potential delay claims based on daily site reports and weather data.",
-                proj2Desc: "Script automating BOQ pricing analysis, comparing vendor bids, and identifying anomalies.",
-                proj3Desc: "Prototype AI model detecting PPE compliance (helmets/vests) on construction sites.",
-                viewCode: "View Code", cookieText: "We use cookies to analyze traffic and improve user experience.",
-                privacyLink: "Privacy Policy", accept: "Accept", decline: "Decline", closeBtn: "Close",
-                footerText: "Built with Concrete, Code & AI Collaboration.",
-                repoTitle: "Repo Status", repoText: "The repository is currently being prepared for public release. Check back soon!",
-                privacyTitle: "Privacy Policy", privacyText: "This website uses Google Analytics 4. No PII stored without consent.",
-                formName: "Name", formEmail: "Email", formMsg: "Message", formSend: "Send Message", formSending: "Sending...",
-                formSuccess: "Message sent successfully! ✅", formError: "Oops! Something went wrong.",
-                filterAll: "All", filterCivil: "Construction", filterAI: "AI & Tech",
-                exp1Title: "Technical Office Chief", exp1Desc: "<li>Managing full IPC (Interim Payment Certificate) process.</li><li>Developing automated claim management tools using Python.</li>",
-                exp2Title: "Tendering & PM Specialist", exp2Desc: "<li>Prepared tenders for infrastructure projects in 10+ countries.</li><li>Managed FIDIC Yellow Book 1999 contract procedures.</li>",
-                exp3Title: "Planning & Cost Control Chief", exp3Desc: "<li>Created Master Schedule using TILOS; reduced planning conflicts.</li>",
-                exp4Title: "Technical Office Chief", exp4Desc: "<li>Established technical office standards and led earthworks planning.</li>",
-                exp5Title: "Planning & Cost Engineer", exp5Desc: "<li>Schedule & cost analysis using Primavera P6.</li>",
-                exp6Title: "Site Chief", exp6Desc: "<li>Managed site operations and subcontractor coordination.</li>",
-                edu1Title: "Machine Learning Specialization", edu1Desc: "<li>Supervised Learning, Regression, Classification, Neural Networks.</li>",
-                edu2Title: "Python for Everybody", edu2Desc: "<li>5-Course Spec: Data Structures, Web Data, SQL Databases.</li>",
-                edu3Title: "Project Management Expertise (PMP)", edu3Desc: "<li>66-Hour comprehensive training on PMI standards and project management processes.</li>",
-                edu_itu_claimTitle: "Int. Construction Contracts & Claims Mgmt.", edu_itu_claimDesc: "<li>Specialized program on FIDIC contracts, claims management, and dispute resolution.</li>",
-                edu4Title: "TILOS Linear Project Management", edu4Desc: "<li>Advanced linear scheduling techniques for infrastructure projects (Highways, Pipelines).</li>",
-                edu5Title: "Oracle Primavera P6 Advanced", edu5Desc: "<li>Advanced resource management, risk analysis, and progress tracking in Primavera P6.</li>",
-                edu6Title: "The Arbitration of Int. Disputes", edu6Desc: "<li>International arbitration procedures and dispute resolution frameworks.</li>",
-                edu7Title: "MSc, Geotechnical Engineering", edu7Desc: "<li>Thesis focus: Artificial Intelligence applications in Geotechnical Engineering.</li>",
-                edu8Title: "BSc, Civil Engineering", edu8Desc: "<li>Graduated as Honor Student with a focus on Structural and Geotechnical courses.</li>"
-            },
-            tr: {
-                contactBtn: "İletişime Geç", heroTitle: "İnşaat Mühendisi & Yapay Zeka Çözüm Geliştiricisi", heroSlogan: "Geleceği Beton ve Kod ile <br> İnşa Ediyorum",
-                skillTip1: "Metraj & Maliyet Analizi Otomasyonu", skillTip2: "Hak Talepleri için Tahmin Modelleri", skillTip3: "Veri Odaklı Karar Verme",
-                skillTip4: "Mega Proje Planlama", skillTip5: "Uluslararası Pazar & Risk Analizi", skillTip6: "Sözleşme Yönetimi & Uyuşmazlık Çözümü",
-                mapTitle: "Global Deneyim Haritası", legendWork: "İş & Projeler", legendEdu: "Eğitim & Sertifikalar", legendTender: "İhale Deneyimi", legendFilter: "*Katmanlar menüsünden filtreleyin",
-                expTitle: "Profesyonel Deneyim", eduTitle: "Eğitim & Sertifikalar", projTitle: "Yapay Zeka & Mühendislik Projeleri",
-                proj1Desc: "Günlük saha raporlarına dayalı gecikme taleplerini (claim) tahmin eden ML modeli.",
-                proj2Desc: "BOQ (Metraj) analizini otomatize eden Python scripti.",
-                proj3Desc: "Şantiye güvenliği (baret/yelek) için görüntü işleme prototipi.",
-                viewCode: "Kodu Gör", cookieText: "Deneyimi iyileştirmek için çerez kullanıyoruz.",
-                privacyLink: "Gizlilik Politikası", accept: "Kabul Et", decline: "Reddet", closeBtn: "Kapat",
-                footerText: "Beton, Kod ve Yapay Zeka ile yapıldı.",
-                repoTitle: "Repo Durumu", repoText: "Bu depo halka açılmak üzere hazırlanıyor. Yakında tekrar kontrol edin!",
-                privacyTitle: "Gizlilik Politikası", privacyText: "Ziyaretçi analizi için GA4 kullanılmaktadır. İzin olmadan kişisel veri saklanmaz.",
-                formName: "İsim", formEmail: "E-posta", formMsg: "Mesaj", formSend: "Gönder", formSending: "Gönderiliyor...",
-                formSuccess: "Mesajınız başarıyla gönderildi! ✅", formError: "Bir hata oluştu. Lütfen tekrar deneyin.",
-                filterAll: "Tümü", filterCivil: "İnşaat", filterAI: "Yapay Zeka",
-                exp1Title: "Teknik Ofis Şefi", exp1Desc: "<li>Tüm Hakediş (IPC) süreçlerinin ve sözleşme yönetiminin yürütülmesi.</li><li>Python ile otomatik hak talebi (claim) araçlarının geliştirilmesi.</li>",
-                exp2Title: "İhale & Proje Yönetim Uzmanı", exp2Desc: "<li>10+ ülkede altyapı projeleri için ihale hazırlığı.</li><li>FIDIC Yellow Book 1999 sözleşme yönetimi.</li>",
-                exp3Title: "Planlama & Maliyet Kontrol Şefi", exp3Desc: "<li>TILOS ile Master İş Programının oluşturulması.</li>",
-                exp4Title: "Teknik Ofis Şefi", exp4Desc: "<li>Teknik ofis standartlarının kurulması ve toprak işleri planlaması.</li>",
-                exp5Title: "Planlama & Maliyet Mühendisi", exp5Desc: "<li>Primavera P6 ile maliyet ve zaman çizelgesi analizi.</li>",
-                exp6Title: "Şantiye Şefi", exp6Desc: "<li>Saha operasyonlarının ve taşeron koordinasyonunun yönetimi.</li>",
-                edu1Title: "Makine Öğrenimi Uzmanlığı", edu1Desc: "<li>Gözetimli Öğrenme, Regresyon, Sınıflandırma, Sinir Ağları.</li>",
-                edu2Title: "Herkes için Python", edu2Desc: "<li>Veri Yapıları, Web Verisi, SQL Veritabanları.</li>",
-                edu3Title: "Proje Yönetim Uzmanlığı (PMP)", edu3Desc: "<li>PMI standartları ve proje yönetim süreçleri üzerine 66 saatlik kapsamlı eğitim.</li>",
-                edu_itu_claimTitle: "Uluslararası İnşaat Sözleşmeleri ve Hak Talepleri", edu_itu_claimDesc: "<li>FIDIC sözleşmeleri, hak talepleri yönetimi ve uyuşmazlık çözümü üzerine uzmanlık programı.</li>",
-                edu4Title: "TILOS Doğrusal Proje Yönetimi", edu4Desc: "<li>Altyapı projeleri (Otoyol, Boru Hattı) için ileri düzey doğrusal planlama teknikleri.</li>",
-                edu5Title: "Oracle Primavera P6 İleri Seviye", edu5Desc: "<li>Primavera P6'da ileri kaynak yönetimi, risk analizi ve ilerleme takibi.</li>",
-                edu6Title: "Uluslararası Tahkim", edu6Desc: "<li>Uluslararası tahkim prosedürleri ve uyuşmazlık çözüm çerçeveleri.</li>",
-                edu7Title: "Yüksek Lisans, Geoteknik Mühendisliği", edu7Desc: "<li>Tez odak noktası: Geoteknik Mühendisliğinde Yapay Zeka uygulamaları.</li>",
-                edu8Title: "Lisans, İnşaat Mühendisliği", edu8Desc: "<li>Yapı ve Geoteknik derslerine odaklanarak Onur Öğrencisi olarak mezuniyet.</li>"
-            },
-            sr: {
-                contactBtn: "Kontaktirajte Me", heroTitle: "Građevinski Inženjer & AI Developer", heroSlogan: "Gradimo Budućnost <br> Betonom i Kodom",
-                skillTip1: "Automatizacija Predmera i Cena", skillTip2: "Prediktivni Modeli za Odštete", skillTip3: "Odlučivanje zasnovano na podacima",
-                skillTip4: "Planiranje Mega Projekata", skillTip5: "Analiza Tržišta i Rizika", skillTip6: "Upravljanje Ugovorima (FIDIC)",
-                mapTitle: "Mapa Globalnog Iskustva", legendWork: "Posao i Projekti", legendEdu: "Obrazovanje", legendTender: "Tenderi", legendFilter: "*Filtrirajte preko menija slojeva",
-                expTitle: "Profesionalno Iskustvo", eduTitle: "Obrazovanje i Sertifikati", projTitle: "AI i Inženjerski Projekti",
-                proj1Desc: "ML model za predviđanje odštetnih zahteva (claim) na osnovu izveštaja.",
-                proj2Desc: "Python skripta za automatizaciju analize cena (BOQ).",
-                proj3Desc: "Prototip kompjuterskog vida za detekciju zaštitne opreme (PPE) na gradilištima.",
-                viewCode: "Pogledaj Kod", cookieText: "Koristimo kolačiće za analizu saobraćaja.",
-                privacyLink: "Politika Privatnosti", accept: "Prihvati", decline: "Odbij", closeBtn: "Zatvori",
-                footerText: "Izgrađeno betonom, kodom i AI saradnjom.",
-                repoTitle: "Status Repozitorijuma", repoText: "Repozitorijum se trenutno priprema za javno objavljivanje. Proverite uskoro!",
-                privacyTitle: "Politika Privatnosti", privacyText: "Ova stranica koristi GA4 za anonimnu analitiku. Lični podaci se ne čuvaju.",
-                formName: "Ime", formEmail: "E-pošta", formMsg: "Poruka", formSend: "Pošalji", formSending: "Slanje...",
-                formSuccess: "Poruka uspešno poslata! ✅", formError: "Došlo je do greške.",
-                filterAll: "Sve", filterCivil: "Građevina", filterAI: "AI & Tehnologija",
-                exp1Title: "Šef Tehničke Službe", exp1Desc: "<li>Upravljanje privremenim situacijama (IPC) i ugovorima.</li><li>Razvoj AI alata za upravljanje odštetnim zahtevima.</li>",
-                exp2Title: "Specijalista za Tendere", exp2Desc: "<li>Priprema tendera za projekte u 10+ zemalja.</li><li>Upravljanje FIDIC ugovorima.</li>",
-                exp3Title: "Šef Planiranja i Kontrole", exp3Desc: "<li>Izrada Master Plana u TILOS-u.</li>",
-                exp4Title: "Šef Tehničke Službe", exp4Desc: "<li>Uspostavljanje standarda tehničke službe.</li>",
-                exp5Title: "Inženjer Planiranja", exp5Desc: "<li>Analiza troškova i vremena u Primavera P6.</li>",
-                exp6Title: "Šef Gradilišta", exp6Desc: "<li>Upravljanje radovima i koordinacija podizvođača.</li>",
-                edu1Title: "Specijalizacija Mašinskog Učenja", edu1Desc: "<li>Regresija, Klasifikacija, Neuralne Mreže.</li>",
-                edu2Title: "Python za Sve", edu2Desc: "<li>Strukture Podataka, SQL Baze.</li>",
-                edu3Title: "Ekspertiza u Upravljanju Projektima", edu3Desc: "<li>66 sati sveobuhvatne obuke o PMI standardima i procesima upravljanja projektima.</li>",
-                edu_itu_claimTitle: "Upravljanje Ugovorima i Odštetnim Zahtevima", edu_itu_claimDesc: "<li>Specijalizovani program o FIDIC ugovorima, upravljanju potraživanjima i rešavanju sporova.</li>",
-                edu4Title: "TILOS Linearno Planiranje", edu4Desc: "<li>Napredne tehnike linearnog planiranja za infrastrukturne projekte (Autoputevi).</li>",
-                edu5Title: "Oracle Primavera P6 Napredni", edu5Desc: "<li>Napredno upravljanje resursima i analiza rizika u Primavera P6.</li>",
-                edu6Title: "Međunarodna Arbitraža", edu6Desc: "<li>Postupci međunarodne arbitraže i rešavanje sporova.</li>",
-                edu7Title: "Master, Geotehnika", edu7Desc: "<li>Fokus teze: Primena veštačke inteligencije u geotehničkom inženjerstvu.</li>",
-                edu8Title: "Dipl. Građevinski Inženjer", edu8Desc: "<li>Diplomirao kao počasni student sa fokusom na strukturalne i geotehničke kurseve.</li>"
+            function tr(n,p){if(typeof gtag==='function')gtag('event',n,p)}
+            function ann(t){document.getElementById('ann').innerText=t}
+            
+            function render(lg){
+                const d=DATA[lg];
+                const mk=(i,cls)=>`<div class="it ${cls||''} item-box visible-item" data-cat="${i.c}"><h4>${i.t}</h4><span class="co">${i.co}</span><div class="meta"><span>${i.l}</span><span>${i.d}</span></div><ul>${i.x}</ul></div>`;
+                document.getElementById('exp').innerHTML=d.exp.map(i=>mk(i)).join('');
+                document.getElementById('edu').innerHTML=d.edu.map(i=>mk(i,'edu')).join('');
+                document.querySelectorAll('[data-t]').forEach(e=>e.innerHTML=d[e.dataset.t]||e.innerHTML);
+                document.querySelectorAll('[data-tip]').forEach(e=>{e.dataset.tooltip=d[e.dataset.tip];e.ariaLabel=d[e.dataset.tip]});
+                ['name','email','msg'].forEach(i=>document.getElementById(i).placeholder=d[i==='msg'?'formMsg':(i==='name'?'formName':'formEmail')]);
+                document.getElementById('lang-btn').innerText=lg.toUpperCase();
+                filt(document.querySelector('.f-btn.active').getAttribute('onclick').split("'")[1]);
             }
-        };
 
-        let currentLang = 'en';
-
-        // ** FILTER LOGIC **
-        function filterSelection(category) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`button[onclick="filterSelection('${category}')"]`).classList.add('active');
-
-            const filterItems = (items) => {
-                items.forEach(item => {
-                    if (category === 'all' || item.dataset.category === category) {
-                        item.style.display = 'block';
-                        if(item.classList.contains('project-card')) item.style.display = 'flex'; // Fix flex for projects
-                    } else {
-                        item.style.display = 'none';
-                    }
+            function filt(c){
+                document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+                document.querySelector(`button[onclick="App.filt('${c}')"]`).classList.add('active');
+                [...document.querySelectorAll('.item-box')].forEach(i=>{
+                    if(c==='all'||i.dataset.cat===c){i.classList.remove('hidden-item');i.classList.add('visible-item')}
+                    else{i.classList.remove('visible-item');i.classList.add('hidden-item')}
                 });
-            };
-
-            filterItems(document.querySelectorAll('.list-item'));
-            filterItems(document.querySelectorAll('.project-card'));
-        }
-
-        // ** RENDER LISTS WITH BADGES **
-        function renderLists(lang) {
-            const expContainer = document.getElementById('exp-list');
-            expContainer.innerHTML = dataExp.map(item => `
-                <div class="list-item" data-category="${item.category}">
-                    <h4>${translations[lang][item.key + 'Title']}</h4>
-                    <span class="company">${item.company}</span>
-                    <div class="meta"><span>${item.loc}</span> <span>${item.date}</span></div>
-                    ${item.subtext ? `<div style="font-size:0.8rem; margin-bottom:5px; opacity:0.8"><i>${item.subtext}</i></div>` : ''}
-                    <ul>${translations[lang][item.key + 'Desc'] || ''}</ul>
-                </div>
-            `).join('');
-
-
-            const eduContainer = document.getElementById('edu-list');
-            eduContainer.innerHTML = dataEdu.map(item => `
-                <div class="list-item edu" data-category="${item.category}">
-                    <h4>${translations[lang][item.key + 'Title']}</h4>
-                    <span class="company">${item.company}</span>
-                    <div class="meta"><span>${item.loc}</span> <span>${item.date}</span></div>
-                    <ul>${translations[lang][item.key + 'Desc'] || ''}</ul>
-                    </div>
-            `).join('');
-            
-            // Re-apply filter after render
-            const activeFilter = document.querySelector('.filter-btn.active');
-            if(activeFilter) {
-                const category = activeFilter.getAttribute('onclick').match(/'([^']+)'/)[1];
-                filterSelection(category);
             }
-        }
 
-        // ** CHATBOT LOGIC **
-        function toggleChat() {
-            document.getElementById('chat-window').classList.toggle('active');
-            if(document.getElementById('chat-window').classList.contains('active')) {
-                document.getElementById('chat-input').focus();
-                trackEvent('chat_open');
+            function lang(){ 
+                l=l==='en'?'tr':'en'; render(l); 
+                const btn=document.getElementById('lang-btn'); btn.setAttribute('aria-expanded','true'); 
+                setTimeout(()=>btn.setAttribute('aria-expanded','false'),500);
+                ann(`Language switched to ${l.toUpperCase()}`); if(map){map.removeControl(window.mc);addLC(l)} 
             }
-        }
 
-        function handleChatKey(e) { if(e.key === 'Enter') sendMessage(); }
-
-        async function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const fileInput = document.getElementById('chat-file');
-            const messages = document.getElementById('chat-messages');
-            const userText = input.value.trim();
-            const file = fileInput.files[0];
-
-            if (!userText && !file) return;
-
-            // User Message UI
-            const userDiv = document.createElement('div');
-            userDiv.className = 'message user';
-            userDiv.innerText = userText + (file ? ` [Attached: ${file.name}]` : '');
-            messages.appendChild(userDiv);
-            input.value = '';
-            fileInput.value = ''; // Reset file
-            messages.scrollTop = messages.scrollHeight;
-
-            // Loading UI
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'typing';
-            loadingDiv.innerHTML = '<span></span><span></span><span></span>';
-            messages.appendChild(loadingDiv);
-
-            try {
-                // Prepare Data for Backend (Multipart/Form-Data)
-                const formData = new FormData();
-                formData.append('message', userText); // Backend expects 'message'
-                if (file) formData.append('image', file); // Backend expects 'image'
-
-                // FETCH API CALL TO RENDER BACKEND
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    body: formData // No headers needed for FormData, browser sets boundary
-                });
-
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                
-                const data = await response.json();
-                
-                // Remove Loading
-                messages.removeChild(loadingDiv);
-                
-                // Bot Response UI
-                const botDiv = document.createElement('div');
-                botDiv.className = 'message bot';
-                
-                // Backend returns { reply: "..." }
-                botDiv.innerText = data.reply || "No response text received."; 
-                
-                messages.appendChild(botDiv);
-
-            } catch (error) {
-                console.error("Chat Error:", error);
-                messages.removeChild(loadingDiv);
-                const botDiv = document.createElement('div');
-                botDiv.className = 'message bot';
-                botDiv.innerHTML = `⚠️ <b>Bağlantı Hatası:</b> Sunucuya ulaşılamadı. (Render uyku modunda olabilir, 1 dakika bekleyip tekrar deneyin). <br><small>${error.message}</small>`;
-                messages.appendChild(botDiv);
-            }
-            messages.scrollTop = messages.scrollHeight;
-        }
-
-        // ** STANDARD FUNCTIONS (Lang, Theme, Map, etc.) **
-        function attachSkillListeners() {
-            document.querySelectorAll('.skill-tag').forEach(tag => {
-                tag.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTooltip(this); } });
-            });
-        }
-        function toggleTooltip(el) { el.classList.toggle('active'); trackEvent('skill_view', { 'skill': el.innerText }); }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) el.innerHTML = translations[lang][key];
-            });
-            document.querySelectorAll('[data-i18n-tooltip]').forEach(el => {
-                const key = el.getAttribute('data-i18n-tooltip');
-                if (translations[lang][key]) el.setAttribute('data-tooltip', translations[lang][key]);
-            });
-            document.getElementById('name').placeholder = translations[lang].formName;
-            document.getElementById('email').placeholder = translations[lang].formEmail;
-            document.getElementById('message').placeholder = translations[lang].formMsg;
-            
-            renderLists(lang);
-            document.getElementById('lang-toggle').innerText = lang.toUpperCase();
-            if(window.mapControl) { map.removeControl(window.mapControl); window.addMapControl(lang); }
-        }
-
-        function toggleLanguage() {
-            if (currentLang === 'en') setLanguage('tr');
-            else if (currentLang === 'tr') setLanguage('sr');
-            else setLanguage('en');
-        }
-
-        const userLang = navigator.language || navigator.userLanguage;
-        if (userLang.startsWith('tr')) setLanguage('tr');
-        else if (userLang.startsWith('sr')) setLanguage('sr');
-        else renderLists('en');
-
-        // Modal Logic
-        const modal = document.getElementById('custom-modal');
-        function openModal(title, content) {
-            document.getElementById('modal-text-content').style.display = 'block';
-            document.getElementById('modal-form-content').style.display = 'none';
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-text-content').innerHTML = content;
-            document.getElementById('modal-close-btn').style.display = 'inline-block';
-            modal.classList.add('active');
-        }
-        function openContactModal(e) {
-            if(e) e.preventDefault();
-            document.getElementById('modal-text-content').style.display = 'none';
-            document.getElementById('modal-form-content').style.display = 'block';
-            document.getElementById('modal-title').innerText = translations[currentLang].contactBtn;
-            document.getElementById('modal-close-btn').style.display = 'none';
-            modal.classList.add('active');
-            setTimeout(() => document.getElementById('name').focus(), 300); // Improved Focus
-        }
-        function closeModal() { modal.classList.remove('active'); }
-        function openRepoModal(e, name) { e.preventDefault(); openModal(translations[currentLang].repoTitle, `<strong>${name}</strong>: ${translations[currentLang].repoText}`); }
-        function openPrivacyModal() { openModal(translations[currentLang].privacyTitle, translations[currentLang].privacyText); }
-
-        // Theme Toggle
-        const themeBtn = document.getElementById('theme-toggle');
-        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-        themeBtn.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            const isLight = document.body.classList.contains('light-mode');
-            themeBtn.querySelector('i').className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            if(map && tileLayer) tileLayer.setUrl(isLight ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png');
-        });
-
-        // Form Logic
-        document.getElementById("contact-form").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const status = document.getElementById("form-status");
-            const btn = document.getElementById("form-submit-btn");
-            const spinner = document.getElementById("form-spinner");
-            btn.disabled = true; spinner.style.display = "inline-block";
-            
-            fetch(event.target.action, { method: 'POST', body: new FormData(event.target), headers: { 'Accept': 'application/json' } })
-            .then(response => {
-                if (response.ok) {
-                    status.innerHTML = translations[currentLang].formSuccess; status.className = "form-status success"; status.style.display = "block"; event.target.reset();
-                    setTimeout(() => { closeModal(); status.style.display = "none"; btn.disabled = false; spinner.style.display = "none"; }, 3000);
+            function chat(){
+                const w=document.getElementById('win'); w.classList.toggle('act'); document.getElementById('bub').classList.toggle('act');
+                if(w.classList.contains('act')){ 
+                    document.getElementById('inp').focus(); 
+                    if(!checkLim()) disInp();
+                    if(!obs){ obs=new MutationObserver(()=>document.getElementById('msgs').scrollTop=document.getElementById('msgs').scrollHeight); obs.observe(document.getElementById('msgs'),{childList:true}); }
+                    tr('chat_open');
                 } else {
-                    status.innerHTML = translations[currentLang].formError; status.className = "form-status error"; status.style.display = "block"; btn.disabled = false; spinner.style.display = "none";
+                    if(obs){obs.disconnect();obs=null}
                 }
-            });
-        });
+            }
 
-        // Map Logic (With Resize Fix)
-        var map, tileLayer; var mapInitialized = false;
-        var workLayer, eduLayer, tenderLayer;
-        
-        var observer = new IntersectionObserver(entry => {
-            if(entry[0].isIntersecting && !mapInitialized) { initMap(); mapInitialized = true; observer.disconnect(); }
-        }, { threshold: 0.1 });
-        observer.observe(document.getElementById('map'));
+            function checkLim(){
+                let u=JSON.parse(localStorage.getItem('c_use')||'{}');
+                if(u.d!==D){u={d:D,c:0};localStorage.setItem('c_use',JSON.stringify(u))} 
+                return u.c < C.LIM;
+            }
+            function incLim(){
+                let u=JSON.parse(localStorage.getItem('c_use')||'{}');
+                if(u.d!==D){u={d:D,c:0}} u.c++; localStorage.setItem('c_use',JSON.stringify(u));
+            }
+            function disInp(){
+                const i=document.getElementById('inp'); i.disabled=true; i.placeholder="Daily Limit Reached";
+                ann("Daily limit reached, refresh page");
+            }
 
-        function initMap() {
-            map = L.map('map').setView([41.0082, 28.9784], 3);
-            var isLight = document.body.classList.contains('light-mode');
-            tileLayer = L.tileLayer(isLight ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', 
-                { attribution: '&copy; CARTO' }).addTo(map);
+            async function send(man=false){
+                if(!checkLim()){disInp();return}
+                const inp=document.getElementById('inp'), msgs=document.getElementById('msgs'), txt=inp.value.trim();
+                if(!txt&&!man)return;
+                if(!man){msgs.innerHTML+=`<div class="msg usr">${txt}</div>`;inp.value='';incLim()}
+                
+                const ld=document.createElement('div'); ld.className='msg bot typing'; ld.innerHTML='...'; ld.ariaHidden="true"; msgs.appendChild(ld);
+                
+                const att=async(r)=>{
+                    const c=new AbortController(); setTimeout(()=>c.abort(),15000);
+                    try{
+                        const fd=new FormData(); fd.append('message',txt||"Retry");
+                        const res=await fetch(C.API,{method:'POST',body:fd,signal:c.signal});
+                        if(!res.ok)throw 0;
+                        const d=await res.json(); msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">${d.reply}</div>`;
+                    }catch(e){
+                        if(r>0) setTimeout(()=>att(r-1),C.RETRY);
+                        else{
+                            msgs.removeChild(ld); 
+                            msgs.innerHTML+=`<div class="msg bot">⚠️ Error. <button class="rtry" aria-label="Retry Chat" onclick="App.rtry()">Retry</button></div>`;
+                            ann("Chat Error");
+                        }
+                    }
+                };
+                att(man?0:C.MAX);
+            }
+
+            function openM(t,c,isF=false){
+                foc=document.activeElement; document.getElementById('m-tit').innerText=t;
+                document.getElementById('m-txt').innerHTML=c; document.getElementById('m-txt').style.display=isF?'none':'block';
+                document.getElementById('frm').style.display=isF?'block':'none'; document.getElementById('m-btn').style.display=isF?'none':'inline-block';
+                document.getElementById('mod').classList.add('act'); 
+                const f=document.getElementById('mod').querySelectorAll('button,input,textarea')[0]; if(f)f.focus();
+            }
+            function cls(){document.getElementById('mod').classList.remove('act');if(foc)foc.focus();ann("Modal Closed")}
             
-            eduLayer = L.layerGroup().addTo(map);
-            tenderLayer = L.layerGroup().addTo(map);
-            workLayer = L.layerGroup().addTo(map); // Top Layer
+            function sub(tok){
+                const f=document.getElementById('frm'), b=f.querySelector('button'), s=document.getElementById('fst');
+                b.disabled=true; b.innerText="...";
+                const fd=new FormData(f); fd.append("g-recaptcha-response",tok);
+                fetch(f.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(r=>{
+                    s.style.display='block';s.innerText=r.ok?"Sent! ✅":"Error ❌";
+                    if(r.ok){f.reset();setTimeout(cls,2000)} else { errCap() } 
+                    b.disabled=false;b.innerText="Send";
+                }).catch(()=>{errCap(); b.disabled=false;});
+            }
+            function errCap(){ ann("Captcha error, please retry"); grecaptcha.reset(); }
 
-            const iconUrl = (c) => `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${c}.png`;
-            const shadow = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png';
-            const icons = {
-                blue: new L.Icon({iconUrl: iconUrl('blue'), shadowUrl: shadow, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]}),
-                green: new L.Icon({iconUrl: iconUrl('green'), shadowUrl: shadow, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]}),
-                gold: new L.Icon({iconUrl: iconUrl('orange'), shadowUrl: shadow, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]})
+            function initMap(){
+                map=L.map('map').setView([41.0,29.0],3);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; CARTO'}).addTo(map);
+                ['work','edu'].forEach(k=>lyrs[k]=L.layerGroup().addTo(map));
+                [{la:45.02,ln:19.40,t:'work'},{la:37.83,ln:27.84,t:'work'},{la:37.42,ln:-122.16,t:'edu'}]
+                .forEach(l=>L.marker([l.la,l.ln],{icon:new L.Icon({iconUrl:`https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.t==='edu'?'green':'blue'}.png`,iconSize:[25,41],iconAnchor:[12,41]})}).addTo(lyrs[l.t]));
+                addLC(l);
+            }
+            function addLC(lg){window.mc=L.control.layers(null,{[`<span style='color:#38bdf8'>${DATA[lg].legWork}</span>`]:lyrs.work,[`<span style='color:#2ecc71'>${DATA[lg].legEdu}</span>`]:lyrs.edu},{collapsed:true}).addTo(map)}
+
+            function init(){
+                DATA = JSON.parse(atob(B64)); // Decode Base64 Data
+                document.getElementById('yr').innerText=new Date().getFullYear();
+                if(localStorage.getItem(C.THEME)==='light')document.body.classList.add('light-mode');
+                if(!localStorage.getItem(C.CONSENT))setTimeout(()=>document.getElementById('cook').classList.add('shw'),2000);
+                const u=navigator.language||navigator.userLanguage; l=u.startsWith('tr')?'tr':'en'; render(l);
+                const obsMap=new IntersectionObserver(e=>{if(e[0].isIntersecting){initMap();obsMap.disconnect()}}); obsMap.observe(document.getElementById('map'));
+                const pObs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('visible-item');pObs.unobserve(i.target)}})});
+                document.querySelectorAll('.card').forEach(c=>pObs.observe(c));
+            }
+
+            return{
+                init,lang,filt,chat,send,cls,sub,tr,errCap,key:e=>{if(e.key==='Enter')send()},
+                tip:t=>t.classList.toggle('active'),
+                theme:()=>{document.body.classList.toggle('light-mode');localStorage.setItem(C.THEME,document.body.classList.contains('light-mode')?'light':'dark')},
+                cont:e=>{e.preventDefault();openM(DATA[l].contactBtn,'',true)},
+                repo:(e,n)=>{e.preventDefault();openM('Repo',`<strong>${n}</strong>: Code is private.`)},
+                cons:g=>{localStorage.setItem(C.CONSENT,g);gtag('consent','update',{'ad_storage':g?'granted':'denied'});App.hCook()},
+                hCook:()=>document.getElementById('cook').classList.remove('shw'),
+                rtry:()=>{mRetries++;if(mRetries>3){ann("Retry limit reached, please refresh page");const b=document.querySelector('.rtry');if(b){b.disabled=true;b.setAttribute('aria-disabled','true');b.textContent='Disabled'}return}send(true)}
             };
-
-            const locs = [
-                {t:"Kuzmin",lat:45.02,lng:19.40,ty:"work"}, {t:"Belgrade",lat:44.78,lng:20.44,ty:"work"}, {t:"Aydin",lat:37.83,lng:27.84,ty:"work"},
-                {t:"Canakkale",lat:40.15,lng:26.41,ty:"work"}, {t:"Kocaeli",lat:40.85,lng:29.88,ty:"work"}, {t:"Istanbul",lat:41.00,lng:28.97,ty:"work"},
-                {t:"Mugla",lat:37.21,lng:28.36,ty:"edu"}, {t:"Poland",lat:53.42,lng:14.55,ty:"edu"}, {t:"Stanford",lat:37.42,lng:-122.16,ty:"edu"},
-                {t:"Michigan",lat:42.27,lng:-83.74,ty:"edu"}, {t:"Leiden",lat:52.16,lng:4.49,ty:"edu"}, {t:"ITU",lat:41.10,lng:29.02,ty:"edu"},
-                {t:"Uzbekistan",lat:41.37,lng:64.58,ty:"tender"}, {t:"Kazakhstan",lat:48.01,lng:66.92,ty:"tender"}, {t:"Georgia",lat:42.31,lng:43.35,ty:"tender"},
-                {t:"Romania",lat:45.94,lng:24.96,ty:"tender"}, {t:"Moldova",lat:47.41,lng:28.36,ty:"tender"}, {t:"Croatia",lat:45.1,lng:15.2,ty:"tender"},
-                {t:"Bosnia",lat:43.91,lng:17.67,ty:"tender"}, {t:"Montenegro",lat:42.70,lng:19.37,ty:"tender"}, {t:"Kosovo",lat:42.60,lng:20.90,ty:"tender"},
-                {t:"Macedonia",lat:41.60,lng:21.74,ty:"tender"}
-            ];
-
-            var bounds = [];
-            locs.forEach(l => {
-                let i = l.ty === 'edu' ? icons.green : (l.ty === 'tender' ? icons.gold : icons.blue);
-                let lay = l.ty === 'edu' ? eduLayer : (l.ty === 'tender' ? tenderLayer : workLayer);
-                L.marker([l.lat, l.lng], {icon: i}).bindPopup(`<b>${l.t}</b>`).addTo(lay);
-                bounds.push([l.lat, l.lng]);
-            });
-
-            setTimeout(() => { map.invalidateSize(); if(bounds.length) map.fitBounds(bounds, {padding:[30,30]}); }, 200);
-            window.addMapControl(currentLang);
-        }
-
-        window.addMapControl = function(lang) {
-            var overlays = {};
-            overlays[`<span style='color:#2A81CB'>${translations[lang].legendWork}</span>`] = workLayer;
-            overlays[`<span style='color:#2ecc71'>${translations[lang].legendEdu}</span>`] = eduLayer;
-            overlays[`<span style='color:#fbbf24'>${translations[lang].legendTender}</span>`] = tenderLayer;
-            window.mapControl = L.control.layers(null, overlays, {collapsed:true}).addTo(map);
-        }
-
-        // Fix Map on Mobile Resize
-        window.addEventListener('resize', () => { if(map) map.invalidateSize(); });
+        })();
+        document.addEventListener("DOMContentLoaded",App.init);
     </script>
 </body>
 </html>
