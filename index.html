@@ -406,8 +406,9 @@
         document.getElementById('year').textContent = new Date().getFullYear();
         const GA_MEASUREMENT_ID = 'G-1E33W355PW'; 
         
-        // ** BACKEND URL (UPDATE THIS AFTER DEPLOYING BACKEND) **
-        const API_URL = "https://your-backend-url.onrender.com/chat"; 
+        // ** BACKEND URL - Render adresinizi buraya yazdım. Lütfen Render Dashboard'dan kontrol edin. **
+        // Genellikle format: https://[repo-adi].onrender.com/chat
+        const API_URL = "https://portfolio-backend-fsenyuz.onrender.com/chat"; 
 
         function trackEvent(eventName, params) {
             if (typeof gtag === 'function') gtag('event', eventName, params);
@@ -627,36 +628,39 @@
             messages.appendChild(loadingDiv);
 
             try {
-                // Prepare Data
+                // Prepare Data for Backend (Multipart/Form-Data)
                 const formData = new FormData();
-                formData.append('message', userText);
-                if (file) formData.append('image', file);
+                formData.append('message', userText); // Backend expects 'message'
+                if (file) formData.append('image', file); // Backend expects 'image'
 
-                // Fetch Backend (Mocking for now if no backend)
-                let response;
-                if(API_URL.includes("your-backend-url")) {
-                    // Simulate delay for demo purposes
-                    await new Promise(r => setTimeout(r, 1500)); 
-                    throw new Error("Backend not connected. This is a demo UI.");
-                } else {
-                    response = await fetch(API_URL, { method: 'POST', body: formData });
-                    const data = await response.json();
-                    if (!response.ok) throw new Error(data.error || 'Server Error');
-                    
-                    messages.removeChild(loadingDiv);
-                    const botDiv = document.createElement('div');
-                    botDiv.className = 'message bot';
-                    botDiv.innerText = data.reply;
-                    messages.appendChild(botDiv);
-                }
+                // FETCH API CALL TO RENDER BACKEND
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: formData // No headers needed for FormData, browser sets boundary
+                });
+
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+                
+                const data = await response.json();
+                
+                // Remove Loading
+                messages.removeChild(loadingDiv);
+                
+                // Bot Response UI
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message bot';
+                
+                // Backend returns { reply: "..." }
+                botDiv.innerText = data.reply || "No response text received."; 
+                
+                messages.appendChild(botDiv);
 
             } catch (error) {
+                console.error("Chat Error:", error);
                 messages.removeChild(loadingDiv);
                 const botDiv = document.createElement('div');
                 botDiv.className = 'message bot';
-                botDiv.innerHTML = error.message === "Backend not connected. This is a demo UI." 
-                    ? "⚠️ <b>Backend Bağlı Değil:</b> Chatbot'un çalışması için Node.js kodunu bir sunucuya yüklemelisin. (Şu an sadece arayüz çalışıyor)" 
-                    : "Sorry, I'm having trouble connecting right now.";
+                botDiv.innerHTML = `⚠️ <b>Bağlantı Hatası:</b> Sunucuya ulaşılamadı. (Render uyku modunda olabilir, 1 dakika bekleyip tekrar deneyin). <br><small>${error.message}</small>`;
                 messages.appendChild(botDiv);
             }
             messages.scrollTop = messages.scrollHeight;
