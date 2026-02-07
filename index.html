@@ -3,14 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
-    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6.">
+    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
     <meta name="author" content="Furkan Senyuz">
+    <meta name="keywords" content="Furkan Senyuz, Civil Engineer, AI Developer, Primavera P6, Python, Machine Learning, Construction Management">
     <link rel="canonical" href="https://fsenyuz.com">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"}]}'>
-    <meta name="theme-color" content="#fbbf24">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Furkan Senyuz",
+      "jobTitle": "Civil Engineer & AI Solutions Developer",
+      "url": "https://fsenyuz.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/fsenyuz",
+        "https://github.com/fsenyuz",
+        "https://kaggle.com/fsenyuz"
+      ]
+    }
+    </script>
 
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fsenyuz.com/">
+    <meta property="og:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
+    <meta property="og:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
+    <meta property="og:image" content="https://fsenyuz.com/profile.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fsenyuz.com/">
+    <meta property="twitter:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
+    <meta property="twitter:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
+    <meta property="twitter:image" content="https://fsenyuz.com/profile.jpg">
+    
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <meta name="theme-color" content="#fbbf24">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
     
     <script>
@@ -28,62 +61,31 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v53 CHAT UI FIXED CSS */
-        
-        /* DARK MODE (Default) */
-        :root { 
-            --bg: #0f172a; 
-            --sec: #1e293b; 
-            --txt: #f1f5f9; 
-            --mut: #94a3b8; 
-            --gold: #fbbf24; 
-            --blue: #38bdf8; 
-            --green: #2ecc71; 
-            --brd: rgba(255, 255, 255, 0.1); 
-            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --tag: rgba(255,255,255,0.1); 
-            --ovr: rgba(0, 0, 0, 0.85); 
-            --inp: #0f172a; 
-            --bot: #fbbf24; 
-            --usr: #334155; 
-        }
-
-        /* LIGHT MODE */
-        body.light-mode { 
-            --bg: #f8fafc; 
-            --sec: #ffffff; 
-            --txt: #0f172a; 
-            --mut: #475569; 
-            --gold: #d97706; 
-            --blue: #0284c7; 
-            --green: #15803d; 
-            --brd: #e2e8f0; 
-            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --tag: #e2e8f0; 
-            --ovr: rgba(255, 255, 255, 0.85); 
-            --inp: #f1f5f9; 
-            --bot: #d97706; 
-            --usr: #e2e8f0; 
-        }
+        /* v54 HYBRID GOLD MASTER CSS */
+        :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
+        body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         
         * { margin:0; padding:0; box-sizing:border-box; } 
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
         
-        .grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; z-index: -1 !important; }
-
+        /* A11y & Focus Management */
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--gold); color: #000; padding: 8px; z-index: 2000; transition: top 0.3s; text-decoration: none; font-weight: bold; }
         .skip-link:focus { top: 0; outline: 3px solid var(--txt); }
         *:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
+        /* Animations */
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .anim { opacity:0; animation:fadeIn 0.8s ease-out forwards; } .d1{animation-delay:0.1s} .d2{animation-delay:0.2s} .d3{animation-delay:0.3s} .d4{animation-delay:0.4s} .d5{animation-delay:0.5s}
         .hidden-item { display:none !important; } 
-        
+        .grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; z-index: -1 !important; }
+
+        /* Loader */
         #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column; transition:opacity 0.5s; }
         .loader-spin { width:50px; height:50px; border:5px solid var(--sec); border-top:5px solid var(--gold); border-radius:50%; animation:spin 1s linear infinite; }
 
+        /* Header */
         header { background:var(--bg); padding:15px 0; position:fixed; width:100%; top:0; z-index:1000; border-bottom:1px solid var(--brd); backdrop-filter:blur(10px); }
         .nav-con { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
         .logo { font-size:1.5rem; font-weight:700; color:var(--txt); text-decoration:none; } .logo span { color:var(--gold); }
@@ -92,6 +94,7 @@
         .b-con { background:var(--txt); color:var(--bg); padding:8px 24px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.3s; } .b-con:hover { background:var(--gold); color:#fff; transform:translateY(-2px); }
         .b-cv { border:1px solid var(--gold); color:var(--gold); padding:7px 20px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.3s; } .b-cv:hover { background:var(--gold); color:#fff; }
 
+        /* Sections */
         .hero { padding:160px 20px 80px; text-align:center; max-width:900px; margin:0 auto; }
         .avt { width:160px; height:160px; border-radius:50%; border:4px solid var(--gold); box-shadow:0 0 20px rgba(251,191,36,0.3); margin-bottom:25px; object-fit:cover; background:var(--sec); }
         .hero h1 { font-size:3.5rem; font-weight:800; color:var(--txt); margin-bottom:15px; line-height:1.1; }
@@ -147,12 +150,10 @@
             background: var(--sec); border: 1px solid var(--brd); border-radius: 20px; 
             display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 2500; 
             opacity: 0; visibility: hidden; transform: translateY(20px); transition: 0.3s; overflow: hidden; 
-            /* Fix: Stretch children */
             align-items: stretch;
         } 
         .win.act { opacity: 1; visibility: visible; transform: translateY(0); }
         
-        /* CHAT HEADER FIXED */
         .chat-h { 
             width: 100%; 
             background: var(--gold); 
@@ -163,9 +164,8 @@
             color: #000; 
             font-weight: bold; 
             font-size: 1.1rem;
-            /* Fix borders */
-            border-radius: 0 0 0 0; 
-            flex-shrink: 0;
+            box-sizing: border-box; 
+            flex-shrink: 0; 
         }
         
         .msgs { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
@@ -174,7 +174,6 @@
         .msg.usr { background: var(--usr); color: var(--txt); align-self: flex-end; border-bottom-right-radius: 2px; }
         body.light-mode .msg.bot { color: #fff; }
         
-        /* CHAT INPUT FIXED */
         .c-inp { 
             padding: 15px; 
             border-top: 1px solid var(--brd); 
@@ -185,13 +184,13 @@
         }
         .inp { 
             flex-grow: 1; 
-            padding: 14px 18px; /* Bigger padding */
+            padding: 14px 18px; 
             border-radius: 25px; 
             border: 1px solid var(--brd); 
             background: var(--sec); 
             color: var(--txt); 
             outline: none; 
-            font-size: 1rem; /* Bigger font */
+            font-size: 1rem; 
             width: 100%;
         }
         .snd { background: var(--gold); border: none; width: 45px; height: 45px; border-radius: 50%; color: #000; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; flex-shrink: 0; }
@@ -345,7 +344,7 @@
 
     <script>
         // PWA Service Worker
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v53').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v54').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
