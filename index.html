@@ -61,9 +61,43 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v56 FINAL CSS */
-        :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
-        body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
+        /* v58 CSS (v29 Colors + Modern UI + Map Fixes) */
+        
+        /* v29 DARK MODE (Default) */
+        :root { 
+            --bg: #0f172a; 
+            --sec: #1e293b; 
+            --txt: #f1f5f9; 
+            --mut: #94a3b8; 
+            --gold: #fbbf24; 
+            --blue: #38bdf8; 
+            --green: #2ecc71; 
+            --brd: rgba(255, 255, 255, 0.1); 
+            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --tag: rgba(255,255,255,0.1); 
+            --ovr: rgba(0, 0, 0, 0.85); 
+            --inp: #0f172a; 
+            --bot: #fbbf24; 
+            --usr: #334155; 
+        }
+
+        /* v29 LIGHT MODE */
+        body.light-mode { 
+            --bg: #f8fafc; 
+            --sec: #ffffff; 
+            --txt: #0f172a; 
+            --mut: #475569; 
+            --gold: #d97706; 
+            --blue: #0284c7; 
+            --green: #15803d; 
+            --brd: #e2e8f0; 
+            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --tag: #e2e8f0; 
+            --ovr: rgba(255, 255, 255, 0.85); 
+            --inp: #f1f5f9; 
+            --bot: #d97706; 
+            --usr: #e2e8f0; 
+        }
         
         * { margin:0; padding:0; box-sizing:border-box; } 
         html { scroll-behavior:smooth; }
@@ -149,7 +183,6 @@
         } 
         .win.act { opacity: 1; visibility: visible; transform: translateY(0); }
         
-        /* CHAT HEADER FIXED */
         .chat-h { 
             width: 100%; 
             background: var(--gold); 
@@ -170,22 +203,19 @@
         .msg.usr { background: var(--usr); color: var(--txt); align-self: flex-end; border-bottom-right-radius: 2px; }
         body.light-mode .msg.bot { color: #fff; }
         
-        /* CHAT INPUT AREA FIXED - FULL WIDTH */
         .c-inp { 
-            padding: 10px; /* Reduced padding */
+            padding: 15px; 
             border-top: 1px solid var(--brd); 
             display: flex; 
-            gap: 10px; 
+            gap: 12px; 
             background: var(--bg); 
             align-items: center; 
             flex-shrink: 0;
-            box-sizing: border-box;
         }
         .inp { 
             flex-grow: 1; 
-            height: 50px; 
-            padding: 0 20px;
-            border-radius: 12px; /* Slightly less rounded */
+            padding: 14px 18px; 
+            border-radius: 25px; 
             border: 1px solid var(--brd); 
             background: var(--sec); 
             color: var(--txt); 
@@ -193,7 +223,7 @@
             font-size: 1rem; 
             width: 100%;
         }
-        .snd { background: var(--gold); border: none; width: 50px; height: 50px; border-radius: 12px; color: #000; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; flex-shrink: 0; }
+        .snd { background: var(--gold); border: none; width: 45px; height: 45px; border-radius: 50%; color: #000; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; flex-shrink: 0; }
 
         .mod { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--ovr); z-index:3000; display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:0.3s; backdrop-filter:blur(5px); } .mod.act { opacity:1; visibility:visible; }
         .m-con { background:var(--sec); border:1px solid var(--gold); padding:40px; border-radius:20px; max-width:500px; width:90%; text-align:center; position:relative; transform:translateY(20px); transition:0.3s; } .mod.act .m-con { transform:translateY(0); }
@@ -344,7 +374,7 @@
 
     <script>
         // PWA Service Worker
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v56').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v58').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
@@ -367,7 +397,6 @@
                     
                     document.getElementById('yr').innerText=new Date().getFullYear();
                     
-                    // AUTO THEME DETECTION
                     const saved = localStorage.getItem(C.THEME);
                     const sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
                     if(saved === 'light' || (!saved && sysLight)) {
@@ -452,25 +481,41 @@
             }
 
             function initMap(){
-                map = L.map('map', {
-                    minZoom: 2, 
-                    maxBounds: [[-90, -180], [90, 180]], 
-                    maxBoundsViscosity: 1.0 
-                });
+                // UNLOCKED MAP (Zoom limitation removed)
+                map = L.map('map'); 
 
                 const isLight = document.body.classList.contains('light-mode');
                 L.tileLayer(isLight ? MAP_LIGHT : MAP_DARK, {attribution:'&copy; CARTO'}).addTo(map);
-                ['work','edu','tender'].forEach(k=>lyrs[k]=L.featureGroup().addTo(map));
+                
+                // Pinleri oluştur ama henüz haritaya ekleme (FeatureGroup içinde topla)
+                const markers = [];
                 
                 DATA.locations.forEach(l=>{
                     const iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.ty==='edu'?'green':(l.ty==='tender'?'orange':'blue')}.png`;
-                    L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
-                    .bindPopup(`<b>${l.t}</b><br>${l.desc}`)
-                    .addTo(lyrs[l.ty]);
+                    const marker = L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
+                    .bindPopup(`<b>${l.t}</b><br>${l.desc}`);
+                    
+                    // Katmanlara ekle
+                    lyrs[l.ty].addLayer(marker);
+                    markers.push(marker);
                 });
+
+                // Katmanları haritaya ekle
+                ['work','edu','tender'].forEach(k=>lyrs[k].addTo(map));
                 
-                const group = L.featureGroup([lyrs.work, lyrs.edu, lyrs.tender]);
-                map.fitBounds(group.getBounds(), {padding: [50, 50], maxZoom: 5});
+                // --- KRİTİK DÜZELTME: LAG EKLEME (v58 Logic) ---
+                const group = L.featureGroup(markers);
+                
+                // 500ms gecikme ile haritayı oturt (Veri ve DOM tam yüklensin)
+                setTimeout(() => {
+                    map.invalidateSize(); // Harita boyutunu garantiye al
+                    if(markers.length > 0) {
+                        map.fitBounds(group.getBounds(), {padding: [50, 50]});
+                    } else {
+                        map.setView([41.0, 29.0], 3); // Veri yoksa varsayılan
+                    }
+                }, 500);
+                
                 addLC(l);
             }
             function addLC(lg){
