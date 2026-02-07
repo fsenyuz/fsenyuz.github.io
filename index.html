@@ -233,8 +233,7 @@
         .chat-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #000; }
         .chat-messages { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
         .message { padding: 10px 14px; border-radius: 10px; max-width: 80%; line-height: 1.4; word-wrap: break-word; }
-        /* DÜZELTİLEN SATIR: Dark Mode'da bot yazısı siyah (#000) oldu */
-        .message.bot { background: var(--chat-bot); color: #000; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .message.bot { background: var(--chat-bot); color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
         .message.user { background: var(--chat-user); color: var(--text-main); align-self: flex-end; border-bottom-right-radius: 2px; }
         body.light-mode .message.bot { color: #fff; }
         .chat-input-area { padding: 10px; border-top: 1px solid var(--border-color); display: flex; gap: 8px; background: var(--bg-body); align-items: center; }
@@ -490,7 +489,7 @@
                 edu8Title: "BSc, Civil Engineering", edu8Desc: "<li>Graduated as Honor Student with a focus on Structural and Geotechnical courses.</li>"
             },
             tr: {
-                contactBtn: "İletişime Geç", heroTitle: "İnşaat Mühendisi & Yapay Zeka Çözüm Geliştirici", heroSlogan: "Geleceği Beton ve Kod ile <br> İnşa Ediyorum",
+                contactBtn: "İletişime Geç", heroTitle: "İnşaat Mühendisi & Yapay Zeka Çözüm Geliştiricisi", heroSlogan: "Geleceği Beton ve Kod ile <br> İnşa Ediyorum",
                 skillTip1: "Metraj & Maliyet Analizi Otomasyonu", skillTip2: "Hak Talepleri için Tahmin Modelleri", skillTip3: "Veri Odaklı Karar Verme",
                 skillTip4: "Mega Proje Planlama", skillTip5: "Uluslararası Pazar & Risk Analizi", skillTip6: "Sözleşme Yönetimi & Uyuşmazlık Çözümü",
                 mapTitle: "Global Deneyim Haritası", legendWork: "İş & Projeler", legendEdu: "Eğitim & Sertifikalar", legendTender: "İhale Deneyimi", legendFilter: "*Katmanlar menüsünden filtreleyin",
@@ -592,6 +591,7 @@
                 </div>
             `).join('');
 
+
             const eduContainer = document.getElementById('edu-list');
             eduContainer.innerHTML = dataEdu.map(item => `
                 <div class="list-item edu" data-category="${item.category}">
@@ -599,8 +599,7 @@
                     <span class="company">${item.company}</span>
                     <div class="meta"><span>${item.loc}</span> <span>${item.date}</span></div>
                     <ul>${translations[lang][item.key + 'Desc'] || ''}</ul>
-                    ${item.badge ? `<a href="${item.badge}" target="_blank" class="badge-link"><i class="fa-solid fa-certificate"></i> View Credly Badge</a>` : ''}
-                </div>
+                    </div>
             `).join('');
             
             // Re-apply filter after render
@@ -811,7 +810,7 @@
                 {t:"Uzbekistan",lat:41.37,lng:64.58,ty:"tender"}, {t:"Kazakhstan",lat:48.01,lng:66.92,ty:"tender"}, {t:"Georgia",lat:42.31,lng:43.35,ty:"tender"},
                 {t:"Romania",lat:45.94,lng:24.96,ty:"tender"}, {t:"Moldova",lat:47.41,lng:28.36,ty:"tender"}, {t:"Croatia",lat:45.1,lng:15.2,ty:"tender"},
                 {t:"Bosnia",lat:43.91,lng:17.67,ty:"tender"}, {t:"Montenegro",lat:42.70,lng:19.37,ty:"tender"}, {t:"Kosovo",lat:42.60,lng:20.90,ty:"tender"},
-                {t:"Macedonia",lat:41.60,lng:21.74,ty:"tender"}, {t:"Belgrade",lat:44.78,lng:20.44,ty:"tender"}
+                {t:"Macedonia",lat:41.60,lng:21.74,ty:"tender"}
             ];
 
             var bounds = [];
