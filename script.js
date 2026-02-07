@@ -1,10 +1,9 @@
 /**
- * V20 - THE DIVINE EDITION SCRIPT
- * Features: JSON Data Fetching, PWA, Background Sync Chat, A11y, Animations, Cookies
+ * V21 - THE DIVINE EDITION SCRIPT (FINAL)
+ * Features: JSON Data, PWA, Chatbot, Animations, Contact Form Handling
  */
 
 // --- KONFİGÜRASYON ---
-// Render'dan aldığın backend linki
 const API_URL = "https://portfolio-backend-hu1r.onrender.com/chat";
 
 // Global Değişkenler
@@ -12,9 +11,8 @@ let currentLang = 'en';
 let translations = {};
 let repoStatus = {};
 let locationsData = [];
-let deferredPrompt; // PWA Install event
+let deferredPrompt; 
 let animationsEnabled = localStorage.getItem('animations') !== 'off';
-let prevFocusElement = null; // A11y Focus Restoration
 
 const THINKING_PHRASES = [
     "Consulting the Oracle...", 
@@ -26,15 +24,11 @@ const THINKING_PHRASES = [
 
 // --- 1. BAŞLANGIÇ & VERİ YÜKLEME ---
 document.addEventListener('DOMContentLoaded', async () => {
-    // Yıl Güncelleme
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Çerez Kontrolü
     checkCookies();
 
-    // Verileri Çek (JSON)
+    // Verileri Çek
     try {
-        // Cache-busting için ?v=20 ekledik
         const [trans, locs, repos, exp, edu] = await Promise.all([
             fetch('data/translations.json?v=20').then(r => r.json()),
             fetch('data/locations.json?v=20').then(r => r.json()),
@@ -47,35 +41,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         locationsData = locs;
         repoStatus = repos;
 
-        // İçeriği Render Et
         renderLists('exp-list', exp);
         renderLists('edu-list', edu);
         
-        // Dil Ayarı (Tarayıcı diline göre)
         const userLang = navigator.language || navigator.userLanguage;
         const initialLang = (userLang.startsWith('tr')) ? 'tr' : (userLang.startsWith('sr') ? 'sr' : 'en');
         setLanguage(initialLang);
 
-        // Animasyon Butonu Durumu
         updateAnimButton();
-
-        // Harita (Lazy Load - Görünür olunca yükle)
         initMapObserver();
+        initContactForm(); // Form dinleyicisini başlat
 
     } catch (e) {
         console.error("Data Load Error:", e);
-        showToast("Offline mode: Some content might be limited.", "error");
+        showToast("Offline mode: Content limited.", "error");
     }
 });
 
 // --- 2. PWA & SERVICE WORKER ---
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-        .then(() => console.log('Divine SW Registered 🛡️'))
-        .catch(err => console.error('SW Fail:', err));
+    navigator.serviceWorker.register('/sw.js').catch(console.error);
 }
 
-// Install Prompt Yakalama
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -87,58 +74,136 @@ window.triggerInstall = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-        document.getElementById('pwa-install-btn').style.display = 'none';
-    }
+    if (outcome === 'accepted') document.getElementById('pwa-install-btn').style.display = 'none';
     deferredPrompt = null;
 };
 
 window.addEventListener('appinstalled', () => {
-    showToast("You are now immortal – App installed eternally! ⚡", "divine");
+    showToast("App installed eternally! ⚡", "divine");
     triggerConfetti(20);
 });
 
-// --- 3. UI FONKSİYONLARI (COOKIES & MENU) ---
+// --- 3. MODAL & İLETİŞİM FORMU YÖNETİMİ (YENİ EKLENDİ) ---
+const modal = document.getElementById('custom-modal');
 
-// Çerez Mantığı
-function checkCookies() {
-    const banner = document.getElementById('cookie-banner');
-    if (!localStorage.getItem('cookieConsent')) {
-        setTimeout(() => banner.classList.add('show'), 2000);
-    }
-    
-    document.getElementById('cookie-accept').onclick = () => {
-        localStorage.setItem('cookieConsent', 'true');
-        banner.classList.remove('show');
-    };
-    
-    document.getElementById('cookie-reject').onclick = () => {
-        localStorage.setItem('cookieConsent', 'false');
-        banner.classList.remove('show');
-    };
+// Genel Kapatma Fonksiyonu
+window.closeModal = function() { 
+    modal.classList.remove('active'); 
+};
+
+// Modal Dışına Tıklayınca Kapat
+if(modal) {
+    modal.addEventListener('click', e => { if(e.target === modal) window.closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') window.closeModal(); });
 }
 
-window.reopenCookieBanner = () => {
-    const banner = document.getElementById('cookie-banner');
-    banner.classList.add('show');
+// 1. Tip Modal: Sadece Metin (Repo, Gizlilik vb.)
+window.openModal = function(title, contentHTML) {
+    document.getElementById('modal-text-content').style.display = 'block';
+    document.getElementById('modal-form-content').style.display = 'none';
+    
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-text-content').innerHTML = contentHTML;
+    document.getElementById('modal-close-btn').style.display = 'inline-block';
+    
+    modal.classList.add('active');
 };
 
-// Mobil Menü
-window.toggleMobileMenu = () => {
-    const menu = document.querySelector('.header-actions');
-    // menu.classList.toggle('active'); // CSS entegrasyonuna göre açılabilir
-    console.log("Mobile menu toggled");
+// 2. Tip Modal: İletişim Formu (Let's Connect)
+window.openContactModal = function(e) {
+    if(e) e.preventDefault();
+    
+    document.getElementById('modal-text-content').style.display = 'none';
+    document.getElementById('modal-form-content').style.display = 'block';
+    
+    const title = translations[currentLang]?.contactBtn || "Let's Connect";
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-close-btn').style.display = 'none'; // Formun kendi akışı var
+    
+    modal.classList.add('active');
 };
 
-// --- 4. CHATBOT ---
+// Repo Link Yönetimi
+window.handleRepoLink = function(repoName) {
+    const repo = repoStatus[repoName];
+    if (!repo) return; 
+    if (repo.ready) window.open(repo.url, '_blank');
+    else if (repo.comingSoon) showToast("Launching Soon! 🚀 Gods are working on it.", "divine");
+    else {
+        // Repo detaylarını modalda göster
+        const title = translations[currentLang]?.repoTitle || "Repo Status";
+        const text = translations[currentLang]?.repoText || "Coming soon.";
+        window.openModal(title, `<strong>${repoName}</strong>: ${text}`);
+    }
+};
 
+// --- FORM GÖNDERİM MANTIĞI (FORMSPREE) ---
+function initContactForm() {
+    const form = document.getElementById("contact-form");
+    if(!form) return;
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const status = document.getElementById("form-status");
+        const btn = document.getElementById("form-submit-btn");
+        const spinner = document.getElementById("form-spinner");
+        const btnText = document.getElementById("form-btn-text");
+        const t = translations[currentLang];
+
+        // Yükleniyor Durumu
+        btn.disabled = true;
+        spinner.style.display = "inline-block";
+        btnText.innerText = t.formSending || "Sending...";
+
+        const data = new FormData(event.target);
+
+        try {
+            const response = await fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                status.innerHTML = t.formSuccess || "Success!";
+                status.className = "form-status success";
+                status.style.display = "block";
+                form.reset();
+                
+                // 3 saniye sonra kapat
+                setTimeout(() => {
+                    window.closeModal();
+                    status.style.display = "none";
+                    btn.disabled = false;
+                    spinner.style.display = "none";
+                    btnText.innerText = t.formSend || "Send Message";
+                }, 3000);
+            } else {
+                const data = await response.json();
+                if (Object.hasOwn(data, 'errors')) {
+                    status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                    status.innerHTML = t.formError || "Error!";
+                }
+                throw new Error('Form error');
+            }
+        } catch (error) {
+            status.className = "form-status error";
+            if(status.innerHTML === "") status.innerHTML = t.formError || "Error sending message.";
+            status.style.display = "block";
+            btn.disabled = false;
+            spinner.style.display = "none";
+            btnText.innerText = t.formSend || "Send Message";
+        }
+    });
+}
+
+// --- 4. CHATBOT MANTIĞI ---
 function toggleChat() {
     const chatWindow = document.getElementById('chat-window');
     const isOpen = chatWindow.style.display === 'flex';
     chatWindow.style.display = isOpen ? 'none' : 'flex';
-    if (!isOpen) {
-        document.getElementById('chat-input').focus();
-    }
+    if (!isOpen) document.getElementById('chat-input').focus();
 }
 
 function handleChatKey(e) {
@@ -154,7 +219,6 @@ function previewImage(input) {
     }
 }
 
-// Yardımcı: Mesaj Ekleme
 function appendMessage(text, type) {
     const div = document.createElement('div');
     div.className = `message ${type}`;
@@ -162,28 +226,11 @@ function appendMessage(text, type) {
     document.getElementById('chat-messages').appendChild(div);
     const container = document.getElementById('chat-messages');
     container.scrollTop = container.scrollHeight;
-    return div;
 }
 
-// YENİ: Retry Fonksiyonu (Grok'un önerisiyle)
-window.retryLastMessage = function() {
-    // Son kullanıcı mesajını bul
-    const lastUserMsg = document.querySelector('.chat-messages .message.user:last-of-type');
-    
-    if (lastUserMsg) {
-        const input = document.getElementById('chat-input');
-        // Mesajı tekrar input'a yaz
-        input.value = lastUserMsg.innerText;
-        // Ve gönder
-        sendMessage();
-    }
-};
-
-// Chat Gönderme
 async function sendMessage() {
     const input = document.getElementById('chat-input');
     const fileInput = document.getElementById('chat-file');
-    
     const msg = input.value.trim();
     const file = fileInput.files[0];
 
@@ -208,49 +255,35 @@ async function sendMessage() {
         formData.append('message', msg);
         if (file) formData.append('image', file);
 
-        const res = await fetch(API_URL, {
-            method: 'POST',
-            body: formData
-        });
-        
+        const res = await fetch(API_URL, { method: 'POST', body: formData });
         clearInterval(interval);
         loading.remove();
         
         if (!res.ok) throw new Error(`Server Error: ${res.status}`); 
-        
         const data = await res.json();
         appendMessage(data.reply, 'bot');
         
-        // Temizlik
         document.getElementById('chat-img-preview').style.display = 'none';
-        document.getElementById('chat-img-preview').innerHTML = '';
         fileInput.value = '';
 
     } catch (e) {
         clearInterval(interval);
         loading.remove();
-        
         console.error("Chat Error:", e);
-        
-        if (!navigator.onLine) {
-            showToast("Offline: Message queued! 📨", "info");
-            appendMessage("Message queued (Offline)...", "system");
-            
-            // Grok Tweak: Offline Sync Placeholder
-            // NOT: Bunun çalışması için sw.js dosyasında 'sync' event listener gerekir.
-            if ('serviceWorker' in navigator && 'SyncManager' in window) {
-                navigator.serviceWorker.ready.then(reg => reg.sync.register('sync-chat').catch(() => {}));
-            }
-        } else {
-            // Grok Tweak: A11y & Stil İyileştirmesi
-            const btnStyle = "background:var(--accent-gold); color:#000; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold; margin-left:5px; font-size:0.8rem;";
-            appendMessage(`Connection failed or Server Busy. <button onclick='retryLastMessage()' style='${btnStyle}' aria-label='Retry last message'>Retry</button>`, 'bot');
-        }
+        const btnStyle = "background:var(--accent-gold); color:#000; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold; margin-left:5px; font-size:0.8rem;";
+        appendMessage(`Connection failed. <button onclick='retryLastMessage()' style='${btnStyle}'>Retry</button>`, 'bot');
     }
 }
 
-// --- 5. DİĞER UI ÖZELLİKLERİ ---
+window.retryLastMessage = function() {
+    const lastUserMsg = document.querySelector('.chat-messages .message.user:last-of-type');
+    if (lastUserMsg) {
+        document.getElementById('chat-input').value = lastUserMsg.innerText;
+        sendMessage();
+    }
+};
 
+// --- 5. UI YARDIMCILARI ---
 function renderLists(elementId, dataArray) {
     const container = document.getElementById(elementId);
     if (!container) return;
@@ -259,7 +292,7 @@ function renderLists(elementId, dataArray) {
         const tDesc = translations[currentLang][item.key + 'Desc'] || "";
         const isEdu = elementId === 'edu-list';
         return `
-            <div class="list-item ${isEdu ? 'edu' : ''}" data-category="${item.cat}">
+            <div class="list-item ${isEdu ? 'edu' : ''}">
                 <h4>${tTitle}</h4>
                 <span class="company">${item.company}</span>
                 <div class="meta"><span>${item.loc}</span> <span>${item.date}</span></div>
@@ -277,18 +310,21 @@ function setLanguage(lang) {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) el.innerHTML = translations[lang][key];
     });
-    document.querySelectorAll('input[name="name"]').forEach(el => el.placeholder = translations[lang].formName);
-    document.querySelectorAll('input[name="email"]').forEach(el => el.placeholder = translations[lang].formEmail);
-    document.querySelectorAll('textarea[name="message"]').forEach(el => el.placeholder = translations[lang].formMsg);
     
-    if(window.globalExpData && window.globalEduData) {
+    // Form Placeholderları
+    const t = translations[lang];
+    document.querySelectorAll('input[name="name"]').forEach(el => el.placeholder = t.formName);
+    document.querySelectorAll('input[name="email"]').forEach(el => el.placeholder = t.formEmail);
+    document.querySelectorAll('textarea[name="message"]').forEach(el => el.placeholder = t.formMsg);
+    
+    if(window.globalExpData) {
         renderLists('exp-list', window.globalExpData);
         renderLists('edu-list', window.globalEduData);
-    } else {
-       // İlk yüklemede veriler fetch'ten gelir
     }
     
     document.getElementById('lang-toggle').innerText = lang.toUpperCase();
+    
+    // Harita Kontrolü Güncelle
     if (window.mapControl && window.map) {
         window.map.removeControl(window.mapControl);
         window.addMapControl(lang);
@@ -306,7 +342,6 @@ function toggleAnimations() {
     localStorage.setItem('animations', animationsEnabled ? 'on' : 'off');
     updateAnimButton();
     if(animationsEnabled) triggerConfetti(10);
-    showToast(`Animations: ${animationsEnabled ? 'ON' : 'OFF'}`, "info");
 }
 
 function updateAnimButton() {
@@ -319,7 +354,7 @@ function updateAnimButton() {
 }
 
 function triggerConfetti(amount = 15) {
-    if (!animationsEnabled || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!animationsEnabled) return;
     const canvas = document.getElementById('confetti-canvas');
     if(!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -327,19 +362,23 @@ function triggerConfetti(amount = 15) {
     canvas.height = window.innerHeight;
     const particles = [];
     const colors = ['#fbbf24', '#38bdf8', '#2ecc71', '#e74c3c', '#f1c40f'];
+    
     for(let i=0; i<amount; i++) {
         particles.push({
-            x: Math.random() * canvas.width, y: -10, r: Math.random() * 5 + 2, d: Math.random() * amount,
-            c: colors[Math.floor(Math.random() * colors.length)], vx: Math.random() * 2 - 1, vy: Math.random() * 2 + 2
+            x: Math.random() * canvas.width, y: -10, r: Math.random() * 5 + 2,
+            c: colors[Math.floor(Math.random() * colors.length)], 
+            vx: Math.random() * 2 - 1, vy: Math.random() * 2 + 2
         });
     }
+    
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let active = 0;
         particles.forEach(p => {
             if(p.y < canvas.height) {
                 active++;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.c; ctx.fill();
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); 
+                ctx.fillStyle = p.c; ctx.fill();
                 p.x += p.vx; p.y += p.vy;
             }
         });
@@ -348,7 +387,16 @@ function triggerConfetti(amount = 15) {
     draw();
 }
 
-// Toast Gösterimi
+// Çerez & Toast
+function checkCookies() {
+    const banner = document.getElementById('cookie-banner');
+    if (!localStorage.getItem('cookieConsent')) setTimeout(() => banner.classList.add('show'), 2000);
+    document.getElementById('cookie-accept').onclick = () => { localStorage.setItem('cookieConsent', 'true'); banner.classList.remove('show'); };
+    document.getElementById('cookie-reject').onclick = () => { localStorage.setItem('cookieConsent', 'false'); banner.classList.remove('show'); };
+}
+
+window.reopenCookieBanner = () => document.getElementById('cookie-banner').classList.add('show');
+
 function showToast(msg, type = 'success') {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
@@ -359,7 +407,7 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 4000);
 }
 
-// Harita ve Modallar
+// Harita
 let map, tileLayer;
 function initMapObserver() {
     const mapEl = document.getElementById('map');
@@ -382,47 +430,26 @@ function initMap() {
     const tenderLayer = L.layerGroup().addTo(map);
     
     const iconUrl = (c) => `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${c}.png`;
-    const shadow = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png';
-    const createIcon = (color) => new L.Icon({ iconUrl: iconUrl(color), shadowUrl: shadow, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] });
-    const icons = { blue: createIcon('blue'), green: createIcon('green'), gold: createIcon('orange') };
+    const icons = { blue: new L.Icon({iconUrl: iconUrl('blue'), shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34]}), green: new L.Icon({iconUrl: iconUrl('green'), shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34]}), gold: new L.Icon({iconUrl: iconUrl('orange'), shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34]}) };
 
     const bounds = [];
     locationsData.forEach(l => {
-        let i, lay;
-        if (l.ty === 'edu') { i = icons.green; lay = eduLayer; } else if (l.ty === 'tender') { i = icons.gold; lay = tenderLayer; } else { i = icons.blue; lay = workLayer; }
-        L.marker([l.lat, l.lng], {icon: i, zIndexOffset: l.zIndex || 0}).bindPopup(`<b>${l.t}</b><br><small>${l.desc || ''}</small>`).addTo(lay);
+        let i = l.ty === 'edu' ? icons.green : (l.ty === 'tender' ? icons.gold : icons.blue);
+        let lay = l.ty === 'edu' ? eduLayer : (l.ty === 'tender' ? tenderLayer : workLayer);
+        L.marker([l.lat, l.lng], {icon: i}).bindPopup(`<b>${l.t}</b>`).addTo(lay);
         bounds.push([l.lat, l.lng]);
     });
+    
     setTimeout(() => { map.invalidateSize(); if(bounds.length) map.fitBounds(bounds, {padding:[30,30]}); }, 200);
+    
     window.addMapControl = (lang) => {
         const t = translations[lang] || translations['en'];
         const overlays = {};
         overlays[`<span style='color:#2A81CB'>${t.legendWork}</span>`] = workLayer;
         overlays[`<span style='color:#2ecc71'>${t.legendEdu}</span>`] = eduLayer;
         overlays[`<span style='color:#fbbf24'>${t.legendTender}</span>`] = tenderLayer;
-        L.control.layers(null, overlays, {collapsed:true}).addTo(map);
+        if(window.mapControl) map.removeControl(window.mapControl);
+        window.mapControl = L.control.layers(null, overlays, {collapsed:true}).addTo(map);
     };
     window.addMapControl(currentLang);
 }
-
-// Modallar ve Form
-const modal = document.getElementById('custom-modal');
-function openModal(title, contentHTML) {
-    document.getElementById('modal-text-content').style.display = 'block';
-    document.getElementById('modal-form-content').style.display = 'none';
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-text-content').innerHTML = contentHTML;
-    document.getElementById('modal-close-btn').style.display = 'inline-block';
-    modal.classList.add('active');
-}
-function closeModal() { modal.classList.remove('active'); }
-if(modal) {
-    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
-}
-window.handleRepoLink = function(repoName) {
-    const repo = repoStatus[repoName];
-    if (!repo) return; 
-    if (repo.ready) window.open(repo.url, '_blank');
-    else if (repo.comingSoon) showToast("Launching Soon! 🚀 Gods are working on it.", "divine");
-};
