@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
-    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6.">
+    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
     <meta name="author" content="Furkan Senyuz">
     <link rel="canonical" href="https://fsenyuz.com">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
     <meta name="theme-color" content="#fbbf24">
 
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
@@ -28,9 +28,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v51: v50 Features + v29 Colors */
+        /* v52 HIGH CONTRAST CSS */
         
-        /* v29 DARK MODE PALETTE (Default) */
+        /* DARK MODE (Default) */
         :root { 
             --bg: #0f172a; 
             --sec: #1e293b; 
@@ -40,7 +40,7 @@
             --blue: #38bdf8; 
             --green: #2ecc71; 
             --brd: rgba(255, 255, 255, 0.1); 
-            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.3); /* v29 soft shadow */
+            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
             --tag: rgba(255,255,255,0.1); 
             --ovr: rgba(0, 0, 0, 0.85); 
             --inp: #0f172a; 
@@ -48,7 +48,7 @@
             --usr: #334155; 
         }
 
-        /* v29 LIGHT MODE PALETTE */
+        /* LIGHT MODE */
         body.light-mode { 
             --bg: #f8fafc; 
             --sec: #ffffff; 
@@ -58,7 +58,7 @@
             --blue: #0284c7; 
             --green: #15803d; 
             --brd: #e2e8f0; 
-            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* v29 soft shadow */
+            --shd: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --tag: #e2e8f0; 
             --ovr: rgba(255, 255, 255, 0.85); 
             --inp: #f1f5f9; 
@@ -70,7 +70,6 @@
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
         
-        /* HIDE RECAPTCHA BADGE */
         .grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; z-index: -1 !important; }
 
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--gold); color: #000; padding: 8px; z-index: 2000; transition: top 0.3s; text-decoration: none; font-weight: bold; }
@@ -145,7 +144,6 @@
         .win { position:fixed; bottom:100px; right:30px; width:380px; height:600px; max-height:80dvh; background:var(--sec); border:1px solid var(--brd); border-radius:20px; display:flex; flex-direction:column; box-shadow:0 10px 40px rgba(0,0,0,0.5); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } 
         .win.act { opacity:1; visibility:visible; transform:translateY(0); }
         
-        /* FIXED CHAT HEADER */
         .chat-h { 
             width: 100%; 
             background: var(--gold); 
@@ -162,9 +160,13 @@
         
         .msgs { flex-grow:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:15px; }
         .msg { padding:12px 16px; border-radius:12px; max-width:85%; line-height:1.5; font-size: 0.95rem; } 
-        .msg.bot { background:var(--bot); color:#fff; align-self:flex-start; border-bottom-left-radius:2px; } 
+        
+        /* CHAT BUBBLE COLORS - FIXED */
+        .msg.bot { background:var(--bot); color:#000; align-self:flex-start; border-bottom-left-radius:2px; } 
         .msg.usr { background:var(--usr); color:var(--txt); align-self:flex-end; border-bottom-right-radius:2px; }
-        .light-mode .msg.bot { color:#fff; }
+        
+        /* Override for Light Mode: White text is better on Dark Orange */
+        body.light-mode .msg.bot { color: #fff; }
         
         .c-inp { padding:15px; border-top:1px solid var(--brd); display:flex; gap:10px; background:var(--bg); align-items:center; }
         .inp { flex-grow:1; padding:12px 15px; border-radius:25px; border:1px solid var(--brd); background:var(--sec); color:var(--txt); outline:none; }
@@ -319,7 +321,7 @@
 
     <script>
         // PWA Service Worker
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v51').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v52').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
