@@ -3,37 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
-    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
+    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6.">
     <meta name="author" content="Furkan Senyuz">
-    <meta name="keywords" content="Furkan Senyuz, Civil Engineer, AI Developer, Primavera P6, Python, Machine Learning, Construction Management">
     <link rel="canonical" href="https://fsenyuz.com">
     
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Furkan Senyuz",
-      "jobTitle": "Civil Engineer & AI Solutions Developer",
-      "url": "https://fsenyuz.com",
-      "sameAs": ["https://www.linkedin.com/in/fsenyuz","https://github.com/fsenyuz","https://kaggle.com/fsenyuz"]
-    }
-    </script>
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fsenyuz.com/">
-    <meta property="og:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
-    <meta property="og:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
-    <meta property="og:image" content="https://fsenyuz.com/profile.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"}]}'>
     <meta name="theme-color" content="#fbbf24">
-    <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
     
     <script>
@@ -51,7 +28,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v48 ADAPTIVE CSS */
+        /* v49 VISUAL PERFECTION CSS */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         
@@ -59,6 +36,9 @@
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
         
+        /* HIDE RECAPTCHA BADGE COMPLETELY */
+        .grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; z-index: -1 !important; }
+
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--gold); color: #000; padding: 8px; z-index: 2000; transition: top 0.3s; text-decoration: none; font-weight: bold; }
         .skip-link:focus { top: 0; outline: 3px solid var(--txt); }
         *:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
@@ -67,7 +47,6 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .anim { opacity:0; animation:fadeIn 0.8s ease-out forwards; } .d1{animation-delay:0.1s} .d2{animation-delay:0.2s} .d3{animation-delay:0.3s} .d4{animation-delay:0.4s} .d5{animation-delay:0.5s}
         .hidden-item { display:none !important; } 
-        .grecaptcha-badge { visibility: hidden; }
         
         #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column; transition:opacity 0.5s; }
         .loader-spin { width:50px; height:50px; border:5px solid var(--sec); border-top:5px solid var(--gold); border-radius:50%; animation:spin 1s linear infinite; }
@@ -288,7 +267,7 @@
     </noscript>
 
     <script>
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v48').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v49').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
@@ -396,7 +375,13 @@
             }
 
             function initMap(){
-                map=L.map('map');
+                // VISUAL FIX: Restrict zoom and bounds
+                map = L.map('map', {
+                    minZoom: 2, // Prevent zooming out too much
+                    maxBounds: [[-90, -180], [90, 180]], // Stick to one world
+                    maxBoundsViscosity: 1.0 // Hard stop at edges
+                });
+
                 const isLight = document.body.classList.contains('light-mode');
                 L.tileLayer(isLight ? MAP_LIGHT : MAP_DARK, {attribution:'&copy; CARTO'}).addTo(map);
                 ['work','edu','tender'].forEach(k=>lyrs[k]=L.featureGroup().addTo(map));
@@ -408,8 +393,10 @@
                     .addTo(lyrs[l.ty]);
                 });
                 
+                // TRUE AUTO-FIT with padding
                 const group = L.featureGroup([lyrs.work, lyrs.edu, lyrs.tender]);
-                map.fitBounds(group.getBounds(), {padding: [50, 50]});
+                map.fitBounds(group.getBounds(), {padding: [50, 50], maxZoom: 5});
+                
                 addLC(l);
             }
             function addLC(lg){
