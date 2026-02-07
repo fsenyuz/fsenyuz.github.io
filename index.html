@@ -28,7 +28,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v43 CSS */
+        /* v44 POLISHED UI CSS */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         
@@ -36,6 +36,9 @@
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
         
+        /* HIDE UGLY RECAPTCHA BADGE */
+        .grecaptcha-badge { visibility: hidden; }
+
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .anim { opacity:0; animation:fadeIn 0.8s ease-out forwards; } .d1{animation-delay:0.1s} .d2{animation-delay:0.2s} .d3{animation-delay:0.3s} .d4{animation-delay:0.4s} .d5{animation-delay:0.5s}
@@ -120,6 +123,9 @@
         .cls { position:absolute; top:20px; right:20px; background:none; border:none; color:var(--mut); font-size:1.8rem; cursor:pointer; }
         .frm-c { padding:15px; border-radius:10px; border:1px solid var(--brd); background:var(--inp); color:var(--txt); width:100%; margin-bottom:15px; font-family:'Inter',sans-serif; font-size: 1rem; }
         .frm-b { background:var(--gold); color:#000; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer; width:100%; font-size: 1rem; margin-top: 10px; }
+        
+        .recaptcha-text { font-size: 0.75rem; color: var(--mut); margin-top: 15px; text-align: center; line-height: 1.4; }
+        .recaptcha-text a { color: var(--gold); text-decoration: none; } .recaptcha-text a:hover { text-decoration: underline; }
 
         #cook { position:fixed; bottom:-200px; left:0; width:100%; background:var(--sec); border-top:1px solid var(--gold); padding:20px; z-index:2000; display:flex; flex-direction:column; align-items:center; gap:15px; transition:0.5s; box-shadow:0 -4px 10px rgba(0,0,0,0.3); } #cook.shw { bottom:0; }
         .c-act button { padding:8px 24px; border-radius:50px; font-weight:bold; cursor:pointer; margin:0 5px; } .yes { background:var(--gold); border:none; color:#000; } .no { background:transparent; border:1px solid var(--mut); color:var(--mut); }
@@ -238,7 +244,11 @@
                 <input type="text" id="name" name="name" class="frm-c" required placeholder="Name">
                 <input type="email" id="email" name="email" class="frm-c" required placeholder="Email">
                 <textarea id="msg" name="message" class="frm-c" required placeholder="Message" rows="4"></textarea>
+                
                 <button class="g-recaptcha frm-b" data-sitekey="6LeR6GMsAAAAADhs_VIncXqN9ZOlJzCWMLocd1jv" data-callback="onSubmit" data-error-callback="onErr" data-action="submit">Send Message</button>
+                
+                <p class="recaptcha-text">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.</p>
+                
                 <div id="fst" style="margin-top:10px;display:none"></div>
             </form>
             <button id="m-btn" class="frm-b" onclick="App.cls()" style="margin-top:15px">Close</button>
@@ -248,7 +258,7 @@
     <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText"></p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline"></button><button class="yes" onclick="App.cons(true)" data-t="accept"></button></div></div>
 
     <script>
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v43').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v44').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); } 
@@ -350,24 +360,18 @@
             function initMap(){
                 map=L.map('map');
                 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; CARTO'}).addTo(map);
-                ['work','edu','tender'].forEach(k=>lyrs[k]=L.layerGroup().addTo(map));
-                
-                var bounds = [];
+                ['work','edu','tender'].forEach(k=>lyrs[k]=L.featureGroup().addTo(map));
                 
                 DATA.locations.forEach(l=>{
                     const iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.ty==='edu'?'green':(l.ty==='tender'?'orange':'blue')}.png`;
                     L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
                     .bindPopup(`<b>${l.t}</b><br>${l.desc}`)
                     .addTo(lyrs[l.ty]);
-                    
-                    bounds.push([l.lat, l.lng]);
                 });
                 
-                if (bounds.length > 0) {
-                    map.fitBounds(bounds, {padding: [50, 50]});
-                } else {
-                    map.setView([41.0, 29.0], 3);
-                }
+                // TRUE AUTO-FIT
+                const group = L.featureGroup([lyrs.work, lyrs.edu, lyrs.tender]);
+                map.fitBounds(group.getBounds(), {padding: [50, 50]});
                 
                 addLC(l);
             }
