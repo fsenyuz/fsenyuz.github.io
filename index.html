@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
-    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
+    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6.">
     <meta name="author" content="Furkan Senyuz">
     <link rel="canonical" href="https://fsenyuz.com">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"}]}'>
     <meta name="theme-color" content="#fbbf24">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <meta property="og:title" content="Furkan Senyuz | Civil Engineer & AI Solutions Developer">
-    <meta property="og:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
-    <meta property="og:image" content="https://fsenyuz.com/profile.jpg">
-    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png">
@@ -35,7 +30,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* FIXED CSS v38 */
+        /* v39 EXTERNAL DATA EDITION CSS */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 4px 6px -1px rgba(0,0,0,0.3); --tag:rgba(255,255,255,0.1); --ovr:rgba(0,0,0,0.85); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 4px 6px -1px rgba(0,0,0,0.1); --tag:#e2e8f0; --ovr:rgba(255,255,255,0.85); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         * { margin:0; padding:0; box-sizing:border-box; } html { scroll-behavior:smooth; }
@@ -43,10 +38,14 @@
         :focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
         
         @keyframes up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(251,191,36,0.7)} 70%{box-shadow:0 0 0 15px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .anim { opacity:0; animation:up 0.8s ease-out forwards; } .d1{animation-delay:.1s} .d2{animation-delay:.2s} .d3{animation-delay:.3s} .d4{animation-delay:.4s} .d5{animation-delay:.5s}
-        .item-box { transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), display 0.4s allow-discrete; }
+        .item-box { transition: opacity 0.4s, transform 0.4s; }
         .hidden-item { opacity:0; transform:scale(0.9); display:none !important; } .visible-item { opacity:1; transform:scale(1); display:flex !important; }
+        
+        /* Loading Screen */
+        #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column; transition:opacity 0.5s; }
+        .loader-spin { width:50px; height:50px; border:5px solid var(--sec); border-top:5px solid var(--gold); border-radius:50%; animation:spin 1s linear infinite; }
         
         header { background:var(--bg); padding:15px 0; position:fixed; width:100%; top:0; z-index:1000; border-bottom:1px solid var(--brd); backdrop-filter:blur(10px); }
         .nav-con { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
@@ -90,46 +89,47 @@
         .ptags { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; } .pt { font-size:0.75rem; background:var(--tag); padding:4px 8px; border-radius:4px; }
         .plnk { color:var(--txt); text-decoration:none; font-size:0.9rem; display:inline-flex; align-items:center; gap:5px; cursor:pointer; } .plnk:hover { color:var(--gold); }
 
-        .bub { position:fixed; bottom:20px; right:20px; background:var(--gold); color:#000; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); transition:0.3s; z-index:2500; animation:pulse 2s infinite 2s; } .bub:hover { transform:scale(1.1); animation:none; } .bub.act { transform:scale(0.9); animation:none; }
-        .win { position:fixed; bottom:90px; right:20px; width:350px; height:500px; max-height:80dvh; height:calc(80vh - 20px); background:var(--sec); border:1px solid var(--brd); border-radius:12px; display:flex; flex-direction:column; box-shadow:0 5px 20px rgba(0,0,0,0.4); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } .win.act { opacity:1; visibility:visible; transform:translateY(0); }
+        .bub { position:fixed; bottom:20px; right:20px; background:var(--gold); color:#000; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); transition:0.3s; z-index:2500; } .bub:hover { transform:scale(1.1); }
+        .win { position:fixed; bottom:90px; right:20px; width:350px; height:500px; max-height:80dvh; background:var(--sec); border:1px solid var(--brd); border-radius:12px; display:flex; flex-direction:column; box-shadow:0 5px 20px rgba(0,0,0,0.4); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } .win.act { opacity:1; visibility:visible; transform:translateY(0); }
         .chat-h { background:var(--gold); padding:15px; display:flex; justify-content:space-between; align-items:center; color:#000; font-weight:bold; }
         .msgs { flex-grow:1; padding:15px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; font-size:0.9rem; scroll-behavior:smooth; }
         .msg { padding:10px 14px; border-radius:10px; max-width:80%; line-height:1.4; word-wrap:break-word; } .msg.bot { background:var(--bot); color:#fff; align-self:flex-start; border-bottom-left-radius:2px; } .msg.usr { background:var(--usr); color:var(--txt); align-self:flex-end; border-bottom-right-radius:2px; } .light-mode .msg.bot { color:#fff; }
         .c-inp { padding:10px; border-top:1px solid var(--brd); display:flex; gap:8px; background:var(--bg); align-items:center; }
-        .inp { flex-grow:1; padding:10px; border-radius:20px; border:1px solid var(--brd); background:var(--sec); color:var(--txt); outline:none; } .inp:disabled { opacity:0.6; cursor:not-allowed; }
+        .inp { flex-grow:1; padding:10px; border-radius:20px; border:1px solid var(--brd); background:var(--sec); color:var(--txt); outline:none; }
         .snd { background:var(--gold); border:none; width:35px; height:35px; border-radius:50%; color:#000; cursor:pointer; display:flex; justify-content:center; align-items:center; }
-        .rtry { background:var(--bg); color:var(--txt); border:1px solid var(--brd); padding:5px 10px; border-radius:15px; font-size:0.8rem; margin-top:5px; cursor:pointer; } .rtry:hover { background:var(--gold); color:#000; } .rtry[disabled] { opacity:0.5; cursor:not-allowed; }
+        .rtry { background:var(--bg); color:var(--txt); border:1px solid var(--brd); padding:5px 10px; border-radius:15px; font-size:0.8rem; margin-top:5px; cursor:pointer; } .rtry:hover { background:var(--gold); color:#000; }
 
         .mod { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--ovr); z-index:3000; display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:0.3s; backdrop-filter:blur(5px); } .mod.act { opacity:1; visibility:visible; }
         .m-con { background:var(--sec); border:1px solid var(--gold); padding:30px; border-radius:12px; max-width:500px; width:90%; text-align:center; position:relative; transform:translateY(20px); transition:0.3s; } .mod.act .m-con { transform:translateY(0); }
         .cls { position:absolute; top:15px; right:15px; background:none; border:none; color:var(--mut); font-size:1.5rem; cursor:pointer; }
         .frm-c { padding:12px; border-radius:8px; border:1px solid var(--brd); background:var(--inp); color:var(--txt); width:100%; margin-bottom:10px; font-family:'Inter',sans-serif; }
-        .frm-b { background:var(--gold); color:#000; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%; } .frm-b:disabled { opacity:0.6; }
-
+        .frm-b { background:var(--gold); color:#000; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%; }
+        
         #cook { position:fixed; bottom:-200px; left:0; width:100%; background:var(--sec); border-top:1px solid var(--gold); padding:20px; z-index:2000; display:flex; flex-direction:column; align-items:center; gap:15px; transition:0.5s; box-shadow:0 -4px 10px rgba(0,0,0,0.3); } #cook.shw { bottom:0; }
         .c-act button { padding:8px 24px; border-radius:50px; font-weight:bold; cursor:pointer; margin:0 5px; } .yes { background:var(--gold); border:none; color:#000; } .no { background:transparent; border:1px solid var(--mut); color:var(--mut); }
         footer { text-align:center; padding:40px 0; color:var(--mut); border-top:1px solid var(--brd); margin-top:60px; font-size:0.9rem; }
     </style>
 </head>
 <body>
+    <div id="loader"><div class="loader-spin"></div><p style="margin-top:10px;color:var(--gold);">Loading Profile...</p></div>
+
     <header class="anim d1">
         <div class="nav-con">
             <a href="#" class="logo">f<span>senyuz</span></a>
             <div class="act">
-                <button class="i-btn" id="lang-btn" aria-label="Switch Language" aria-expanded="false" onclick="App.lang()">TR</button>
-                <button class="i-btn" aria-label="Toggle Theme" onclick="App.theme()"><i class="fa-solid fa-sun"></i></button>
-                <a href="CV_FS_2026.pdf" class="b-cv" target="_blank" onclick="App.tr('cv_dl')"><i class="fa-solid fa-download"></i> CV</a>
-                <a href="#" class="b-con" onclick="App.cont(event)"><i class="fa-regular fa-envelope"></i> <span data-t="contactBtn">Connect</span></a>
+                <button class="i-btn" id="lang-btn" onclick="App.lang()">TR</button>
+                <button class="i-btn" onclick="App.theme()"><i class="fa-solid fa-sun"></i></button>
+                <a href="CV_FS_2026.pdf" class="b-cv" target="_blank"><i class="fa-solid fa-download"></i> CV</a>
+                <a href="#" class="b-con" onclick="App.cont(event)"><i class="fa-regular fa-envelope"></i> <span data-t="contactBtn"></span></a>
             </div>
-            <div id="ann" class="sr-only" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
         </div>
     </header>
 
     <section class="hero">
         <img src="profile.jpg" class="avt anim d2" alt="Furkan Senyuz">
         <h1 class="anim d3">Furkan Senyuz</h1>
-        <p class="sub anim d4" data-t="heroTitle">Civil Engineer & AI Solutions Developer</p>
-        <div class="slogan anim d5" data-t="heroSlogan">Building the Future with <br> Concrete & Code</div>
+        <p class="sub anim d4" data-t="heroTitle"></p>
+        <div class="slogan anim d5" data-t="heroSlogan"></div>
         <div class="socials anim d5">
             <a href="https://www.linkedin.com/in/fsenyuz" class="soc"><i class="fa-brands fa-linkedin"></i></a>
             <a href="https://github.com/fsenyuz" class="soc"><i class="fa-brands fa-github"></i></a>
@@ -150,57 +150,57 @@
     </section>
 
     <div class="box">
-        <h3 class="title"><i class="fa-solid fa-earth-americas"></i> <span data-t="mapTitle">Map</span></h3>
+        <h3 class="title"><i class="fa-solid fa-earth-americas"></i> <span data-t="mapTitle"></span></h3>
         <div id="map"></div>
-        <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legWork">Work</span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legEdu">Edu</span></div></div>
+        <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legendWork"></span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legendEdu"></span></div></div>
     </div>
 
     <div class="grid">
         <div style="grid-column:1/-1; display:flex; justify-content:center;">
             <div class="filters">
-                <button class="f-btn active" onclick="App.filt('all')" data-t="fAll">All</button>
-                <button class="f-btn" onclick="App.filt('civil')" data-t="fCiv">Construction</button>
-                <button class="f-btn" onclick="App.filt('ai')" data-t="fAI">AI & Tech</button>
+                <button class="f-btn active" onclick="App.filt('all')" data-t="filterAll"></button>
+                <button class="f-btn" onclick="App.filt('civil')" data-t="filterCivil"></button>
+                <button class="f-btn" onclick="App.filt('ai')" data-t="filterAI"></button>
             </div>
         </div>
-        <div><h3 class="title"><i class="fa-solid fa-briefcase"></i> <span data-t="expTitle">Experience</span></h3><div class="lst" id="exp"></div></div>
-        <div><h3 class="title"><i class="fa-solid fa-graduation-cap"></i> <span data-t="eduTitle">Education</span></h3><div class="lst" id="edu"></div></div>
+        <div><h3 class="title"><i class="fa-solid fa-briefcase"></i> <span data-t="expTitle"></span></h3><div class="lst" id="exp"></div></div>
+        <div><h3 class="title"><i class="fa-solid fa-graduation-cap"></i> <span data-t="eduTitle"></span></h3><div class="lst" id="edu"></div></div>
     </div>
 
     <div class="proj">
-        <h3 class="title"><i class="fa-solid fa-laptop-code"></i> <span data-t="projTitle">Projects</span></h3>
+        <h3 class="title"><i class="fa-solid fa-laptop-code"></i> <span data-t="projTitle"></span></h3>
         <div class="p-grid" id="projs">
             <div class="card item-box visible-item" data-cat="ai">
                 <h4><i class="fa-solid fa-chart-line"></i> Construction Claim Predictor</h4>
                 <div class="ptags"><span class="pt">Python</span><span class="pt">Random Forest</span></div>
-                <p data-t="p1">ML model predicting delay claims.</p>
-                <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" class="plnk" onclick="App.repo(event,'Construction Claim Predictor')"><i class="fa-brands fa-github"></i> <span data-t="view">View Code</span></a>
+                <p data-t="proj1Desc"></p>
+                <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" class="plnk" onclick="App.repo(event,'Construction Claim Predictor')"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
             </div>
             <div class="card item-box visible-item" data-cat="civil">
                 <h4><i class="fa-solid fa-file-invoice-dollar"></i> Tender Cost Optimizer</h4>
                 <div class="ptags"><span class="pt">Python</span><span class="pt">Automation</span></div>
-                <p data-t="p2">Script automating BOQ analysis.</p>
-                <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" class="plnk" onclick="App.repo(event,'Tender Cost Optimizer')"><i class="fa-brands fa-github"></i> <span data-t="view">View Code</span></a>
+                <p data-t="proj2Desc"></p>
+                <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" class="plnk" onclick="App.repo(event,'Tender Cost Optimizer')"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
             </div>
             <div class="card item-box visible-item" data-cat="ai">
                 <h4><i class="fa-solid fa-hard-hat"></i> Site Safety Vision</h4>
                 <div class="ptags"><span class="pt">YOLO</span><span class="pt">OpenCV</span></div>
-                <p data-t="p3">AI detecting PPE compliance.</p>
-                <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" class="plnk" onclick="App.repo(event,'Site Safety Vision')"><i class="fa-brands fa-github"></i> <span data-t="view">View Code</span></a>
+                <p data-t="proj3Desc"></p>
+                <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" class="plnk" onclick="App.repo(event,'Site Safety Vision')"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
             </div>
         </div>
     </div>
 
-    <footer><p>&copy; <span id="yr"></span> Furkan Senyuz. <span data-t="foot">Built with Concrete, Code & AI.</span></p></footer>
+    <footer><p>&copy; <span id="yr"></span> Furkan Senyuz. <span data-t="footerText"></span></p></footer>
 
     <div class="bub" id="bub" onclick="App.chat()"><i class="fa-solid fa-robot"></i></div>
     <div class="win" id="win">
         <div class="chat-h"><h4><i class="fa-solid fa-brain"></i> FS AI</h4><button class="cls" onclick="App.chat()" style="position:static;font-size:1.2rem"><i class="fa-solid fa-xmark"></i></button></div>
-        <div class="msgs" id="msgs" role="log" aria-live="polite"><div class="msg bot">Hello! I'm Furkan's AI. Ask me anything!</div></div>
+        <div class="msgs" id="msgs"><div class="msg bot">Hello! I'm Furkan's AI. Ask me anything!</div></div>
         <div class="c-inp">
             <label for="f-up" style="cursor:pointer"><i class="fa-solid fa-paperclip"></i></label><input type="file" id="f-up" style="display:none">
             <input type="text" id="inp" class="inp" placeholder="Ask..." onkeypress="App.key(event)">
-            <button class="snd" aria-label="Send Message" onclick="App.send()"><i class="fa-solid fa-paper-plane"></i></button>
+            <button class="snd" onclick="App.send()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -220,50 +220,69 @@
         </div>
     </div>
 
-    <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText">Cookies help us improve.</p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline">Decline</button><button class="yes" onclick="App.cons(true)" data-t="accept">Accept</button></div></div>
+    <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText"></p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline"></button><button class="yes" onclick="App.cons(true)" data-t="accept"></button></div></div>
 
     <script>
-        if('serviceWorker'in navigator){
-            // PWA Cache: Core + Fonts + CV + Leaflet
-            const sw=`const C='fs-v5';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/','index.html','profile.jpg','CV_FS_2026.pdf','https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`;
-            navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(sw)}`).catch(console.error);
-        }
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v5').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         function onSubmit(t){App.sub(t)}
-        function onErr(){App.errCap()}
+        function onErr(){alert("Captcha Error")}
         
         window.App=(function(){
             const C=window.CFG, D=new Date().toISOString().split('T')[0];
-            let l='en', map, lyrs={}, mRetries=0, foc, obs;
-            
-            // DIRECT DATA OBJECT - NO DECODING RISK
-            const DATA = {
-                en:{
-                    contactBtn:"Let's Connect",heroTitle:"Civil Engineer & AI Solutions Developer",heroSlogan:"Building the Future with <br> Concrete & Code",mapTitle:"Global Experience Map",legWork:"Work",legEdu:"Edu",fAll:"All",fCiv:"Construction",fAI:"AI & Tech",expTitle:"Experience",eduTitle:"Education",projTitle:"Projects",p1:"ML model predicting delay claims.",p2:"Script automating BOQ analysis.",p3:"AI detecting PPE compliance.",view:"View Code",foot:"Built with Concrete, Code & AI.",cookieText:"Cookies help us improve.",accept:"Accept",decline:"Decline",formName:"Name",formEmail:"Email",formMsg:"Message",
-                    skillTip1:"Automating BOQ",skillTip2:"Predictive Models",skillTip3:"Data-Driven",skillTip4:"Mega Projects",skillTip5:"Risk Analysis",skillTip6:"Contract Mgmt",
-                    exp:[{c:"civil",t:"Technical Office Chief",co:"Tasyapi",l:"Serbia",d:"2024+",x:"<li>Kuzmin-Sremska Raca Highway.</li>"},{c:"civil",t:"Tender Specialist",co:"Tasyapi",l:"Serbia",d:"21-24",x:"<li>International Tenders.</li>"},{c:"civil",t:"Planning Chief",co:"Fernas",l:"Turkey",d:"2021",x:"<li>Aydin-Denizli Motorway.</li>"}],
-                    edu:[{c:"ai",t:"ML Specialization",co:"Stanford",l:"Online",d:"2026",x:"<li>Andrew Ng Course.</li>"},{c:"civil",t:"MSc Geotechnical",co:"MSKU",l:"Turkey",d:"2016+",x:"<li>AI in Geotechnics.</li>"}]
-                },
-                tr:{
-                    contactBtn:"İletişime Geç",heroTitle:"İnşaat Mühendisi & Yapay Zeka Geliştiricisi",heroSlogan:"Geleceği Beton ve Kod ile <br> İnşa Ediyorum",mapTitle:"Global Deneyim Haritası",legWork:"İş",legEdu:"Eğitim",fAll:"Tümü",fCiv:"İnşaat",fAI:"Yapay Zeka",expTitle:"Deneyim",eduTitle:"Eğitim",projTitle:"Projeler",p1:"Gecikme tahmini yapan ML modeli.","p2":"Otomatik metraj analizi.","p3":"KKD tespit eden yapay zeka.","view":"Kodu Gör","foot":"Beton, Kod ve Yapay Zeka ile yapıldı.","cookieText":"Çerez kullanıyoruz.","accept":"Kabul","decline":"Red","formName":"İsim","formEmail":"E-posta","formMsg":"Mesaj",
-                    skillTip1:"Metraj Otomasyonu",skillTip2:"Tahmin Modelleri",skillTip3:"Veri Odaklı",skillTip4:"Mega Projeler",skillTip5:"Risk Analizi",skillTip6:"Sözleşme Yönetimi",
-                    exp:[{c:"civil",t:"Teknik Ofis Şefi",co:"Tasyapi",l:"Sırbistan",d:"2024+",x:"<li>Kuzmin-Sremska Raca Otoyolu.</li>"},{c:"civil",t:"İhale Uzmanı",co:"Tasyapi",l:"Sırbistan",d:"21-24",x:"<li>Uluslararası İhaleler.</li>"},{c:"civil",t:"Planlama Şefi",co:"Fernas",l:"Türkiye",d:"2021",x:"<li>Aydın-Denizli Otoyolu.</li>"}],
-                    edu:[{c:"ai",t:"ML Uzmanlığı",co:"Stanford",l:"Online",d:"2026",x:"<li>Andrew Ng Kursu.</li>"},{c:"civil",t:"Yüksek Lisans",co:"MSKÜ",l:"Türkiye",d:"2016+",x:"<li>Geoteknikte Yapay Zeka.</li>"}]
-                }
-            };
+            let l='en', map, lyrs={}, foc, obs, DATA;
 
-            function tr(n,p){if(typeof gtag==='function')gtag('event',n,p)}
-            function ann(t){document.getElementById('ann').innerText=t}
+            async function init(){
+                try {
+                    const res = await fetch('data.json');
+                    if(!res.ok) throw new Error('Data fetch failed');
+                    DATA = await res.json();
+                    document.getElementById('loader').style.opacity = 0;
+                    setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
+                    
+                    document.getElementById('yr').innerText=new Date().getFullYear();
+                    if(localStorage.getItem(C.THEME)==='light')document.body.classList.add('light-mode');
+                    if(!localStorage.getItem(C.CONSENT))setTimeout(()=>document.getElementById('cook').classList.add('shw'),2000);
+                    
+                    const u=navigator.language||navigator.userLanguage; 
+                    l=u.startsWith('tr')?'tr':'en'; 
+                    render(l);
+                    
+                    const obsMap=new IntersectionObserver(e=>{if(e[0].isIntersecting){initMap();obsMap.disconnect()}}); 
+                    obsMap.observe(document.getElementById('map'));
+                    
+                    const pObs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('visible-item');pObs.unobserve(i.target)}})});
+                    document.querySelectorAll('.card').forEach(c=>pObs.observe(c));
+                } catch(e) {
+                    document.getElementById('loader').innerHTML = `<p style="color:red">Failed to load content. Please refresh.</p>`;
+                    console.error(e);
+                }
+            }
             
             function render(lg){
-                const d=DATA[lg];
-                const mk=(i,cls)=>`<div class="it ${cls||''} item-box visible-item" data-cat="${i.c}"><h4>${i.t}</h4><span class="co">${i.co}</span><div class="meta"><span>${i.l}</span><span>${i.d}</span></div><ul>${i.x}</ul></div>`;
-                document.getElementById('exp').innerHTML=d.exp.map(i=>mk(i)).join('');
-                document.getElementById('edu').innerHTML=d.edu.map(i=>mk(i,'edu')).join('');
-                document.querySelectorAll('[data-t]').forEach(e=>e.innerHTML=d[e.dataset.t]||e.innerHTML);
-                document.querySelectorAll('[data-tip]').forEach(e=>{e.dataset.tooltip=d[e.dataset.tip];e.ariaLabel=d[e.dataset.tip]});
-                ['name','email','msg'].forEach(i=>document.getElementById(i).placeholder=d[i==='msg'?'formMsg':(i==='name'?'formName':'formEmail')]);
-                document.getElementById('lang-btn').innerText=lg.toUpperCase();
+                const tr = DATA.translations[lg];
+                // Text Mapping
+                document.querySelectorAll('[data-t]').forEach(e => e.innerHTML = tr[e.dataset.t] || e.innerHTML);
+                document.querySelectorAll('[data-tip]').forEach(e => e.setAttribute('data-tooltip', tr[e.dataset.tip]));
+                ['name','email','msg'].forEach(i => document.getElementById(i).placeholder = tr[i==='msg'?'formMsg':(i==='name'?'formName':'formEmail')]);
+                document.getElementById('lang-btn').innerText = lg.toUpperCase();
+
+                // Dynamic Lists
+                const mk = (i, cls) => {
+                    const title = tr[i.key + 'Title'] || i.key;
+                    const desc = tr[i.key + 'Desc'] || '';
+                    return `<div class="it ${cls||''} item-box visible-item" data-cat="${i.cat}">
+                        <h4>${title}</h4><span class="co">${i.company}</span>
+                        <div class="meta"><span>${i.loc}</span><span>${i.date}</span></div>
+                        ${i.subtext ? `<small><i>${i.subtext}</i></small>` : ''}
+                        <ul>${desc}</ul>
+                    </div>`;
+                };
+                
+                document.getElementById('exp').innerHTML = DATA.experience.map(i => mk(i)).join('');
+                document.getElementById('edu').innerHTML = DATA.education.map(i => mk(i, 'edu')).join('');
+                
                 filt(document.querySelector('.f-btn.active').getAttribute('onclick').split("'")[1]);
+                if(map){ map.removeControl(window.mc); addLC(lg); }
             }
 
             function filt(c){
@@ -275,116 +294,80 @@
                 });
             }
 
-            function lang(){ 
-                l=l==='en'?'tr':'en'; render(l); 
-                const btn=document.getElementById('lang-btn'); btn.setAttribute('aria-expanded','true'); 
-                setTimeout(()=>btn.setAttribute('aria-expanded','false'),500);
-                ann(`Language switched to ${l.toUpperCase()}`); if(map){map.removeControl(window.mc);addLC(l)} 
-            }
+            function lang(){ l=l==='en'?'tr':'en'; render(l); }
 
             function chat(){
                 const w=document.getElementById('win'); w.classList.toggle('act'); document.getElementById('bub').classList.toggle('act');
                 if(w.classList.contains('act')){ 
                     document.getElementById('inp').focus(); 
-                    if(!checkLim()) disInp();
                     if(!obs){ obs=new MutationObserver(()=>document.getElementById('msgs').scrollTop=document.getElementById('msgs').scrollHeight); obs.observe(document.getElementById('msgs'),{childList:true}); }
-                    tr('chat_open');
-                } else {
-                    if(obs){obs.disconnect();obs=null}
+                } else if(obs){obs.disconnect();obs=null}
+            }
+
+            async function send(){
+                const inp=document.getElementById('inp'), msgs=document.getElementById('msgs'), txt=inp.value.trim();
+                if(!txt)return;
+                msgs.innerHTML+=`<div class="msg usr">${txt}</div>`;inp.value='';
+                
+                const ld=document.createElement('div'); ld.className='msg bot typing'; ld.innerHTML='...'; msgs.appendChild(ld);
+                
+                try{
+                    const fd=new FormData(); fd.append('message',txt);
+                    const res=await fetch(C.API,{method:'POST',body:fd});
+                    if(!res.ok)throw 0;
+                    const d=await res.json(); msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">${d.reply}</div>`;
+                }catch(e){
+                    msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">⚠️ Server Error.</div>`;
                 }
             }
-
-            function checkLim(){
-                let u=JSON.parse(localStorage.getItem('c_use')||'{}');
-                if(u.d!==D){u={d:D,c:0};localStorage.setItem('c_use',JSON.stringify(u))} 
-                return u.c < C.LIM;
-            }
-            function incLim(){
-                let u=JSON.parse(localStorage.getItem('c_use')||'{}');
-                if(u.d!==D){u={d:D,c:0}} u.c++; localStorage.setItem('c_use',JSON.stringify(u));
-            }
-            function disInp(){
-                const i=document.getElementById('inp'); i.disabled=true; i.placeholder="Daily Limit Reached";
-                ann("Daily limit reached, refresh page");
-            }
-
-            async function send(man=false){
-                if(!checkLim()){disInp();return}
-                const inp=document.getElementById('inp'), msgs=document.getElementById('msgs'), txt=inp.value.trim();
-                if(!txt&&!man)return;
-                if(!man){msgs.innerHTML+=`<div class="msg usr">${txt}</div>`;inp.value='';incLim()}
-                
-                const ld=document.createElement('div'); ld.className='msg bot typing'; ld.innerHTML='...'; ld.ariaHidden="true"; msgs.appendChild(ld);
-                
-                const att=async(r)=>{
-                    const c=new AbortController(); setTimeout(()=>c.abort(),15000);
-                    try{
-                        const fd=new FormData(); fd.append('message',txt||"Retry");
-                        const res=await fetch(C.API,{method:'POST',body:fd,signal:c.signal});
-                        if(!res.ok)throw 0;
-                        const d=await res.json(); msgs.removeChild(ld); msgs.innerHTML+=`<div class="msg bot">${d.reply}</div>`;
-                    }catch(e){
-                        if(r>0) setTimeout(()=>att(r-1),C.RETRY);
-                        else{
-                            msgs.removeChild(ld); 
-                            msgs.innerHTML+=`<div class="msg bot">⚠️ Error. <button class="rtry" aria-label="Retry Chat" onclick="App.rtry()">Retry</button></div>`;
-                            ann("Chat Error");
-                        }
-                    }
-                };
-                att(man?0:C.MAX);
-            }
-
-            function openM(t,c,isF=false){
-                foc=document.activeElement; document.getElementById('m-tit').innerText=t;
-                document.getElementById('m-txt').innerHTML=c; document.getElementById('m-txt').style.display=isF?'none':'block';
-                document.getElementById('frm').style.display=isF?'block':'none'; document.getElementById('m-btn').style.display=isF?'none':'inline-block';
-                document.getElementById('mod').classList.add('act'); 
-                const f=document.getElementById('mod').querySelectorAll('button,input,textarea')[0]; if(f)f.focus();
-            }
-            function cls(){document.getElementById('mod').classList.remove('act');if(foc)foc.focus();ann("Modal Closed")}
-            
-            function sub(tok){
-                const f=document.getElementById('frm'), b=f.querySelector('button'), s=document.getElementById('fst');
-                b.disabled=true; b.innerText="...";
-                const fd=new FormData(f); fd.append("g-recaptcha-response",tok);
-                fetch(f.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(r=>{
-                    s.style.display='block';s.innerText=r.ok?"Sent! ✅":"Error ❌";
-                    if(r.ok){f.reset();setTimeout(cls,2000)} else { errCap() } 
-                    b.disabled=false;b.innerText="Send";
-                }).catch(()=>{errCap(); b.disabled=false;});
-            }
-            function errCap(){ ann("Captcha error, please retry"); grecaptcha.reset(); }
 
             function initMap(){
                 map=L.map('map').setView([41.0,29.0],3);
                 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; CARTO'}).addTo(map);
-                ['work','edu'].forEach(k=>lyrs[k]=L.layerGroup().addTo(map));
-                [{la:45.02,ln:19.40,t:'work'},{la:37.83,ln:27.84,t:'work'},{la:37.42,ln:-122.16,t:'edu'}]
-                .forEach(l=>L.marker([l.la,l.ln],{icon:new L.Icon({iconUrl:`https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.t==='edu'?'green':'blue'}.png`,iconSize:[25,41],iconAnchor:[12,41]})}).addTo(lyrs[l.t]));
+                ['work','edu','tender'].forEach(k=>lyrs[k]=L.layerGroup().addTo(map));
+                
+                DATA.locations.forEach(l=>{
+                    const iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.ty==='edu'?'green':(l.ty==='tender'?'orange':'blue')}.png`;
+                    L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
+                    .bindPopup(`<b>${l.t}</b><br>${l.desc}`)
+                    .addTo(lyrs[l.ty]);
+                });
                 addLC(l);
             }
-            function addLC(lg){window.mc=L.control.layers(null,{[`<span style='color:#38bdf8'>${DATA[lg].legWork}</span>`]:lyrs.work,[`<span style='color:#2ecc71'>${DATA[lg].legEdu}</span>`]:lyrs.edu},{collapsed:true}).addTo(map)}
+            function addLC(lg){
+                const tr = DATA.translations[lg];
+                window.mc=L.control.layers(null,{
+                    [`<span style='color:#38bdf8'>${tr.legendWork}</span>`]:lyrs.work,
+                    [`<span style='color:#2ecc71'>${tr.legendEdu}</span>`]:lyrs.edu,
+                    [`<span style='color:#fbbf24'>${tr.legendTender}</span>`]:lyrs.tender
+                },{collapsed:true}).addTo(map);
+            }
 
-            function init(){
-                document.getElementById('yr').innerText=new Date().getFullYear();
-                if(localStorage.getItem(C.THEME)==='light')document.body.classList.add('light-mode');
-                if(!localStorage.getItem(C.CONSENT))setTimeout(()=>document.getElementById('cook').classList.add('shw'),2000);
-                const u=navigator.language||navigator.userLanguage; l=u.startsWith('tr')?'tr':'en'; render(l);
-                const obsMap=new IntersectionObserver(e=>{if(e[0].isIntersecting){initMap();obsMap.disconnect()}}); obsMap.observe(document.getElementById('map'));
-                const pObs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('visible-item');pObs.unobserve(i.target)}})});
-                document.querySelectorAll('.card').forEach(c=>pObs.observe(c));
+            function openM(t,c,isF=false){
+                document.getElementById('m-tit').innerText=t;
+                document.getElementById('m-txt').innerHTML=c; document.getElementById('m-txt').style.display=isF?'none':'block';
+                document.getElementById('frm').style.display=isF?'block':'none'; document.getElementById('m-btn').style.display=isF?'none':'inline-block';
+                document.getElementById('mod').classList.add('act');
+            }
+            function cls(){document.getElementById('mod').classList.remove('act');}
+            
+            function sub(tok){
+                const f=document.getElementById('frm'), b=f.querySelector('button');
+                b.disabled=true; b.innerText="...";
+                const fd=new FormData(f); fd.append("g-recaptcha-response",tok);
+                fetch(f.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(r=>{
+                    if(r.ok){f.reset();setTimeout(cls,2000)} b.disabled=false;b.innerText="Send";
+                });
             }
 
             return{
-                init,lang,filt,chat,send,cls,sub,tr,errCap,key:e=>{if(e.key==='Enter')send()},
+                init,lang,filt,chat,send,cls,sub,errCap:onErr,key:e=>{if(e.key==='Enter')send()},
                 tip:t=>t.classList.toggle('active'),
-                theme:()=>{document.body.classList.toggle('light-mode');localStorage.setItem(C.THEME,document.body.classList.contains('light-mode')?'light':'dark')},
-                cont:e=>{e.preventDefault();openM(DATA[l].contactBtn,'',true)},
-                repo:(e,n)=>{e.preventDefault();openM('Repo',`<strong>${n}</strong>: Code is private.`)},
+                theme:()=>{document.body.classList.toggle('light-mode');localStorage.setItem(C.THEME,document.body.classList.contains('light-mode')?'light':'dark'); if(map) map.eachLayer((layer) => { if (layer instanceof L.TileLayer) { layer.setUrl(document.body.classList.contains('light-mode') ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'); } });},
+                cont:e=>{e.preventDefault();openM(DATA.translations[l].contactBtn,'',true)},
+                repo:(e,n)=>{e.preventDefault();openM('Repo',DATA.repos && DATA.repos[n] && DATA.repos[n].ready ? DATA.translations[l].repoTextPublic : DATA.translations[l].repoTextPrivate)},
                 cons:g=>{localStorage.setItem(C.CONSENT,g);gtag('consent','update',{'ad_storage':g?'granted':'denied'});App.hCook()},
-                hCook:()=>document.getElementById('cook').classList.remove('shw'),
-                rtry:()=>{mRetries++;if(mRetries>3){ann("Retry limit reached, please refresh page");const b=document.querySelector('.rtry');if(b){b.disabled=true;b.setAttribute('aria-disabled','true');b.textContent='Disabled'}return}send(true)}
+                hCook:()=>document.getElementById('cook').classList.remove('shw')
             };
         })();
         document.addEventListener("DOMContentLoaded",App.init);
