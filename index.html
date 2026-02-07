@@ -28,7 +28,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v49 VISUAL PERFECTION CSS */
+        /* v50 PIXEL PERFECT CSS */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         
@@ -36,7 +36,7 @@
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; transition:background 0.3s,color 0.3s; overflow-x:hidden; }
         
-        /* HIDE RECAPTCHA BADGE COMPLETELY */
+        /* HIDE RECAPTCHA BADGE */
         .grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; z-index: -1 !important; }
 
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--gold); color: #000; padding: 8px; z-index: 2000; transition: top 0.3s; text-decoration: none; font-weight: bold; }
@@ -107,8 +107,25 @@
         .plnk { color:var(--txt); text-decoration:none; font-size:1rem; display:inline-flex; align-items:center; gap:8px; font-weight: 600; } .plnk:hover { color:var(--gold); }
 
         .bub { position:fixed; bottom:30px; right:30px; background:var(--gold); color:#000; width:65px; height:65px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.8rem; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.4); z-index:2500; transition: transform 0.3s; } .bub:hover { transform:scale(1.1); }
-        .win { position:fixed; bottom:100px; right:30px; width:380px; height:600px; max-height:80dvh; background:var(--sec); border:1px solid var(--brd); border-radius:20px; display:flex; flex-direction:column; box-shadow:0 10px 40px rgba(0,0,0,0.5); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } .win.act { opacity:1; visibility:visible; transform:translateY(0); }
-        .chat-h { background:var(--gold); padding:20px; display:flex; justify-content:space-between; align-items:center; color:#000; font-weight:bold; font-size: 1.1rem; }
+        
+        .win { position:fixed; bottom:100px; right:30px; width:380px; height:600px; max-height:80dvh; background:var(--sec); border:1px solid var(--brd); border-radius:20px; display:flex; flex-direction:column; box-shadow:0 10px 40px rgba(0,0,0,0.5); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } 
+        .win.act { opacity:1; visibility:visible; transform:translateY(0); }
+        
+        /* --- FIXED CHAT HEADER --- */
+        .chat-h { 
+            width: 100%; /* Ensures it fills width */
+            background: var(--gold); 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            color: #000; 
+            font-weight: bold; 
+            font-size: 1.1rem;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            flex-shrink: 0; /* Prevents shrinking */
+        }
+        
         .msgs { flex-grow:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:15px; }
         .msg { padding:12px 16px; border-radius:12px; max-width:85%; line-height:1.5; font-size: 0.95rem; } 
         .msg.bot { background:var(--bot); color:#fff; align-self:flex-start; border-bottom-left-radius:2px; } 
@@ -267,7 +284,7 @@
     </noscript>
 
     <script>
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v49').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v50').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
@@ -290,7 +307,6 @@
                     
                     document.getElementById('yr').innerText=new Date().getFullYear();
                     
-                    // AUTO THEME DETECTION
                     const saved = localStorage.getItem(C.THEME);
                     const sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
                     if(saved === 'light' || (!saved && sysLight)) {
@@ -375,11 +391,10 @@
             }
 
             function initMap(){
-                // VISUAL FIX: Restrict zoom and bounds
                 map = L.map('map', {
-                    minZoom: 2, // Prevent zooming out too much
-                    maxBounds: [[-90, -180], [90, 180]], // Stick to one world
-                    maxBoundsViscosity: 1.0 // Hard stop at edges
+                    minZoom: 2, 
+                    maxBounds: [[-90, -180], [90, 180]], 
+                    maxBoundsViscosity: 1.0 
                 });
 
                 const isLight = document.body.classList.contains('light-mode');
@@ -393,10 +408,8 @@
                     .addTo(lyrs[l.ty]);
                 });
                 
-                // TRUE AUTO-FIT with padding
                 const group = L.featureGroup([lyrs.work, lyrs.edu, lyrs.tender]);
                 map.fitBounds(group.getBounds(), {padding: [50, 50], maxZoom: 5});
-                
                 addLC(l);
             }
             function addLC(lg){
