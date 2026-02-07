@@ -26,20 +26,34 @@
       gtag('consent', 'default', { 'ad_storage': 'denied', 'analytics_storage': 'denied' });
       gtag('js', new Date());
       gtag('config', 'G-1E33W355PW', { 'anonymize_ip': true });
-    </script>
+    script>
 </head>
 <body>
 
     <header>
         <div class="nav-container">
             <a href="#" class="logo">f<span>senyuz</span></a>
-            <div style="display:flex; align-items:center;">
-                <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()" style="background:none; border:none; color:var(--text-main); cursor:pointer; font-weight:bold; margin-right:10px;">EN</button>
+            
+            <div class="header-actions">
+                <button class="icon-btn lang-toggle" id="lang-toggle" onclick="toggleLanguage()" title="Switch Language">EN</button>
                 
-                <button class="anim-toggle" id="anim-toggle" aria-pressed="true" onclick="toggleAnimations()" title="Ctrl+Shift+A">Anim: On</button>
-                <button id="pwa-install-btn" style="display:none;" aria-label="Install App" aria-describedby="install-desc"><i class="fa-solid fa-download"></i></button>
-                <span id="install-desc" class="sr-only">Add to home screen</span>
-                <button class="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false" onclick="toggleMobileMenu()" style="background:none; border:none; color:var(--text-main); font-size:1.5rem; display:none;"><i class="fa-solid fa-bars"></i></button>
+                <button class="icon-btn theme-toggle" id="theme-toggle" title="Toggle Theme" aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <button class="anim-toggle" id="anim-toggle" aria-pressed="true" onclick="toggleAnimations()" title="Toggle Confetti">Anim: On</button>
+
+                <a href="CV_FS_2026.pdf" download="Furkan_Senyuz_CV.pdf" class="btn-cv" target="_blank" onclick="trackEvent('cv_download')">
+                    <i class="fa-solid fa-download"></i> CV
+                </a>
+
+                <a href="#" class="btn-contact" onclick="openContactModal(event)">
+                    <i class="fa-regular fa-envelope"></i> <span data-i18n="contactBtn">Let's Connect</span>
+                </a>
+
+                <button id="pwa-install-btn" style="display:none;" aria-label="Install App"><i class="fa-solid fa-download"></i></button>
+                
+                <button class="mobile-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
             </div>
         </div>
     </header>
