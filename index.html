@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Furkan Senyuz | Civil Engineer & AI Solutions Developer</title>
-    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6. Portfolio with Gemini AI integration.">
+    <meta name="description" content="Civil Engineer & AI Solutions Developer bridging construction with Python, Machine Learning, and Primavera P6.">
     <meta name="author" content="Furkan Senyuz">
     <link rel="canonical" href="https://fsenyuz.com">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"}]}'>
     <meta name="theme-color" content="#fbbf24">
 
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
@@ -28,7 +28,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v52 HIGH CONTRAST CSS */
+        /* v53 CHAT UI FIXED CSS */
         
         /* DARK MODE (Default) */
         :root { 
@@ -139,11 +139,20 @@
         .card p { flex-grow: 1; color: var(--mut); margin-bottom: 20px; }
         .plnk { color:var(--txt); text-decoration:none; font-size:1rem; display:inline-flex; align-items:center; gap:8px; font-weight: 600; } .plnk:hover { color:var(--gold); }
 
-        .bub { position:fixed; bottom:30px; right:30px; background:var(--gold); color:#000; width:65px; height:65px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.8rem; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.4); z-index:2500; transition: transform 0.3s; } .bub:hover { transform:scale(1.1); }
+        .bub { position: fixed; bottom: 30px; right: 30px; background: var(--gold); color: #000; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 2500; transition: transform 0.3s; } 
+        .bub:hover { transform: scale(1.1); }
         
-        .win { position:fixed; bottom:100px; right:30px; width:380px; height:600px; max-height:80dvh; background:var(--sec); border:1px solid var(--brd); border-radius:20px; display:flex; flex-direction:column; box-shadow:0 10px 40px rgba(0,0,0,0.5); z-index:2500; opacity:0; visibility:hidden; transform:translateY(20px); transition:0.3s; overflow:hidden; } 
-        .win.act { opacity:1; visibility:visible; transform:translateY(0); }
+        .win { 
+            position: fixed; bottom: 100px; right: 30px; width: 380px; height: 600px; max-height: 80dvh; 
+            background: var(--sec); border: 1px solid var(--brd); border-radius: 20px; 
+            display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 2500; 
+            opacity: 0; visibility: hidden; transform: translateY(20px); transition: 0.3s; overflow: hidden; 
+            /* Fix: Stretch children */
+            align-items: stretch;
+        } 
+        .win.act { opacity: 1; visibility: visible; transform: translateY(0); }
         
+        /* CHAT HEADER FIXED */
         .chat-h { 
             width: 100%; 
             background: var(--gold); 
@@ -154,23 +163,38 @@
             color: #000; 
             font-weight: bold; 
             font-size: 1.1rem;
-            box-sizing: border-box; 
-            flex-shrink: 0; 
+            /* Fix borders */
+            border-radius: 0 0 0 0; 
+            flex-shrink: 0;
         }
         
-        .msgs { flex-grow:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:15px; }
-        .msg { padding:12px 16px; border-radius:12px; max-width:85%; line-height:1.5; font-size: 0.95rem; } 
-        
-        /* CHAT BUBBLE COLORS - FIXED */
-        .msg.bot { background:var(--bot); color:#000; align-self:flex-start; border-bottom-left-radius:2px; } 
-        .msg.usr { background:var(--usr); color:var(--txt); align-self:flex-end; border-bottom-right-radius:2px; }
-        
-        /* Override for Light Mode: White text is better on Dark Orange */
+        .msgs { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .msg { padding: 12px 16px; border-radius: 12px; max-width: 85%; line-height: 1.5; font-size: 0.95rem; } 
+        .msg.bot { background: var(--bot); color: #000; align-self: flex-start; border-bottom-left-radius: 2px; } 
+        .msg.usr { background: var(--usr); color: var(--txt); align-self: flex-end; border-bottom-right-radius: 2px; }
         body.light-mode .msg.bot { color: #fff; }
         
-        .c-inp { padding:15px; border-top:1px solid var(--brd); display:flex; gap:10px; background:var(--bg); align-items:center; }
-        .inp { flex-grow:1; padding:12px 15px; border-radius:25px; border:1px solid var(--brd); background:var(--sec); color:var(--txt); outline:none; }
-        .snd { background:var(--gold); border:none; width:45px; height:45px; border-radius:50%; color:#000; cursor:pointer; display:flex; justify-content:center; align-items:center; font-size: 1.2rem; }
+        /* CHAT INPUT FIXED */
+        .c-inp { 
+            padding: 15px; 
+            border-top: 1px solid var(--brd); 
+            display: flex; 
+            gap: 12px; 
+            background: var(--bg); 
+            align-items: center; 
+        }
+        .inp { 
+            flex-grow: 1; 
+            padding: 14px 18px; /* Bigger padding */
+            border-radius: 25px; 
+            border: 1px solid var(--brd); 
+            background: var(--sec); 
+            color: var(--txt); 
+            outline: none; 
+            font-size: 1rem; /* Bigger font */
+            width: 100%;
+        }
+        .snd { background: var(--gold); border: none; width: 45px; height: 45px; border-radius: 50%; color: #000; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; flex-shrink: 0; }
 
         .mod { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--ovr); z-index:3000; display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:0.3s; backdrop-filter:blur(5px); } .mod.act { opacity:1; visibility:visible; }
         .m-con { background:var(--sec); border:1px solid var(--gold); padding:40px; border-radius:20px; max-width:500px; width:90%; text-align:center; position:relative; transform:translateY(20px); transition:0.3s; } .mod.act .m-con { transform:translateY(0); }
@@ -321,7 +345,7 @@
 
     <script>
         // PWA Service Worker
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v52').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v53').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
