@@ -28,7 +28,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
-        /* v43 AUTO-FIT CSS */
+        /* v43 CSS */
         :root { --bg:#0f172a; --sec:#1e293b; --txt:#f1f5f9; --mut:#94a3b8; --gold:#fbbf24; --blue:#38bdf8; --green:#2ecc71; --brd:rgba(255,255,255,0.1); --shd:0 10px 15px -3px rgba(0,0,0,0.3); --inp:#0f172a; --bot:#fbbf24; --usr:#334155; }
         body.light-mode { --bg:#f8fafc; --sec:#ffffff; --txt:#0f172a; --mut:#475569; --gold:#d97706; --blue:#0284c7; --green:#15803d; --brd:#e2e8f0; --shd:0 10px 15px -3px rgba(0,0,0,0.1); --inp:#f1f5f9; --bot:#d97706; --usr:#e2e8f0; }
         
@@ -248,7 +248,6 @@
     <div id="cook"><button style="position:absolute;top:10px;right:15px;background:none;border:none;cursor:pointer" onclick="App.hCook()"><i class="fa-solid fa-xmark"></i></button><p data-t="cookieText"></p><div class="c-act"><button class="no" onclick="App.cons(false)" data-t="decline"></button><button class="yes" onclick="App.cons(true)" data-t="accept"></button></div></div>
 
     <script>
-        // PWA Service Worker
         if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v43').then(c=>c.addAll(['/','index.html','data.json','profile.jpg'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
@@ -270,9 +269,8 @@
                     document.getElementById('yr').innerText=new Date().getFullYear();
                     if(localStorage.getItem(C.THEME)==='light')document.body.classList.add('light-mode');
                     
-                    // Dil Seçimi: Sırpça (SR) eklendi
-                    const u = navigator.language || navigator.userLanguage; 
-                    l = u.startsWith('tr') ? 'tr' : (u.startsWith('sr') ? 'sr' : 'en'); 
+                    const u=navigator.language||navigator.userLanguage; 
+                    l=u.startsWith('tr')?'tr':(u.startsWith('sr')?'sr':'en'); 
                     render(l);
                     
                     const obsMap=new IntersectionObserver(e=>{if(e[0].isIntersecting){initMap();obsMap.disconnect()}}); 
@@ -365,7 +363,6 @@
                     bounds.push([l.lat, l.lng]);
                 });
                 
-                // AUTO-FIT: Calculate optimal view
                 if (bounds.length > 0) {
                     map.fitBounds(bounds, {padding: [50, 50]});
                 } else {
