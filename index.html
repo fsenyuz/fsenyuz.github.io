@@ -450,24 +450,44 @@
                 }
                 msgs.scrollTop=msgs.scrollHeight;
             }
-
             function initMap(){
-                map = L.map('map', {
-                    minZoom: 2, 
-                    maxBounds: [[-90, -180], [90, 180]], 
-                    maxBoundsViscosity: 1.0 
-                });
+                // Haritayı başlat
+                map = L.map('map'); 
 
                 const isLight = document.body.classList.contains('light-mode');
                 L.tileLayer(isLight ? MAP_LIGHT : MAP_DARK, {attribution:'&copy; CARTO'}).addTo(map);
-                ['work','edu','tender'].forEach(k=>lyrs[k]=L.featureGroup().addTo(map));
+                
+                // Pinleri oluştur ama henüz haritaya ekleme (FeatureGroup içinde topla)
+                const markers = [];
                 
                 DATA.locations.forEach(l=>{
                     const iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.ty==='edu'?'green':(l.ty==='tender'?'orange':'blue')}.png`;
-                    L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
-                    .bindPopup(`<b>${l.t}</b><br>${l.desc}`)
-                    .addTo(lyrs[l.ty]);
+                    const marker = L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
+                    .bindPopup(`<b>${l.t}</b><br>${l.desc}`);
+                    
+                    // Katmanlara ekle
+                    lyrs[l.ty].addLayer(marker);
+                    markers.push(marker);
                 });
+
+                // Katmanları haritaya ekle
+                ['work','edu','tender'].forEach(k=>lyrs[k].addTo(map));
+                
+                // --- KRİTİK DÜZELTME: LAG EKLEME ---
+                const group = L.featureGroup(markers);
+                
+                // 300ms gecikme ile haritayı oturt (Veri ve DOM tam yüklensin)
+                setTimeout(() => {
+                    map.invalidateSize(); // Harita boyutunu garantiye al
+                    if(markers.length > 0) {
+                        map.fitBounds(group.getBounds(), {padding: [50, 50]});
+                    } else {
+                        map.setView([41.0, 29.0], 3); // Veri yoksa varsayılan
+                    }
+                }, 300);
+                
+                addLC(l);
+            }
                 
                 const group = L.featureGroup([lyrs.work, lyrs.edu, lyrs.tender]);
                 map.fitBounds(group.getBounds(), {padding: [50, 50], maxZoom: 5});
@@ -524,3 +544,4 @@
     </script>
 </body>
 </html>
+
