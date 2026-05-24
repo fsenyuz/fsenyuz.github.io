@@ -136,6 +136,7 @@
         .pt { font-size:0.8rem; background:var(--brd); padding:6px 12px; border-radius:6px; color: var(--txt); }
         .card p { flex-grow: 1; color: var(--mut); margin-bottom: 20px; }
         .plnk { color:var(--txt); text-decoration:none; font-size:1rem; display:inline-flex; align-items:center; gap:8px; font-weight: 600; } .plnk:hover { color:var(--gold); }
+        .soon { color:var(--txt); opacity:0.55; font-size:1rem; display:inline-flex; align-items:center; gap:8px; font-weight:600; cursor:default; }
 
         .bub { position: fixed; bottom: 30px; right: 30px; background: var(--gold); color: #000; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 2500; transition: transform 0.3s; } 
         .bub:hover { transform: scale(1.1); }
@@ -279,22 +280,28 @@
             <h3 class="title" style="justify-content: center;"><i class="fa-solid fa-laptop-code"></i> <span data-t="projTitle"></span></h3>
             <div class="p-grid" id="projs">
                 <div class="card item-box visible-item" data-cat="ai">
+                    <h4><i class="fa-solid fa-robot"></i> DCC RAG AI Assistant</h4>
+                    <div class="ptags"><span class="pt">RAG</span><span class="pt">LangChain</span><span class="pt">LLM</span></div>
+                    <p data-t="proj3Desc"></p>
+                    <a href="https://github.com/fsenyuz/dcc-intelligence-hub-hv1" target="_blank" rel="noopener noreferrer" class="plnk" aria-label="View Code for DCC RAG AI Assistant"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+                </div>
+                <div class="card item-box visible-item" data-cat="ai">
+                    <h4><i class="fa-solid fa-file-contract"></i> Tender Documentation Analysis</h4>
+                    <div class="ptags"><span class="pt">NLP</span><span class="pt">Python</span></div>
+                    <p data-t="proj4Desc"></p>
+                    <span class="soon"><i class="fa-solid fa-clock"></i> <span data-t="comingSoon"></span></span>
+                </div>
+                <div class="card item-box visible-item" data-cat="ai">
                     <h4><i class="fa-solid fa-chart-line"></i> Construction Claim Predictor</h4>
                     <div class="ptags"><span class="pt">Python</span><span class="pt">Random Forest</span></div>
                     <p data-t="proj1Desc"></p>
-                    <a href="https://github.com/fsenyuz/construction-claim-predictor" target="_blank" rel="noopener noreferrer" class="plnk" onclick="App.repo(event,'Construction Claim Predictor')" aria-label="View Code for Claim Predictor"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+                    <span class="soon"><i class="fa-solid fa-clock"></i> <span data-t="comingSoon"></span></span>
                 </div>
                 <div class="card item-box visible-item" data-cat="civil">
                     <h4><i class="fa-solid fa-file-invoice-dollar"></i> Tender Cost Optimizer</h4>
                     <div class="ptags"><span class="pt">Python</span><span class="pt">Automation</span></div>
                     <p data-t="proj2Desc"></p>
-                    <a href="https://github.com/fsenyuz/tender-cost-optimizer" target="_blank" rel="noopener noreferrer" class="plnk" onclick="App.repo(event,'Tender Cost Optimizer')" aria-label="View Code for Cost Optimizer"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
-                </div>
-                <div class="card item-box visible-item" data-cat="ai">
-                    <h4><i class="fa-solid fa-hard-hat"></i> Site Safety Vision</h4>
-                    <div class="ptags"><span class="pt">YOLO</span><span class="pt">OpenCV</span></div>
-                    <p data-t="proj3Desc"></p>
-                    <a href="https://github.com/fsenyuz/site-safety-vision" target="_blank" rel="noopener noreferrer" class="plnk" onclick="App.repo(event,'Site Safety Vision')" aria-label="View Code for Site Safety"><i class="fa-brands fa-github"></i> <span data-t="viewCode"></span></a>
+                    <span class="soon"><i class="fa-solid fa-clock"></i> <span data-t="comingSoon"></span></span>
                 </div>
             </div>
         </div>
@@ -342,7 +349,7 @@
 
     <script>
         // PWA Service Worker
-        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v60').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response("Offline")))));`)}`).catch(console.error)}
+        if('serviceWorker'in navigator){navigator.serviceWorker.register(`data:application/javascript;base64,${btoa(`self.addEventListener('install',e=>{e.waitUntil(caches.open('fs-v61').then(c=>c.addAll(['/','index.html','data.json','profile.jpg','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'])));self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.map(k=>k==='fs-v61'?null:caches.delete(k)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',e=>{var req=e.request;if(req.method!=='GET'){return}var u=new URL(req.url);var fresh=u.origin===location.origin&&(req.mode==='navigate'||u.pathname==='/'||u.pathname.endsWith('.html')||u.pathname.endsWith('.json'));if(fresh){e.respondWith(fetch(req).then(r=>{var cp=r.clone();caches.open('fs-v61').then(c=>c.put(req,cp));return r}).catch(()=>caches.match(req).then(r=>r||new Response('Offline'))))}else{e.respondWith(caches.match(req).then(r=>r||fetch(req).catch(()=>new Response('Offline'))))}});`)}`).catch(console.error)}
         
         function onSubmit(t){App.sub(t)}
         function onErr(){ console.warn("ReCAPTCHA Error"); }
@@ -450,40 +457,35 @@
             }
 
             function initMap(){
-                map = L.map('map'); // Zoom kısıtlaması kaldırıldı
                 const isLight = document.body.classList.contains('light-mode');
-                L.tileLayer(isLight ? MAP_LIGHT : MAP_DARK, {attribution:'&copy; CARTO'}).addTo(map);
-                
-                // CRITICAL FIX: Initialize layer groups FIRST
+
                 lyrs = {
                     work: L.featureGroup(),
                     edu: L.featureGroup(),
                     tender: L.featureGroup()
                 };
-                
+
                 const markers = [];
-                DATA.locations.forEach(l=>{
-                    const iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${l.ty==='edu'?'green':(l.ty==='tender'?'orange':'blue')}.png`;
-                    const marker = L.marker([l.lat,l.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
-                    .bindPopup(`<b>${l.t}</b><br>${l.desc}`);
-                    
-                    lyrs[l.ty].addLayer(marker);
+                DATA.locations.forEach(loc=>{
+                    const iconUrl = `https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-${loc.ty==='edu'?'green':(loc.ty==='tender'?'orange':'blue')}.png`;
+                    const marker = L.marker([loc.lat,loc.lng],{icon:new L.Icon({iconUrl,iconSize:[25,41],iconAnchor:[12,41]})})
+                    .bindPopup(`<b>${loc.t}</b><br>${loc.desc}`);
+                    lyrs[loc.ty].addLayer(marker);
                     markers.push(marker);
                 });
 
+                map = L.map('map', {zoomSnap:0.25, scrollWheelZoom:false});
+                L.tileLayer(isLight ? MAP_LIGHT : MAP_DARK, {attribution:'&copy; CARTO'}).addTo(map);
                 ['work','edu','tender'].forEach(k=>lyrs[k].addTo(map));
-                
-                // Auto-fit with delay for smooth rendering
-                const group = L.featureGroup(markers);
-                setTimeout(() => {
-                    map.invalidateSize();
-                    if(markers.length > 0) {
-                        map.fitBounds(group.getBounds(), {padding: [50, 50]});
-                    } else {
-                        map.setView([41.0, 29.0], 3);
-                    }
-                }, 500);
-                
+
+                const bounds = L.featureGroup(markers).getBounds();
+                map.invalidateSize();
+                if(bounds.isValid()) {
+                    map.fitBounds(bounds, {padding:[30,30], animate:false});
+                } else {
+                    map.setView([41.0, 29.0], 3);
+                }
+
                 addLC(l);
             }
             function addLC(lg){
