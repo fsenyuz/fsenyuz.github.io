@@ -37,9 +37,12 @@
     <meta property="twitter:description" content="Bridging the gap between physical infrastructure and digital intelligence.">
     <meta property="twitter:image" content="https://fsenyuz.com/profile.jpg">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-orange.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Furkan Senyuz Portfolio","short_name":"FS Portfolio","start_url":"/","display":"standalone","background_color":"#0f172a","theme_color":"#fbbf24","orientation":"portrait","icons":[{"src":"https://fsenyuz.com/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"https://fsenyuz.com/icon-512.png","sizes":"512x512","type":"image/png"}]}'>
     <meta name="theme-color" content="#fbbf24">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,7 +56,6 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E33W355PW"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', window.CFG.GA, { 'anonymize_ip': true });</script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -255,7 +257,7 @@
         <div class="box">
             <h3 class="title" style="justify-content: center;"><i class="fa-solid fa-earth-americas"></i> <span data-t="mapTitle"></span></h3>
             <div id="map"></div>
-            <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legendWork"></span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legendEdu"></span></div></div>
+            <div class="leg"><div><span class="dot" style="background:#38bdf8"></span> <span data-t="legendWork"></span></div><div><span class="dot" style="background:#2ecc71"></span> <span data-t="legendEdu"></span></div><div><span class="dot" style="background:#f97316"></span> <span data-t="legendTender"></span></div></div>
         </div>
 
         <div class="grid">
@@ -397,9 +399,11 @@
             function render(lg){
                 const tr = DATA.translations[lg];
                 document.documentElement.lang = lg;
+                if(tr.pageTitle) document.title = tr.pageTitle;
                 document.querySelectorAll('[data-t]').forEach(e => e.innerHTML = tr[e.dataset.t] || e.innerHTML);
                 document.querySelectorAll('[data-tip]').forEach(e => e.setAttribute('data-tooltip', tr[e.dataset.tip]));
                 ['name','email','msg'].forEach(i => document.getElementById(i).placeholder = tr[i==='msg'?'formMsg':(i==='name'?'formName':'formEmail')]);
+                document.getElementById('inp').placeholder = tr.chatPlaceholder || 'Ask something...';
                 document.getElementById('lang-btn').innerText = lg.toUpperCase();
 
                 const mk = (i, cls) => {
@@ -499,6 +503,15 @@
                 },{collapsed:true}).addTo(map);
             }
 
+            let captchaLoaded=false;
+            function loadCaptcha(){
+                if(captchaLoaded) return;
+                captchaLoaded=true;
+                const s=document.createElement('script');
+                s.src='https://www.google.com/recaptcha/api.js'; s.async=true; s.defer=true;
+                document.head.appendChild(s);
+            }
+
             function openM(t,c,isF=false){
                 document.getElementById('m-tit').innerText=t;
                 document.getElementById('m-txt').innerHTML=c; document.getElementById('m-txt').style.display=isF?'none':'block';
@@ -531,7 +544,7 @@
                     });
                 },
                 
-                cont:e=>{e.preventDefault();openM(DATA.translations[l].contactBtn,'',true)},
+                cont:e=>{e.preventDefault();loadCaptcha();openM(DATA.translations[l].contactBtn,'',true)},
                 cons:g=>{localStorage.setItem(C.CONSENT,g);gtag('consent','update',{'analytics_storage':g?'granted':'denied','ad_storage':g?'granted':'denied','ad_user_data':g?'granted':'denied','ad_personalization':g?'granted':'denied'});App.hCook()},
                 hCook:()=>document.getElementById('cook').classList.remove('shw')
             };
