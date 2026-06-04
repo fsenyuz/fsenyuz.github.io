@@ -50,7 +50,7 @@
     <link rel="prefetch" href="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png">
     
     <script>
-        window.CFG = { GA:'G-1E33W355PW', API:"https://portfolio-backend-hu1r.onrender.com/chat", THEME:'theme', CONSENT:'cookie_consent', RETRY:2000, MAX:2, LIM:50 };
+        window.CFG = { GA:'G-1E33W355PW', API:"https://portfolio-backend-hu1r.onrender.com/chat", THEME:'theme', CONSENT:'cookie_consent', LANG:'lang', GEO:'https://ipapi.co/json/', RETRY:2000, MAX:2, LIM:50 };
         window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
         gtag('consent', 'default', { 'ad_storage':'denied', 'ad_user_data':'denied', 'ad_personalization':'denied', 'analytics_storage':'denied' });
     </script>
@@ -215,7 +215,7 @@
 </head>
 <body>
     <div id="loader"><div class="loader-spin"></div><p id="ldr-txt" style="margin-top:20px;color:var(--gold);font-weight:bold;">Loading Profile...</p></div>
-    <script>(function(){var l=(navigator.language||'').toLowerCase();var t=l.indexOf('tr')===0?'Profil Yükleniyor...':(l.indexOf('sr')===0?'Učitavanje profila...':null);if(t)document.getElementById('ldr-txt').textContent=t;})();</script>
+    <script>(function(){var l=(navigator.language||'').toLowerCase();var t=l.indexOf('tr')===0?'Profil Yükleniyor...':(l.indexOf('sr')===0?'Učitavanje profila...':(l.indexOf('de')===0?'Profil wird geladen...':null));if(t)document.getElementById('ldr-txt').textContent=t;})();</script>
     <a href="#main-content" class="skip-link">Skip to content</a>
 
     <header class="anim d1">
@@ -362,6 +362,38 @@
             const MAP_DARK = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
             const MAP_LIGHT = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
             let l='en', map, lyrs={}, DATA;
+            const SUPPORTED=['en','tr','sr','de'];
+            // Map ISO country codes to the supported language they should default to.
+            const GEO_LANG={ TR:'tr', RS:'sr', ME:'sr', BA:'sr', DE:'de', AT:'de', CH:'de', LI:'de' };
+
+            // Derive a supported language from the browser's preferred language.
+            function browserLang(){
+                const u=(navigator.language||navigator.userLanguage||'en').toLowerCase();
+                if(u.startsWith('tr')) return 'tr';
+                if(u.startsWith('sr')||u.startsWith('hr')||u.startsWith('bs')) return 'sr';
+                if(u.startsWith('de')) return 'de';
+                return 'en';
+            }
+
+            // Decide the display language: a manual choice always wins; otherwise
+            // pick by the visitor's IP region, falling back to browser language,
+            // and English for anything out of scope.
+            async function detectLang(){
+                const saved=localStorage.getItem(C.LANG);
+                if(saved && SUPPORTED.includes(saved)) return saved;
+                try{
+                    const ctrl=new AbortController();
+                    const to=setTimeout(()=>ctrl.abort(), 2500);
+                    const r=await fetch(C.GEO,{signal:ctrl.signal});
+                    clearTimeout(to);
+                    if(r.ok){
+                        const d=await r.json();
+                        const cc=(d.country_code||d.country||'').toUpperCase();
+                        if(cc) return GEO_LANG[cc] || 'en';
+                    }
+                }catch(e){ /* geolocation unavailable: fall back below */ }
+                return browserLang();
+            }
 
             async function init(){
                 try {
@@ -381,8 +413,7 @@
                         document.body.classList.add('light-mode');
                     }
                     
-                    const u=navigator.language||navigator.userLanguage; 
-                    l=u.startsWith('tr')?'tr':(u.startsWith('sr')?'sr':'en'); 
+                    l = await detectLang();
                     render(l);
                     
                     const obsMap=new IntersectionObserver(e=>{if(e[0].isIntersecting){initMap();obsMap.disconnect()}}); 
@@ -436,7 +467,12 @@
                 });
             }
 
-            function lang(){ l=l==='en'?'tr':(l==='tr'?'sr':'en'); render(l); }
+            function lang(){
+                const i=SUPPORTED.indexOf(l);
+                l=SUPPORTED[(i+1)%SUPPORTED.length];
+                localStorage.setItem(C.LANG, l); // remember explicit choice over IP detection
+                render(l);
+            }
 
             let warmed=false;
             function chat(){
